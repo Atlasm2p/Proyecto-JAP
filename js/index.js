@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", function(){
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
-        window.location = "catalogo-autos.html"
+        window.location = "products.html"
     });
     document.getElementById("juguetes").addEventListener("click", function() {
         localStorage.setItem("catID", 102);
