@@ -1,7 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const CATALOG_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
     const container = document.querySelector(".catalog_container");
-  
+
     // Función que crea la tarjeta de producto
     function createProductCard(product) {
       const card = document.createElement("div");
