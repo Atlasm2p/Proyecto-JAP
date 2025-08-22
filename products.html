@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
   <link rel="stylesheet" href="css/products.css">
-  <script src="js/products.js" defer></script>
+  <script src="js/products.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Krona+One&display=swap" rel="stylesheet">
@@ -28,11 +28,25 @@
             <a href="cart.html" class="icon-link">
                 <i class="fas fa-shopping-bag"></i>
             </a>
-            <a href="#" class="icon-link" id="menu-toggle">
-                <i class="fas fa-bars"></i>
-            </a>
+
+            <!-- Contenedor del botón y menú -->
+            <div class="menu-wrapper" style="position: relative; display: inline-block;">
+                <a href="#" class="icon-link" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+
+                <div class="dropdown-menu" id="dropdown-menu">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="categories.html">Categorías</a></li>
+                        <li><a href="sell.html">Vender</a></li>
+                        <li><a href="login.html?redirect=products.html" id="login-button">Ingresar</a></li>
+                    </ul>
+                </div>
+            </div>
         </div>
     </nav>
+
     <div class="dropdown-menu" id="dropdown-menu">
         <ul>
             <li><a href="index.html">Inicio</a></li>
@@ -43,22 +57,21 @@
     </div>
     <div class="menu-overlay" id="menu-overlay"> </div>
 
-  <header class="header-catalogo">
+    <header class="header-catalogo">
         <div class="titulo-catalogo">
             <h1>Autos</h1>
         </div>
         <p>
             Descubre nuestra amplia selección de autos de alta y media gama, tanto nuevos como usados, con los mejores precios del mercado. Encuentra el vehículo perfecto que se adapte a tu estilo de vida y presupuesto. 
         </p>
+    </header>
 
-  </header>
-
-  <main class="pb-5 container" class="main-content" id="muestrario-autos">
+    <main class="pb-5 container" class="main-content" id="muestrario-autos">
     <!--- DESPUÉS VEO ESTO
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
+    <div class="alert alert-danger text-center" role="alert">
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
+    </div>
     </div>
     -->
 
@@ -118,29 +131,28 @@
         <div class="catalog_container">
             
         </div>
-  </main>
+    </main>
 
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+    <footer class="text-muted">
+        <div class="container">
+            <p class="float-end">
+            <a href="#">Volver arriba</a>
+            </p>
+            <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+        </div>
+    </footer>
+
+    <div id="spinner-wrapper">
+        <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </div>
-  </footer>
 
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-
-  <script src="js/init.js"></script>
-  <script src="js/products.js"></script>
-  <script src="js/loginlogic.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/loginlogic.js"></script>
 </body>
 
 </html>
