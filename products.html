@@ -5,51 +5,121 @@
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
-
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/products.css">
+  <script src="js/products.js" defer></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Krona+One&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/b08c876a80.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="my-profile.html">Mi perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="cart.html">Carrito <span class="badge bg-secondary" id="cart-count">0</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="login-button" href="login.html?redirect=products.html">Ingresar</a>  
-          </li>
+  <nav class="navbar-container">
+        <a href="index.html" class="logo-link">
+            <div class="logo">
+                <img src="img/logo_e_mercado.png" alt="Logo e-Mercado" class="logo-e-mercado">
+            </div>
+        </a>
+
+        <div class="nav-icons">
+            <a href="my-profile.html" class="icon-link" title="Mi perfil">
+                <i class="fa-solid fa-user"></i>
+            </a>
+            <a href="cart.html" class="icon-link">
+                <i class="fas fa-shopping-bag"></i>
+            </a>
+            <a href="#" class="icon-link" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </a>
+        </div>
+    </nav>
+    <div class="dropdown-menu" id="dropdown-menu">
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="categories.html">Categorías</a></li>
+            <li><a href="sell.html">Vender</a></li>
+            <li><a href="login.html?redirect=products.html" id="login-button">Ingresar</a></li>
         </ul>
-      </div>
     </div>
-  </nav>
-  <main class="pb-5 container">
+    <div class="menu-overlay" id="menu-overlay"> </div>
+
+  <header class="header-catalogo">
+        <div class="titulo-catalogo">
+            <h1>Autos</h1>
+        </div>
+        <p>
+            Descubre nuestra amplia selección de autos de alta y media gama, tanto nuevos como usados, con los mejores precios del mercado. Encuentra el vehículo perfecto que se adapte a tu estilo de vida y presupuesto. 
+        </p>
+
+  </header>
+
+  <main class="pb-5 container" class="main-content" id="muestrario-autos">
+    <!--- DESPUÉS VEO ESTO
     <div class="container">
       <div class="alert alert-danger text-center" role="alert">
         <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
       </div>
     </div>
+    -->
+
+    <!-- Aquí empieza los costosos filtros -->
+        <div class="filtros">
+            <button class="filtro-boton-todo active">Mostrar todos</button>
+
+            <div class="filtro-menu"> <!-- Son todos hatchback, menos el Fiat uno way que es CUV -->
+                <label for="tipo">Tipos</label>
+                <select name="tipo" id="tipo">
+                    <option value="">Todos</option>
+                    <option value="sedan">Sedan</option>
+                    <option value="suv">SUV</option>
+                    <option value="coupe">4x4</option>
+                    <option value="hatchback">Hatchback</option>
+                    <option value="deportivo">Deportivo</option>
+                </select>
+            </div>
+
+            <div class="filtro-menu">
+                <label for="marca">Marca</label>
+                <select name="marca" id="marca">
+                    <option value="">Todas</option>
+                    <option value="chevrolet">Chevrolet</option>
+                    <option value="fiat">Fiat</option>
+                    <option value="suzuki">Suzuki</option>
+                    <option value="peugeot">Peugeot</option>
+                    <option value="bugatti">Bugatti</option>
+                </select>
+            </div>
+
+            <div class="filtro-menu">
+                <label for="ano">Año</label>
+                <select name="ano" id="ano">
+                    <option value="">Todos</option>
+                    <option value="2014">2014</option>
+                    <option value="2017">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                </select>
+
+                </div>
+
+            <div class="switch-financiable-container">
+                <label class="switch">
+                    <input type="checkbox" id="financiable-switch">
+                    <span class="slider"></span>
+                </label>
+                <label for="financiable-switch" class="switch-label">Financiable</label>
+            </div>
+        </div>
+
+        <!-- Aca empieza el catalogo -->
+        <div class="catalog_container">
+            
+        </div>
   </main>
+
   <footer class="text-muted">
     <div class="container">
       <p class="float-end">
@@ -58,6 +128,7 @@
       <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
     </div>
   </footer>
+
   <div id="spinner-wrapper">
     <div class="lds-ring">
       <div></div>
@@ -66,7 +137,7 @@
       <div></div>
     </div>
   </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
+
   <script src="js/init.js"></script>
   <script src="js/products.js"></script>
   <script src="js/loginlogic.js"></script>
