@@ -16,6 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="desc_item">${product.description}</div>
                 <div class="payment_item">
                     <div class="price">${product.currency} ${product.cost.toLocaleString()}</div>
+                    <div class="quantity_sold">Vendidos: ${product.soldCount}</div>
                     <div class="button_pucharsed">
                         <button>Comprar</button>
                     </div>

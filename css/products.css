@@ -352,7 +352,7 @@ input:checked + .slider:before {
 }
 
 .price {
-    font-size: 14px;
+    font-size: 12px;
     font-weight: 700;
     color: #1a49ff; /* Azul similar al de la imagen */
 }
@@ -370,6 +370,12 @@ input:checked + .slider:before {
 
 .button_pucharsed button:hover {
     background-color: #c6da0e;
+}
+
+.quantity_sold {
+    margin-top: 0;
+    font-size: 12px;
+    color: #888;
 }
 /*----- Grid de Productos fin -----*/
 
