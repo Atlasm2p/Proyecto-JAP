@@ -10,6 +10,8 @@ document.getElementById("loginForm").addEventListener("submit", function(event) 
     }
     else {
       window.location.replace(redirect);
+      sessionStorage.setItem("usuario", usuario);
       sessionStorage.setItem("loggedIn", "true");
+      
     }
 }); 
