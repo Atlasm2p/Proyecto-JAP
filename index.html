@@ -9,80 +9,144 @@
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <script src="js/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/b08c876a80.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="my-profile.html">Mi perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="cart.html">Carrito <span class="badge bg-secondary" id="cart-count">0</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="login-button" href="login.html?redirect=index.html">Ingresar</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <main>
-    <div class="jumbotron text-center"></div>
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm custom-card cursor-active" id="autos">
-              <img class="bd-placeholder-img card-img-top" src="img/cars_index.jpg"
-                alt="Imgagen representativa de la categoría 'Autos'">
-              <h3 class="m-3">Autos</h3>
-              <div class="card-body">
-                <p class="card-text">Los mejores precios en autos 0 kilómetro, de alta y media gama.</p>
-              </div>
+  <nav class="navbar-container">
+        <a href="index.html" class="logo-link">
+            <div class="logo">
+                <img src="img/logo_e_mercado.png" alt="Logo e-Mercado" class="logo-e-mercado">
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm custom-card cursor-active" id="juguetes">
-              <img class="bd-placeholder-img card-img-top" src="img/toys_index.jpg"
-                alt="Imgagen representativa de la categoría 'Juguetes'">
-              <h3 class="m-3">Juguetes</h3>
-              <div class="card-body">
-                <p class="card-text">Encuentra aquí los mejores precios para niños/as de cualquier edad.</p>
-              </div>
+        </a>
+
+        <div class="nav-icons">
+            <a href="my-profile.html" class="icon-link" title="Mi perfil">
+                <i class="fa-solid fa-user"></i>
+            </a>
+            <a href="cart.html" class="icon-link">
+                <i class="fas fa-shopping-bag"></i>
+            </a>
+
+            <!-- Contenedor del botón y menú -->
+            <div class="menu-wrapper" style="position: relative; display: inline-block;">
+                <a href="#" class="icon-link" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+
+                <div class="custom-dropdown" id="dropdown-menu">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="categories.html">Categorías</a></li>
+                        <li><a href="sell.html">Vender</a></li>
+                        <li><a href="login.html?redirect=products.html" id="login-button">Ingresar</a></li>
+                    </ul>
+                </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm custom-card cursor-active" id="muebles">
-              <img class="bd-placeholder-img card-img-top" src="img/furniture_index.jpg"
-                alt="Imgagen representativa de la categoría 'Muebles'">
-              <h3 class="m-3">Muebles</h3>
-              <div class="card-body">
-                <p class="card-text">Muebles antiguos, nuevos y para ser armados por uno mismo.</p>
-              </div>
-            </div>
-          </div>
         </div>
-        <div class="row">
-          <a class="btn btn-light btn-lg btn-block" href="categories.html">Y mucho más!</a>
+    </nav>
+
+    <div class="menu-overlay" id="menu-overlay"> </div>
+
+  <main id="inicio" class="container">
+    <section class="hero" aria-label="Destacados">
+      <div class="carousel">
+        <div class="slides">
         </div>
       </div>
-    </div>
+      <div class="spacer"></div>
+    </section>
+
+    <section id="categorias">
+      <div class="section-head">
+        <div class="text">
+          <h3>Buscar por categorías</h3>
+          <a href="categories.html">Mostrar todos</a>
+        </div>
+        <div class="btn">
+          <button>&lt;</button>
+          <button>&gt;</button>
+        </div>
+      </div>
+      <div class="categories" data-active="all">
+        <div class="cat" data-cat="celulares">
+          <div class="cat-grid">
+            <article class="card">
+              <div class="card-inner">
+                <div class="card-face card-front">
+                  <img src="https://smartsolarmercadeo-wrzot.wordpress.com/wp-content/uploads/2025/08/carro-1.png?w=512" alt="Auto">
+                </div>
+                <div class="card-face card-back">
+                  <h3>Autos</h3>
+                  <a class="cta" href="products.html">Ver productos</a>
+                </div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-inner">
+                <div class="card-face card-front">
+                  <img src="https://i.pinimg.com/originals/40/f7/ca/40f7ca16d953a26233b171ec8b80ae92.png" alt="Juguetes">
+                </div>
+                <div class="card-face card-back"><h3>Juguetes</h3>
+                  <a class="cta" href="products.html">Ver productos</a>
+                </div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-inner">
+                <div class="card-face card-front">
+                  <img src="https://cdn-icons-png.flaticon.com/512/65/65857.png" alt="Muebles">
+                </div>
+                <div class="card-face card-back">
+                  <h3>Muebles</h3>
+                  <a class="cta" href="products.html">Ver productos</a>
+                </div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-inner">
+                <div class="card-face card-front">
+                  <img src="https://static.thenounproject.com/png/689731-200.png" alt="TV">
+                </div>
+                <div class="card-face card-back"><h3>Televisores</h3>
+                  <a class="cta" href="products.html">Ver productos</a>
+                </div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-inner">
+                <div class="card-face card-front">
+                  <img src="https://cdn-icons-png.flaticon.com/512/1865/1865343.png" alt="Deportes">
+                </div>
+                <div class="card-face card-back"><h3>Deportes</h3>
+                  <a class="cta" href="products.html">Ver productos</a>
+                </div>
+              </div>
+            </article>
+            <article class="card">
+              <div class="card-inner">
+                <div class="card-face card-front">
+                  <img src="https://www.pixsector.com/cache/753f2096/avb4326d4ac628bc1c307.png" alt="Celulares">
+                </div>
+                <div class="card-face card-back"><h3>Celulares</h3>
+                  <a class="cta" href="products.html">Ver productos</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section id="productos" aria-label="Productos destacados">
+      <div class="section-head">
+        <h3>Productos destacados</h3>
+        <a class="pill" href="#categorias">← Volver a categorías</a>
+      </div>
+      <div class="products">
+        
+      </div>
+    </section>
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -93,9 +157,9 @@
     </div>
   </footer>
   <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/index.js"></script>
   <script src="js/init.js"></script>
   <script src="js/loginlogic.js"></script>
 </body>
 
 </html>
+
