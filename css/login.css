@@ -100,6 +100,69 @@ main {
     min-height: 0; 
 }
 
+@media (min-width: 1200px) and (max-width: 1400px) {
+    .login-container {
+        width: 400px;
+        padding: 40px 50px;
+    }
+
+    .logo img {
+        width: 220px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 800px) {
+    .login-container {
+        width: 350px;
+        padding: 25px 30px;
+    }
+
+    .logo img {
+        width: 180px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 400px) {
+    .login-container {
+        width: 90%;  
+        padding: 20px;
+    }
+
+    .logo img {
+        width: 200px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    .form-group input {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .subtitle{
+        font-size: 12px;
+    }
+
+    footer {
+        font-size: 12px;
+    }
+}
+
 footer {
     text-align: center;
     margin-top: 20px;
