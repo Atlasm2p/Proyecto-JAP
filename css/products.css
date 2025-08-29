@@ -127,18 +127,18 @@ body{
 }
 
 @media (max-width: 768px) {
-            .logo-e-mercado {
-                max-width: 180px;
-            }
-            
-            .nav-icons {
-                gap: 15px;
-            }
-            
-            .icon-link {
-                font-size: 20px;
-            }
-        }
+    .logo-e-mercado {
+        max-width: 180px;
+    }
+    
+    .nav-icons {
+        gap: 15px;
+    }
+    
+    .icon-link {
+        font-size: 20px;
+    }
+}
 
 /* ----- Navegación fin ----- */
 
@@ -163,8 +163,6 @@ body{
     margin-bottom: -6px;
     line-height: 1.5em;
     font-size: 20px;
-
-
 }
 /* ----- Titulo del Catálogo fin----- */
 
@@ -206,12 +204,11 @@ body{
 }
 
 .filtro-menu select {
-    appearance: none; /* Elimina el estilo predeterminado */
+    appearance: none;
     background-color: white;
     border: none;
     padding: 10px 30px 10px 20px;
-    text-align: left;
-    text-align-last: center; /* no entedí por qué pero mejoró */
+    text-align-last: center;
     border-radius: 15px;
     font-size: 14px;
     cursor: pointer;
@@ -228,7 +225,7 @@ body{
     gap: 10px;
 }
 
-/* El puto switch que me costó mucho*/
+/* Switch */
 .switch {
     position: relative;
     display: inline-block;
@@ -267,8 +264,7 @@ body{
 }
 
 input:checked + .slider {
-    background-color: var(--verde-amarillo)
-;
+    background-color: var(--verde-amarillo);
 }
 
 input:checked + .slider:before {
@@ -281,12 +277,9 @@ input:checked + .slider:before {
     color: var(--negro);
     letter-spacing: 0.09em;
 }
-/* Fin del hermoso switch */
-
 /* ----- Filtros fin ----- */
 
 /*----- Grid de Productos -----*/
-/* Contenedor general de las tarjetas */
 .catalog_container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -294,7 +287,6 @@ input:checked + .slider:before {
     padding: 20px 0;
 }
 
-/* Estilo de cada tarjeta */
 .card_product {
     background: #fff;
     border-radius: 12px;
@@ -310,7 +302,6 @@ input:checked + .slider:before {
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-/* Imagen del producto */
 .section_image {
     text-align: center;
     padding: 15px;
@@ -322,7 +313,6 @@ input:checked + .slider:before {
     object-fit: contain;
 }
 
-/* Info del producto */
 .section_info {
     padding: 15px;
     display: flex;
@@ -330,7 +320,6 @@ input:checked + .slider:before {
     flex-grow: 1;
 }
 
-/* Nombre y descripción */
 .name_item {
     font-family: "Inter", sans-serif;
     font-size: 18px;
@@ -345,7 +334,6 @@ input:checked + .slider:before {
     margin-bottom: 12px;
 }
 
-/* Precio y botón */
 .payment_item {
     margin-top: auto;
     display: flex;
@@ -356,11 +344,11 @@ input:checked + .slider:before {
 .price {
     font-size: 12px;
     font-weight: 700;
-    color: #1a49ff; /* Azul similar al de la imagen */
+    color: #1a49ff;
 }
 
 .button_pucharsed button {
-    background-color: #d9f011; /* Verde amarillento del botón */
+    background-color: #d9f011;
     border: none;
     border-radius: 6px;
     padding: 6px 14px;
@@ -381,3 +369,152 @@ input:checked + .slider:before {
 }
 /*----- Grid de Productos fin -----*/
 
+/* ===============================
+   ACÁ SE HACE EL SITIO RESPONSIVE
+   =============================== */
+
+/* Resolución estándar: 1366x768 */
+@media (max-width: 1366px) {
+    body {
+        padding: 20px;
+    }
+    .titulo-catalogo h1 {
+        font-size: 55px;
+        padding: 20px;
+    }
+    .header-catalogo p {
+        font-size: 18px;
+    }
+}
+
+/* Tableta en modo vertical: 768x1024 */
+@media (max-width: 1024px) {
+    body {
+        padding: 15px;
+    }
+
+    .titulo-catalogo h1 {
+        font-size: 40px;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .header-catalogo p {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .filtros {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+    
+    .filtro-menu {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .filtro-menu label {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .filtro-menu select {
+        flex: 1;
+    }
+    
+    .catalog_container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Smartphone pequeño: 320x568 */
+@media (max-width: 568px) {
+    body {
+        padding: 10px;
+    }
+
+    .logo-e-mercado {
+        max-width: 140px;
+    }
+
+    .nav-icons {
+        gap: 10px;
+    }
+
+    .icon-link {
+        font-size: 18px;
+    }
+
+    .nav-icons a[href*="my-profile"], 
+    .nav-icons a[href*="cart"] {
+        display: none;
+    }
+
+    .titulo-catalogo h1 {
+        font-size: 26px;
+        letter-spacing: 0.05em;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .header-catalogo p {
+        font-size: 14px;
+        text-align: justify;
+    }
+
+    .filtros {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        grid-template-areas: 
+            "boton tipo tipo"        
+            "marca ano financiable"; 
+    }
+    
+    .filtro-boton-todo { grid-area: boton; }
+    .filtro-menu:first-of-type { grid-area: tipo; }
+    .filtro-menu:nth-of-type(2) { grid-area: marca; }
+    .filtro-menu:nth-of-type(3) { grid-area: ano; }
+    .switch-financiable-container { grid-area: financiable; justify-self: center; }
+
+    
+    .switch-label {
+        display: none;
+    }
+
+    .switch-financiable-container {
+        justify-content: center;
+    }
+
+    .catalog_container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .card_product {
+        font-size: 14px;
+    }
+
+    .name_item {
+        font-size: 16px;
+    }
+
+    .desc_item {
+        font-size: 13px;
+    }
+
+    .payment_item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .button_pucharsed button {
+        width: 100%;
+        text-align: center;
+    }
+}
