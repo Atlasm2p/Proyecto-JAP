@@ -481,6 +481,30 @@ input:checked + .slider:before {
     .filtro-menu:nth-of-type(3) { grid-area: ano; }
     .switch-financiable-container { grid-area: financiable; justify-self: center; }
 
+    .filtro-boton-todo {
+    border: none;
+    padding: clamp(0.1rem, 1vw, 1rem) clamp(0.8rem, 2vw, 1.5rem);
+    border-radius: 1em;
+    font-size: clamp(0.7rem, 1.8vw, 1rem);
+    cursor: pointer;
+    }
+
+    .filtro-menu select {
+        padding: clamp(0.2rem, 1vw, 0.8rem) clamp(0.5rem, 2vw, 1.8rem);
+        font-size: clamp(0.7rem, 1.8vw, 1rem);
+        min-width: clamp(40px, 20vw, 150px);
+    }
+
+    .switch {
+        width: clamp(28px, 6vw, 40px);
+        height: clamp(16px, 4vw, 24px);
+    }
+
+    .slider:before {
+        height: clamp(10px, 2.5vw, 16px);
+        width: clamp(10px, 2.5vw, 16px);
+    }
+
     
     .switch-label {
         display: none;
