@@ -354,19 +354,11 @@ input:checked + .slider:before {
 .price {
     font-size: 14px;
     font-weight: 700;
-<<<<<<< Updated upstream
     color: #1a49ff; /* Azul similar al de la imagen */
 }
 
 .button_pucharsed button {
     background-color: #d9f011; /* Verde amarillento del botón */
-=======
-    color: var(--azul);
-}
-
-.button_pucharsed button {
-    background-color: var(--verde-amarillo);
->>>>>>> Stashed changes
     border: none;
     border-radius: 6px;
     padding: 6px 14px;
@@ -379,10 +371,6 @@ input:checked + .slider:before {
 .button_pucharsed button:hover {
     background-color: var(--verde-amarillo);
 }
-<<<<<<< Updated upstream
-/*----- Grid de Productos fin -----*/
-
-=======
 
 .quantity_sold {
     margin-top: 0;
@@ -564,4 +552,3 @@ input:checked + .slider:before {
         text-align: center;
     }
 }
->>>>>>> Stashed changes
