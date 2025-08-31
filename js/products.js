@@ -1,8 +1,53 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const CATALOG_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
     const container = document.querySelector(".catalog_container");
 
-    // Función para crear la tarjeta de producto
+    // --- Lógica del menú
+    const menuToggle = document.getElementById('menu-toggle');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    const menuOverlay = document.getElementById('menu-overlay');
+
+    function toggleMenu() {
+        dropdownMenu.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+    }
+
+    function closeMenu() {
+        dropdownMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+    }
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMenu();
+        });
+    }
+
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeMenu);
+    }
+
+    document.addEventListener('click', function (e) {
+        if (dropdownMenu && menuToggle &&
+            !dropdownMenu.contains(e.target) &&
+            !menuToggle.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeMenu();
+        }
+    });
+
+    const menuLinks = dropdownMenu ? dropdownMenu.querySelectorAll('a') : [];
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+
+    // --- Lógica de productos por categoría
     function createProductCard(product) {
         const card = document.createElement("div");
         card.classList.add("card_product");
@@ -25,67 +70,52 @@ document.addEventListener("DOMContentLoaded", () => {
         return card;
     }
 
-const menuToggle = document.getElementById('menu-toggle');
-            const dropdownMenu = document.getElementById('dropdown-menu');
-            const menuOverlay = document.getElementById('menu-overlay');
+    const categoryMap = {
+        'autos': '101',
+        // 'juguetes': 'XXX',
+        // 'muebles': 'XXX',
+        // 'computadoras': 'XXX',
+        // 'deportes': 'XXX',
+        // 'celulares': 'XXX',
+        // 'vestimenta': 'XXX',
+        // 'electrodomesticos': 'XXX',
+        // 'herramientas': 'XXX'
+    };
 
-            function toggleMenu() {
-                dropdownMenu.classList.toggle('active');
-                menuOverlay.classList.toggle('active');
-                console.log('Menú toggled'); // Para debug
+    // Función principal para cargar los datos
+    async function loadCategoryProducts() {
+        const params = new URLSearchParams(window.location.search);
+        const categoryName = params.get('category');
+        
+        if (!categoryName || !categoryMap[categoryName]) {
+            console.error("Categoría no válida o no encontrada.");
+            container.innerHTML = "<p>No se encontraron productos para esta categoría.</p>";
+            return;
+        }
+
+        const categoryId = categoryMap[categoryName];
+        const CATALOG_URL = `https://japceibal.github.io/emercado-api/cats_products/${categoryId}.json`;
+
+        try {
+            const response = await fetch(CATALOG_URL);
+            if (!response.ok) {
+                throw new Error('Error al cargar los productos');
             }
-
-            function closeMenu() {
-                dropdownMenu.classList.remove('active');
-                menuOverlay.classList.remove('active');
-                console.log('Menú cerrado'); // Para debug
-            }
-
-            // Event listeners para el menú
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toggleMenu();
-                });
-            }
-
-            if (menuOverlay) {
-                menuOverlay.addEventListener('click', closeMenu);
-            }
-
-            // Cerrar menú al hacer clic fuera
-            document.addEventListener('click', function (e) {
-                if (dropdownMenu && menuToggle && 
-                    !dropdownMenu.contains(e.target) && 
-                    !menuToggle.contains(e.target)) {
-                    closeMenu();
-                }
-            });
-
-            // Cerrar menú con Escape
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape') {
-                    closeMenu();
-                }
-            });
+            const data = await response.json();
             
-            // Cerrar menú al hacer clic en los enlaces
-            const menuLinks = dropdownMenu ? dropdownMenu.querySelectorAll('a') : [];
-            menuLinks.forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
-
-    // Traemos los productos del JSON
-    fetch(CATALOG_URL)
-        .then(response => response.json())
-        .then(data => {
             const products = data.products;
             container.innerHTML = "";
             products.forEach(product => {
                 const card = createProductCard(product);
                 container.appendChild(card);
             });
-        })
-        .catch(error => console.error("Error al cargar productos:", error));
+
+        } catch (error) {
+            console.error("Error al cargar productos:", error);
+            container.innerHTML = "<p>Hubo un error al mostrar los productos.</p>";
+        }
+    }
+
+    // Llamamos a la función principal
+    loadCategoryProducts();
 });

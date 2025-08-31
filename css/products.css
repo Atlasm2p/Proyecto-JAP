@@ -294,7 +294,7 @@ input:checked + .slider:before {
 
 /* Estilo de cada tarjeta */
 .card_product {
-    background: #fff;
+    background: white;
     border-radius: 12px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     overflow: hidden;
@@ -334,12 +334,12 @@ input:checked + .slider:before {
     font-size: 18px;
     font-weight: 700;
     margin-bottom: 5px;
-    color: #000;
+    color: var(--negro);
 }
 
 .desc_item {
     font-size: 14px;
-    color: #444;
+    color: var(--gris-oscuro);
     margin-bottom: 12px;
 }
 
@@ -354,11 +354,19 @@ input:checked + .slider:before {
 .price {
     font-size: 14px;
     font-weight: 700;
+<<<<<<< Updated upstream
     color: #1a49ff; /* Azul similar al de la imagen */
 }
 
 .button_pucharsed button {
     background-color: #d9f011; /* Verde amarillento del botón */
+=======
+    color: var(--azul);
+}
+
+.button_pucharsed button {
+    background-color: var(--verde-amarillo);
+>>>>>>> Stashed changes
     border: none;
     border-radius: 6px;
     padding: 6px 14px;
@@ -369,7 +377,191 @@ input:checked + .slider:before {
 }
 
 .button_pucharsed button:hover {
-    background-color: #c6da0e;
+    background-color: var(--verde-amarillo);
+}
+<<<<<<< Updated upstream
+/*----- Grid de Productos fin -----*/
+
+=======
+
+.quantity_sold {
+    margin-top: 0;
+    font-size: 12px;
+    color: var(--gris-oscuro);
 }
 /*----- Grid de Productos fin -----*/
 
+/* ===============================
+   ACÁ SE HACE EL SITIO RESPONSIVE
+   =============================== */
+
+/* Resolución estándar: 1366x768 */
+@media (max-width: 1366px) {
+    body {
+        padding: 30px;
+    }
+    .titulo-catalogo h1 {
+        font-size: 55px;
+        padding: 20px;
+    }
+    .header-catalogo p {
+        font-size: 18px;
+    }
+}
+
+/* Tableta en modo vertical: 768x1024 */
+@media (max-width: 1024px) {
+    body {
+        padding: 30px;
+    }
+
+    .titulo-catalogo h1 {
+        font-size: 40px;
+        text-align: center;
+        padding: 15px;
+    }
+
+    .header-catalogo p {
+        font-size: 16px;
+        text-align: center;
+    }
+
+    .filtros {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+    }
+    
+    .filtro-menu {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .filtro-menu label {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+
+    .filtro-menu select {
+        flex: 1;
+    }
+    
+    .catalog_container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+/* Smartphone pequeño: 320x568 */
+@media (max-width: 568px) {
+    body {
+        padding: 10px;
+    }
+
+    .logo-e-mercado {
+        max-width: 140px;
+    }
+
+    .nav-icons {
+        gap: 10px;
+    }
+
+    .icon-link {
+        font-size: 18px;
+    }
+
+    .nav-icons a[href*="my-profile"], 
+    .nav-icons a[href*="cart"] {
+        display: none;
+    }
+
+    .titulo-catalogo h1 {
+        font-size: 26px;
+        letter-spacing: 0.05em;
+        text-align: center;
+        padding: 10px;
+    }
+
+    .header-catalogo p {
+        font-size: 14px;
+        text-align: justify;
+    }
+
+    .filtros {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        grid-template-areas: 
+            "boton tipo tipo"        
+            "marca ano financiable"; 
+    }
+    
+    .filtro-boton-todo { grid-area: boton; }
+    .filtro-menu:first-of-type { grid-area: tipo; }
+    .filtro-menu:nth-of-type(2) { grid-area: marca; }
+    .filtro-menu:nth-of-type(3) { grid-area: ano; }
+    .switch-financiable-container { grid-area: financiable; justify-self: center; }
+
+    .filtro-boton-todo {
+    border: none;
+    padding: clamp(0.1rem, 1vw, 1rem) clamp(0.8rem, 2vw, 1.5rem);
+    border-radius: 1em;
+    font-size: clamp(0.7rem, 1.8vw, 1rem);
+    cursor: pointer;
+    }
+
+    .filtro-menu select {
+        padding: clamp(0.2rem, 1vw, 0.8rem) clamp(0.5rem, 2vw, 1.8rem);
+        font-size: clamp(0.7rem, 1.8vw, 1rem);
+        min-width: clamp(40px, 20vw, 150px);
+    }
+
+    .switch {
+        width: clamp(28px, 6vw, 40px);
+        height: clamp(16px, 4vw, 24px);
+    }
+
+    .slider:before {
+        height: clamp(10px, 2.5vw, 16px);
+        width: clamp(10px, 2.5vw, 16px);
+    }
+
+    
+    .switch-label {
+        display: none;
+    }
+
+    .switch-financiable-container {
+        justify-content: center;
+    }
+
+    .catalog_container {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .card_product {
+        font-size: 14px;
+    }
+
+    .name_item {
+        font-size: 16px;
+    }
+
+    .desc_item {
+        font-size: 13px;
+    }
+
+    .payment_item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+
+    .button_pucharsed button {
+        width: 100%;
+        text-align: center;
+    }
+}
+>>>>>>> Stashed changes
