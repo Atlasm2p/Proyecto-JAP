@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", async () => {
+    // --- Lógica del menú ---
     const menuToggle = document.getElementById('menu-toggle');
     const dropdownMenu = document.getElementById('dropdown-menu');
     const menuOverlay = document.getElementById('menu-overlay');
@@ -13,7 +14,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         menuOverlay.classList.remove('active');
     }
 
-    // Abrir/cerrar menú con el ícono
     if (menuToggle) {
         menuToggle.addEventListener('click', function (e) {
             e.preventDefault();
@@ -22,12 +22,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         });
     }
 
-    // Cerrar menú al hacer clic en overlay
     if (menuOverlay) {
         menuOverlay.addEventListener('click', closeMenu);
     }
 
-    // Cerrar menú al hacer clic fuera
     document.addEventListener('click', function (e) {
         if (dropdownMenu && menuToggle && 
             !dropdownMenu.contains(e.target) && 
@@ -36,87 +34,145 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
     });
 
-    // Cerrar menú con Escape
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             closeMenu();
         }
     });
 
-    // Cerrar menú al hacer clic en los enlaces
     const menuLinks = dropdownMenu ? dropdownMenu.querySelectorAll('a') : [];
     menuLinks.forEach(link => {
         link.addEventListener('click', closeMenu);
     });
 
-    const buttons = document.querySelectorAll(".section-head .btn button"); 
-    const cards = document.querySelectorAll(".cat-grid .card"); 
-    let activeIndex = -1; 
-    buttons.forEach((btn, i) => { 
-        btn.addEventListener("click", () => { 
-            if (i === 0) { 
-                if (activeIndex !== -1) { 
-                    cards[activeIndex].classList.remove("active"); 
-                    activeIndex += -1; 
-                    cards[activeIndex].classList.add("active"); 
-                } else { 
-                    activeIndex = 5; 
-                    cards[activeIndex].classList.add("active"); 
-                } 
-            } else if (i === 1) { 
-                if (activeIndex === 5) { 
-                    cards[activeIndex].classList.remove("active"); 
-                    activeIndex = -1; 
-                } else { 
-                    if (activeIndex !== -1) { 
-                        cards[activeIndex].classList.remove("active"); 
-                    } 
-                    activeIndex += 1; 
-                    cards[activeIndex].classList.add("active"); 
-                } 
-            } 
+// Categorías
+const categorias = [
+    { nombre: 'autos', icono: 'fa-car' },
+    { nombre: 'juguetes', icono: 'fa-puzzle-piece' },
+    { nombre: 'muebles', icono: 'fa-couch' },
+    { nombre: 'computadoras', icono: 'fa-laptop' },
+    { nombre: 'deportes', icono: 'fa-baseball-ball' },
+    { nombre: 'celulares', icono: 'fa-mobile-alt' },
+    { nombre: 'vestimenta', icono: 'fa-shirt' },
+    { nombre: 'electrodomesticos', icono: 'fa-plug' },
+    { nombre: 'herramientas', icono: 'fa-tools' }
+];
+
+// Obtenemos los elementos del DOM
+const carousel = document.querySelector('.categories-carousel');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+
+// Función para crear las tarjetas
+function crearTarjetas() {
+    categorias.forEach(categoria => {
+        const tarjeta = document.createElement('div');
+        tarjeta.classList.add('category-card');
+        tarjeta.dataset.categoria = categoria.nombre;
+
+        // Frente de la tarjeta
+        const frente = document.createElement('div');
+        frente.classList.add('card-face', 'card-front');
+        const icono = document.createElement('i');
+        icono.classList.add('fa-solid', categoria.icono);
+        frente.appendChild(icono);
+
+        // Dorso de la tarjeta
+        const dorso = document.createElement('div');
+        dorso.classList.add('card-face', 'card-back');
+        const nombreCategoria = document.createElement('span');
+        nombreCategoria.textContent = categoria.nombre.toUpperCase();
+        dorso.appendChild(nombreCategoria);
+
+        tarjeta.appendChild(frente);
+        tarjeta.appendChild(dorso);
+
+        carousel.appendChild(tarjeta);
+
+        // Añadir el evento de clic a cada tarjeta
+        tarjeta.addEventListener('click', () => {
+            // Redirección a products.html con el nombre de la categoría en la URL
+            window.location.href = `products.html?category=${categoria.nombre}`;
         });
     });
-        
+}
 
-    const CATALOG_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
-    const slidesContainer = document.querySelector(".slides");
-    const productsContainer = document.querySelector(".products");
-    slidesContainer.innerHTML = "";
-    productsContainer.innerHTML = "";
-    try {
-        const response = await fetch(CATALOG_URL);
-        const data = await response.json();
-        const products = data.products;
-        for (let i = 0; i < 5; i++) {
-            console.log(i)
-            if (i < 3) {
-                const slide = document.createElement("div");
-                slide.classList.add("slide");
-            
-                slide.innerHTML = `
-                    <div class="slide-text">
-                        <div class= "slide-header">${products[i].name}</div>
-                        <div class="slide-desc">${products[i].description}</div>
-                        <div class="slide-btn"><button onclick="window.location.href='products.html'">Más Información</button></div>
-                    </div>
-                    <div class="slide-img"><img src="${products[i].image}" alt="${products[i].name}">
-                `;
-                slidesContainer.appendChild(slide)
-            }
-            const product = document.createElement("article");
-            product.classList.add("product");
+// Llamar a la función para generar las tarjetas
+crearTarjetas();
 
-            product.innerHTML = `
-            <div class="thumb"><img src="${products[i].image}" alt=""></div>
-            <div class="info"><h4>${products[i].name}</h4>
-                <div class="cost">${products[i].cost} ${products[i].currency}</div>
-            </div>
-            <a class="buy" href="products.html">Ver producto</a>
-          `
-          productsContainer.appendChild(product)
-        }
-    } catch (error) {
-    console.error("Error al cargar catálogo:", error);
-  }
+// Lógica de desplazamiento
+nextBtn.addEventListener('click', () => {
+    carousel.scrollBy({
+        left: 200, // Ajusta este valor para el desplazamiento deseado
+        behavior: 'smooth'
+    });
 });
+
+prevBtn.addEventListener('click', () => {
+    carousel.scrollBy({
+        left: -200, // Ajusta este valor para el desplazamiento deseado
+        behavior: 'smooth'
+    });
+});
+
+})
+
+    // --- Lógica de productos destacados ---
+    const productosDestacados = [
+        {
+            name: "Bugatti Chiron",
+            description: "El mejor hiperdeportivo de mundo. Producción limitada a 500 unidades.",
+            image: "img/prod50925_2.jpg",
+            cost: 3500000,
+            currency: "USD"
+        },
+        {
+            name: "Balón de basketball Wilson",
+            description: "Balón oficial para entrenamientos, fabricado con materiales resistentes.",
+            image: "img/prod50742_1.jpg",
+            cost: 45,
+            currency: "USD"
+        },
+        {
+            name: "Sillón de tres plazas",
+            description: "Perfecto para cualquier sala de estar. Comodidad garantizada.",
+            image: "img/prod60802_2.jpg",
+            cost: 1200,
+            currency: "USD"
+        },
+        {
+            name: "Laptop HP Spectre x360",
+            description: "Convertible 2 en 1, con pantalla táctil y procesador de última generación.",
+            image: "img/cat105_1.jpg",
+            cost: 1599,
+            currency: "USD"
+        }
+    ];
+
+    const featuredProductsContainer = document.getElementById("featured-products-container");
+
+    function createProductCard(product) {
+        const card = document.createElement("div");
+        card.classList.add("col-12", "col-md-6", "col-lg-3", "mb-4");
+        
+        card.innerHTML = `
+            <div class="product-card">
+                <img src="${product.image}" alt="${product.name}" class="product-img">
+                <div class="product-info">
+                    <h5 class="product-title">${product.name}</h5>
+                    <p class="product-desc">${product.description}</p>
+                    <p class="product-price"><strong>${product.currency} ${product.cost.toLocaleString()}</strong></p>
+                </div>
+            </div>
+        `;
+        return card;
+    }
+
+    function renderFeaturedProducts() {
+        productosDestacados.forEach(product => {
+            const productCard = createProductCard(product);
+            featuredProductsContainer.appendChild(productCard);
+        });
+    }
+
+    renderFeaturedProducts();
