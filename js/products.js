@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const CATALOG_URL = "https://japceibal.github.io/emercado-api/cats_products/101.json";
+    const catID = localStorage.getItem("catID") || 101;
+    const CATALOG_URL = "https://japceibal.github.io/emercado-api/cats_products/" + catID + ".json";
     const container = document.querySelector(".catalog_container");
 
     // Función para crear la tarjeta de producto
@@ -25,57 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
         return card;
     }
 
-const menuToggle = document.getElementById('menu-toggle');
-            const dropdownMenu = document.getElementById('dropdown-menu');
-            const menuOverlay = document.getElementById('menu-overlay');
-
-            function toggleMenu() {
-                dropdownMenu.classList.toggle('active');
-                menuOverlay.classList.toggle('active');
-                console.log('Menú toggled'); // Para debug
-            }
-
-            function closeMenu() {
-                dropdownMenu.classList.remove('active');
-                menuOverlay.classList.remove('active');
-                console.log('Menú cerrado'); // Para debug
-            }
-
-            // Event listeners para el menú
-            if (menuToggle) {
-                menuToggle.addEventListener('click', function (e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    toggleMenu();
-                });
-            }
-
-            if (menuOverlay) {
-                menuOverlay.addEventListener('click', closeMenu);
-            }
-
-            // Cerrar menú al hacer clic fuera
-            document.addEventListener('click', function (e) {
-                if (dropdownMenu && menuToggle && 
-                    !dropdownMenu.contains(e.target) && 
-                    !menuToggle.contains(e.target)) {
-                    closeMenu();
-                }
-            });
-
-            // Cerrar menú con Escape
-            document.addEventListener('keydown', function (e) {
-                if (e.key === 'Escape') {
-                    closeMenu();
-                }
-            });
-            
-            // Cerrar menú al hacer clic en los enlaces
-            const menuLinks = dropdownMenu ? dropdownMenu.querySelectorAll('a') : [];
-            menuLinks.forEach(link => {
-                link.addEventListener('click', closeMenu);
-            });
-
     // Traemos los productos del JSON
     fetch(CATALOG_URL)
         .then(response => response.json())
@@ -88,4 +38,49 @@ const menuToggle = document.getElementById('menu-toggle');
             });
         })
         .catch(error => console.error("Error al cargar productos:", error));
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    const menuOverlay = document.getElementById('menu-overlay');
+    function toggleMenu() {
+        dropdownMenu.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+        console.log('Menú toggled'); // Para debug
+    }
+    function closeMenu() {
+        dropdownMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+        console.log('Menú cerrado'); // Para debug
+    }
+    // Event listeners para el menú
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMenu();
+        });
+    }
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeMenu);
+    }
+    // Cerrar menú al hacer clic fuera
+    document.addEventListener('click', function (e) {
+        if (dropdownMenu && menuToggle && 
+            !dropdownMenu.contains(e.target) && 
+            !menuToggle.contains(e.target)) {
+            closeMenu();
+        }
+    });
+    // Cerrar menú con Escape
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeMenu();
+        }
+    });
+    
+    // Cerrar menú al hacer clic en los enlaces
+    const menuLinks = dropdownMenu ? dropdownMenu.querySelectorAll('a') : [];
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
 });

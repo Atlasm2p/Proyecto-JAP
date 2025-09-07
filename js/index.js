@@ -47,15 +47,15 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 // Categorías
 const categorias = [
-    { nombre: 'autos', icono: 'fa-car' },
-    { nombre: 'juguetes', icono: 'fa-puzzle-piece' },
-    { nombre: 'muebles', icono: 'fa-couch' },
-    { nombre: 'computadoras', icono: 'fa-laptop' },
-    { nombre: 'deportes', icono: 'fa-baseball-ball' },
-    { nombre: 'celulares', icono: 'fa-mobile-alt' },
-    { nombre: 'vestimenta', icono: 'fa-shirt' },
-    { nombre: 'electrodomesticos', icono: 'fa-plug' },
-    { nombre: 'herramientas', icono: 'fa-tools' }
+    { nombre: 'autos', icono: 'fa-car', id: 101 },
+    { nombre: 'juguetes', icono: 'fa-puzzle-piece', id: 102 },
+    { nombre: 'muebles', icono: 'fa-couch', id: 103 },
+    { nombre: 'herramientas', icono: 'fa-tools', id: 104 },
+    { nombre: 'computadoras', icono: 'fa-laptop', id: 105 },
+    { nombre: 'vestimenta', icono: 'fa-shirt', id: 106 },
+    { nombre: 'electrodomesticos', icono: 'fa-plug', id: 107 },
+    { nombre: 'deportes', icono: 'fa-baseball-ball', id: 108 },
+    { nombre: 'celulares', icono: 'fa-mobile-alt', id: 109}
 ];
 
 // Obtenemos los elementos del DOM
@@ -91,7 +91,8 @@ function crearTarjetas() {
 
         // Añadir el evento de clic a cada tarjeta
         tarjeta.addEventListener('click', () => {
-            // Redirección a products.html con el nombre de la categoría en la URL
+            // Redirección a products.html con el nombre de la categoría en la URL y actualizar CatID
+            localStorage.setItem("catID", categoria.id);
             window.location.href = `products.html?category=${categoria.nombre}`;
         });
     });
