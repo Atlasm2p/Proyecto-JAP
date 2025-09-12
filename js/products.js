@@ -23,6 +23,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 </div>
             </div>
         `;
+
+        
+        // Añado un evento de clic a cada tarjeta de producto
+        card.addEventListener('click', () => {
+            // Guardo el ID del producto en el almacenamiento local
+            localStorage.setItem('prodID', product.id);
+            // Redirijo al usuario a la página de detalles del producto
+            window.location.href = 'product-info.html';
+        });
+        
+        
         return card;
     }
 
@@ -42,16 +53,19 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuToggle = document.getElementById('menu-toggle');
     const dropdownMenu = document.getElementById('dropdown-menu');
     const menuOverlay = document.getElementById('menu-overlay');
+
     function toggleMenu() {
         dropdownMenu.classList.toggle('active');
         menuOverlay.classList.toggle('active');
-        console.log('Menú toggled'); // Para debug
+        console.log('Menú toggled');
     }
+
     function closeMenu() {
         dropdownMenu.classList.remove('active');
         menuOverlay.classList.remove('active');
-        console.log('Menú cerrado'); // Para debug
+        console.log('Menú cerrado');
     }
+
     // Event listeners para el menú
     if (menuToggle) {
         menuToggle.addEventListener('click', function (e) {
@@ -60,24 +74,27 @@ document.addEventListener("DOMContentLoaded", () => {
             toggleMenu();
         });
     }
+
     if (menuOverlay) {
         menuOverlay.addEventListener('click', closeMenu);
     }
+
     // Cerrar menú al hacer clic fuera
     document.addEventListener('click', function (e) {
-        if (dropdownMenu && menuToggle && 
-            !dropdownMenu.contains(e.target) && 
+        if (dropdownMenu && menuToggle &&
+            !dropdownMenu.contains(e.target) &&
             !menuToggle.contains(e.target)) {
             closeMenu();
         }
     });
+
     // Cerrar menú con Escape
     document.addEventListener('keydown', function (e) {
         if (e.key === 'Escape') {
             closeMenu();
         }
     });
-    
+
     // Cerrar menú al hacer clic en los enlaces
     const menuLinks = dropdownMenu ? dropdownMenu.querySelectorAll('a') : [];
     menuLinks.forEach(link => {

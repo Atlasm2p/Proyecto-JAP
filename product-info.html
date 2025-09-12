@@ -10,53 +10,81 @@
   <link href="css/font-awesome.min.css" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <link href="css/product-info.css" rel="stylesheet"> 
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="my-profile.html">Mi perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="cart.html">Carrito <span class="badge bg-secondary" id="cart-count">0</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="login-button" href="login.html?redirect=product-info.html">Ingresar</a>  
-          </li>
-        </ul>
-      </div>
+  <nav class="navbar-container">
+    <a href="index.html" class="logo-link">
+        <div class="logo">
+            <img src="img/logo_e_mercado.png" alt="Logo e-Mercado" class="logo-e-mercado">
+        </div>
+    </a>
+    <div class="nav-icons">
+        <a href="my-profile.html" class="icon-link" title="Mi perfil">
+            <i class="fas fa-user"></i>
+        </a>
+        <a href="cart.html" class="icon-link">
+            <i class="fas fa-shopping-bag"></i>
+        </a>
+        <div class="menu-wrapper" style="position: relative; display: inline-block;">
+            <a href="#" class="icon-link" id="menu-toggle">
+                <i class="fas fa-bars"></i>
+            </a>
+        </div>
     </div>
   </nav>
   <main>
     <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
+      <div class="top-bar">
+        <button class="btn-back" id="btn-back">Volver</button>
+        <nav aria-label="breadcrumb" class="breadcrumb-inline">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="categories.html">Catálogo</a></li>
+            <li class="breadcrumb-item active" aria-current="page" id="product-category">Autos</li>
+          </ol>
+        </nav>
+      </div>
+      <div class="product-layout">
+        <!-- Galería de miniaturas -->
+        <div class="gallery-thumbs">
+          <div id="product-thumbs">
+            <!-- Miniaturas aquí -->
+          </div>
+        </div>
+        <!-- Imagen principal -->
+        <div class="gallery-main">
+          <img src="img/placeholder.png" id="product-image-main" alt="Imagen principal del producto">
+        </div>
+        <!-- Info a la derecha -->
+        <div class="info-column">
+          <h1 id="product-name">Nombre del producto</h1>
+          <p id="product-sold">0 vendidos</p>
+          <h3 id="product-price">USD 0</h3>
+          <p class="product-discount" id="product-discount">Descuento</p>
+          <div class="qty-row">
+            <label for="qty-select">Cantidad</label>
+            <select id="qty-select">
+              <option value="1">1</option>
+            </select>
+          </div>
+          <button class="buy-now" id="buy-now">Comprar ahora</button>
+          <p class="text-muted">Compra protegida, recibe el producto esperado o te devolvemos tu dinero.</p>
+        </div>
+      </div>
+      <div class="description-section">
+        <h4>Descripción</h4>
+        <p id="product-description">Aquí irá la descripción del producto...</p>
       </div>
     </div>
   </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
+  <footer class="footer-aligned text-muted">
+    <p>
+      Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a>
+    </p>
+    <p class="float-end">
+      <a href="#">Volver arriba</a>
+    </p>
   </footer>
   <div id="spinner-wrapper">
     <div class="lds-ring">
@@ -66,7 +94,6 @@
       <div></div>
     </div>
   </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/product-info.js"></script>
   <script src="js/loginlogic.js"></script>
