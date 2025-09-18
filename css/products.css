@@ -176,6 +176,15 @@ body{
     margin-bottom: 30px;
 }
 
+#buscar-input {
+    width: 94%;
+    padding: 12px 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+};
+
+
 .filtro-boton-todo {
     border: none;
     padding: 10px 20px;
@@ -193,7 +202,17 @@ body{
     background-color: var(--azul);
     color: white;
     font-weight: bold;
-}
+    border: none;
+    padding: 10px 20px;
+    border-radius: 15px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    letter-spacing: 0.09em;
+} /* Geronimo: tuve que cambiar copiando filtro-boton-todo y agregandolo a active, porque se rompio cuando yo cambie el estilo del filtro de busqueda D: */
 
 .filtro-menu {
     position: relative;
