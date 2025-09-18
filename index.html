@@ -4,98 +4,162 @@
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
+  <title>eMercado - Inicio</title>
 
   <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <link href="css/styles.css" rel="stylesheet">
+  <script src="js/index.js" defer></script>
+  <script src="https://kit.fontawesome.com/b08c876a80.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link active" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="my-profile.html">Mi perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="cart.html">Carrito <span class="badge bg-secondary" id="cart-count">0</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="login-button" href="login.html?redirect=index.html">Ingresar</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <main>
-    <div class="jumbotron text-center"></div>
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm custom-card cursor-active" id="autos">
-              <img class="bd-placeholder-img card-img-top" src="img/cars_index.jpg"
-                alt="Imgagen representativa de la categoría 'Autos'">
-              <h3 class="m-3">Autos</h3>
-              <div class="card-body">
-                <p class="card-text">Los mejores precios en autos 0 kilómetro, de alta y media gama.</p>
-              </div>
+  <nav class="navbar-container">
+        <a href="index.html" class="logo-link">
+            <div class="logo">
+                <img src="img/logo_e_mercado.png" alt="Logo e-Mercado" class="logo-e-mercado">
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm custom-card cursor-active" id="juguetes">
-              <img class="bd-placeholder-img card-img-top" src="img/toys_index.jpg"
-                alt="Imgagen representativa de la categoría 'Juguetes'">
-              <h3 class="m-3">Juguetes</h3>
-              <div class="card-body">
-                <p class="card-text">Encuentra aquí los mejores precios para niños/as de cualquier edad.</p>
-              </div>
+        </a>
+
+        <div class="nav-icons">
+            <a href="my-profile.html" class="icon-link" title="Mi perfil">
+                <i class="fa-solid fa-user"></i>
+            </a>
+            <a href="cart.html" class="icon-link">
+                <i class="fas fa-shopping-bag"></i>
+            </a>
+
+            <!-- Contenedor del botón y menú -->
+            <div class="menu-wrapper" style="position: relative; display: inline-block;">
+                <a href="#" class="icon-link" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+
+                <div class="custom-dropdown" id="dropdown-menu">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="categories.html">Categorías</a></li>
+                        <li><a href="sell.html">Vender</a></li>
+                        <li><a href="login.html?redirect=products.html" id="login-button">Ingresar</a></li>
+                    </ul>
+                </div>
             </div>
-          </div>
-          <div class="col-md-4">
-            <div class="card mb-4 shadow-sm custom-card cursor-active" id="muebles">
-              <img class="bd-placeholder-img card-img-top" src="img/furniture_index.jpg"
-                alt="Imgagen representativa de la categoría 'Muebles'">
-              <h3 class="m-3">Muebles</h3>
-              <div class="card-body">
-                <p class="card-text">Muebles antiguos, nuevos y para ser armados por uno mismo.</p>
-              </div>
-            </div>
-          </div>
         </div>
-        <div class="row">
-          <a class="btn btn-light btn-lg btn-block" href="categories.html">Y mucho más!</a>
+    </nav>
+
+    <div class="menu-overlay" id="menu-overlay"> </div>
+
+<main id="inicio">
+
+<!-- Inicio carrusel propaganda -->
+<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <a href="products.html?category=autos">
+                <img src="img/propaganda_1.png" class="d-block w-100" alt="Propaganda Auto Chevrolet">
+            </a>
         </div>
-      </div>
+        <div class="carousel-item">
+            <a href="product-info.html">
+                <img src="img/propaganda_2.png" class="d-block w-100" alt="Propaganda descuentos">
+            </a>
+        </div>
+        <div class="carousel-item">
+            <a href="products.html?category=deportes">
+                <img src="img/propaganda_3.png" class="d-block w-100" alt="Propaganda desata tu potencial">
+            </a>
+        </div>
+        <div class="carousel-item">
+            <a href="products.html?category=muebles">
+                <img src="img/propaganda_4.png" class="d-block w-100" alt="Propaganda de muebles">
+            </a>
+        </div>
     </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+<!-- Fin carrusel propaganda -->
+
+<!-- Inicio Categorías -->
+<section class="categories-container">
+    <div class="categories-header">
+        <div class="categories-title">
+            <h2>Buscar por categoría</h2>
+            <a href="categories.html">Mostrar todas</a>
+        </div>
+        <div class="categories-nav">
+            <button id="prev-btn">
+                <i class="fa-solid fa-angle-left"></i>
+            </button>
+            <button id="next-btn">
+                <i class="fa-solid fa-angle-right"></i>
+            </button>
+        </div>
     </div>
-  </footer>
+    <div class="categories-carousel">
+        </div>
+</section>
+<!-- Fin Categorías -->
+
+<section class="featured-products-section">
+    <h2>Productos Destacados</h2>
+    <div id="featured-products-container" class="row"></div>
+</section>
+
+</main>
+
+<section>
+    <div class="info-extra-container">
+        <div class="info-card">
+            <i class="fa-solid fa-truck-fast"></i>
+            <div class="footer-text-container">
+                <h4>Envío gratis desde $ 1.200</h4>
+                <p>Compra y disfruta de envíos gratis en miles de productos.</p>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <div class="footer-text-container">
+                <h4>Seguridad de principio a fin</h4>
+                <p>¿No te gusta? ¡Devuélvelo! Con nosotros estás siempre protegido.</p>
+            </div>
+        </div>
+
+        <div class="info-card">
+            <i class="fa-solid fa-credit-card"></i>
+            <div class="footer-text-container">
+                <h4>Paga con la tranquilidad</h4>
+                <p>Diferentes métodos de pago para pagar de forma segura.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer class="footer-container">
+    <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a></p>
+        <a href="#top" class="back-to-top-btn" aria-label="Volver arriba">
+            <i class="fa-solid fa-arrow-up"></i>
+    </a>
+</footer>
+
   <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/index.js"></script>
   <script src="js/init.js"></script>
   <script src="js/loginlogic.js"></script>
 </body>
 
 </html>
+

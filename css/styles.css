@@ -1,190 +1,477 @@
-.jumbotron,
-.card-body,
-.container,
-.site-header {
-  font-family: 'Verdana', serif !important;
+:root{
+    --background: #ebebe9;
+    --gris-oscuro: #797979;
+    --negro: #131314;
+    --azul: #2f31f5;
+    --verde-amarillo: #dbf059;
+    --fuente-textos: "Inter", sans-serif;
+    --shadow: 0 10px 30px rgba(2,6,23,0.08);
 }
 
-.jumbotron .display-4 {
-  font-weight: bold;
+body{
+    background-color: var(--background);
+    font-family: var(--fuente-textos);
+    margin: 0;
 }
 
-nav a {
+/*---- Barra navegadora ----*/
+.navbar-container{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 30px 20px 30px;
+}
+
+.logo-e-mercado {
+    max-width: 250px;
+    height: 100%;
+}
+
+.nav-icons {
+    color: var(--azul);
+    display: flex;
+    gap: 20px;
+    align-items: center;
+}
+
+.icon-link {
+    font-size: 24px;
+    color: var(--azul);
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.icon-link:hover {
+    transform: scale(1.1);
+}
+
+/* Menú desplegable */
+.custom-dropdown {
+    position: absolute;
+    top: 100%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    right: 0;
+    margin-top: 5px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.custom-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.custom-dropdown li {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.custom-dropdown li:last-child {
+    border-bottom: none;
+}
+
+.custom-dropdown a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--negro);
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.custom-dropdown a:hover {
+    background-color: var(--verde-amarillo);
+    color: var(--negro);
+}
+
+.cart-badge {
+    background-color: var(--azul);
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+    margin-left: 5px;
+}
+
+/* Overlay para cerrar el menú */
+#inicio{
+  padding: 0 80px 0 80px;
+}
+
+.menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+@media (max-width: 768px) {
+            .logo-e-mercado {
+                max-width: 180px;
+            }
+            
+            .nav-icons {
+                gap: 15px;
+            }
+            
+            .icon-link {
+                font-size: 20px;
+            }
+        }
+
+        nav a {
   text-decoration: none;
 }
 
-.bd-placeholder-img {
-  font-size: 1.125rem;
-  text-anchor: middle;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+
+/* ----- Navegación fin ----- */
+
+
+/* Carrusel nuevo */
+.carousel-item {
+  padding-bottom: 30px;
+  border-radius: 15px;
 }
 
-@media (min-width: 768px) {
-  .bd-placeholder-img-lg {
-    font-size: 3.5rem;
-  }
+.carousel-item img{
+  border-radius: 15px;
 }
 
-.jumbotron {
-  height: 50vh;
-  padding: 5em inherit;
-  margin-bottom: 0;
-  background-color: #53C0FB;
-  background: url('../img/cover_back.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  color: black;
-  font-weight: bold;
+.carousel-indicators {
+  bottom: 13px;
 }
 
-@media (min-width: 768px) {
-  .jumbotron {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
-  }
-}
-
-.jumbotron p:last-child {
-  margin-bottom: 0;
-}
-
-.jumbotron-heading {
-  font-weight: 300;
-}
-
-.jumbotron .container {
-  max-width: 40rem;
-  background-color: rgba(255, 255, 255, 0.5);
+.carousel-indicators button {
+  width: 50px;
+  height: 50px;
   border-radius: 10px;
-  text-shadow: 1px 1px 2px grey;
+  margin: 0 5px;
+}
+/* FIN Carrusel nuevo */
+
+/*--- Categorías ---*/
+
+/* Cosas que van arriba */
+.categories-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
 }
 
-.jumbotron .lead {
-  font-size: 38px;
+.categories-title {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
 }
 
-footer {
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+.categories-title h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
 }
 
-footer p {
-  margin-bottom: .25rem;
+.categories-title a {
+    color: var(--gris-oscuro);
+    text-decoration: underline;
 }
 
-.site-header a {
-  color: white;
-  transition: ease-in-out color .15s;
+.categories-nav button {
+    background-color: white;
+    border: none;
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
-.site-header .dropdown-menu a {
-  color: black;
+.categories-nav button:hover {
+    background-color: #f49000;
+}
+.categories-nav button i {
+    font-size: 1.2rem;
+    color: var(--negro)
 }
 
-.dropzone {
-  border: 2px dashed #0087F7;
-  border-radius: 5px;
-  background: white;
+
+/* tarjetas categorías */
+.categories-carousel {
+    display: flex;
+    gap: 1.5rem;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
 }
 
-.img-fit {
-  max-height: 100%;
+/* Ocultar la barra de desplazamiento */
+.categories-carousel::-webkit-scrollbar {
+    display: none;
 }
 
-.alert {
-  position: fixed;
-  top: 80px;
-  width: 50%;
-  left: 50%;
-  transform: translate(-50%, 0);
+.category-card {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    background-color: var(--verde-amarillo);
+    border-radius: 15px;
+    cursor: pointer;
+    perspective: 1000px; /* Perspectiva para el efecto 3D */
+    transition: transform 0.6s;
+    transform-style: preserve-3d; /* Permite que los hijos hereden el 3D */
+    flex-shrink: 0; /* Evita que las tarjetas se encojan */
 }
 
-.lds-ring {
-  display: inline-block;
-  position: relative;
-  width: 64px;
-  height: 64px;
-  top: 50%;
-  left: 50%;
+.category-card:hover {
+    transform: rotateY(180deg);
 }
 
-.cursor-active {
-  cursor: pointer;
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-.left {
-  float: left;
-  padding: 4px;
-  background-color: rgba(255, 255, 255, 0.5);
+.card-front {
+    transform: rotateY(0deg);
 }
 
-.lds-ring div {
-  box-sizing: border-box;
-  display: block;
-  position: absolute;
-  width: 51px;
-  height: 51px;
-  margin: 6px;
-  border: 6px solid #fff;
-  border-radius: 50%;
-  animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
-  border-color: #fff transparent transparent transparent;
+.card-front i {
+    font-size: 4rem;
+    color: var(--negro);
 }
 
-.lds-ring div:nth-child(1) {
-  animation-delay: -0.45s;
+.card-back {
+    background-color: var(--negro);
+    color: var(--verde-amarillo);
+    transform: rotateY(180deg); 
+    border-radius: 15px;
 }
 
-.lds-ring div:nth-child(2) {
-  animation-delay: -0.3s;
+.card-back span {
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
 }
 
-.lds-ring div:nth-child(3) {
-  animation-delay: -0.15s;
+
+/* Sección de productos destacados */
+
+.featured-products-section{
+  padding: 50px 0 50px 0;
 }
 
-@keyframes lds-ring {
-  0% {
-    transform: rotate(0deg);
+
+.featured-products-section h2 {
+    gap: 20px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    padding-bottom: 10px;
+}
+
+.product-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.product-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.product-title {
+    font-family: "Inter", sans-serif;
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 5px;
+    color: var(--negro);
+}
+
+.product-desc {
+    font-size: 14px;
+    color: var(--gris-oscuro);
+    margin-bottom: 12px;
+}
+
+.product-price {
+    font-size: 1rem;
+    color: var(--azul);
+    margin-top: 10px;
+    font-family:"Krona One", sans-serif;
+    font-weight: 800;
+}
+
+
+/* Info extra */
+
+
+.info-extra-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 50px 20px;
+    background-color: var(--verde-amarillo);
+}
+
+.info-card {
+    background-color: var(--azul);
+    color: var(--background);
+    border-radius: 15px;
+    padding: 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 420px;
+}
+
+.info-card i {
+    font-size: 3rem;
+    flex-shrink: 0;
+}
+
+.info-extra-container h4 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--verde-amarillo);
+}
+
+.info-extra-container p {
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.4;
+}
+
+/* Nuevo footer */
+.footer-container{
+    background-color: var(--negro);
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+.footer-container p, .footer-container a{
+    font-size: 15px;
+    color: var(--background);
+}
+
+/* Botón Volver Arriba */
+.back-to-top-btn {
+    background-color: var(--gris-oscuro); 
+    color: var(--verde-amarillo);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.back-to-top-btn:hover {
+    background-color: var(--background);
+}
+
+.back-to-top-btn i {
+    font-size: 1.2rem;
+    color: var(--negro);
+}
+
+/*--- Footer ---*/
+
+/* ===============================
+   ACÁ SE HACE EL SITIO RESPONSIVE
+   =============================== */
+
+/* Resolución estándar: 1366x768 */
+@media (max-width: 1366px) {
+  #inicio{
+    padding: 0 60px 0 60px;
   }
 
-  100% {
-    transform: rotate(360deg);
+  .product-title{
+    font-size: 1.1rem;
   }
+
+  .info-extra-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 50px 20px;
+    background-color: var(--verde-amarillo);
 }
 
-.signin {
-  width: 100%;
-  max-width: 330px;
-  padding: 15px;
-  margin: auto;
+.info-card {
+    background-color: var(--azul);
+    color: var(--background);
+    border-radius: 15px;
+    padding: 30px;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    max-width: 400px;
 }
 
-#spinner-wrapper {
-  position: fixed;
-  background-color: rgba(0, 0, 0, 0.5);
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1021;
-  display: none;
+.info-card i {
+    font-size: 2.8rem;
+    flex-shrink: 0;
+}
 }
 
-main {
-  min-height: calc(100vh - 210px);
-}
-
-a.custom-card,
-a.custom-card:hover {
-  color: inherit;
-  text-decoration: inherit;
-}
-
-.checked {
-  color: orange;
+/* Tableta en modo vertical (768x1024) se mantiene */
+/* Smartphone pequeño: 320x568 */
+@media (max-width: 1366px) {
+  #inicio{
+    padding: 0 30px 0 30px;
+  }
 }

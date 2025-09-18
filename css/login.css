@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #dbf059;
+    display: flex;
+    flex-direction: column; 
+    min-height: 100vh;      
+    margin: 0;
+    justify-content: flex-start; 
+    align-items: center;
+}
+
+.login-container {
+    background-color: #fff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    width: 350px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.logo {
+    margin-bottom: 15px;
+}
+
+.logo img {
+    width: 200px; 
+    height: auto;
+}
+
+.subtitle {
+    margin: 10px 0 20px;
+    font-size: 14px;
+    color: #333;
+}
+
+h2 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+.form-group {
+    text-align: left;
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #2f31f5;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background-color: #333;
+}
+
+.register {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.register a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #000;
+}
+
+.register a:hover {
+    text-decoration: underline;
+}
+
+main {
+    flex: 1; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-direction: column;
+    min-height: 0; 
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+    .login-container {
+        width: 400px;
+        padding: 40px 50px;
+    }
+
+    .logo img {
+        width: 220px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+}
+
+@media (min-width: 700px) and (max-width: 800px) {
+    .login-container {
+        width: 350px;
+        padding: 25px 30px;
+    }
+
+    .logo img {
+        width: 180px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 400px) {
+    .login-container {
+        width: 90%;  
+        padding: 20px;
+    }
+
+    .logo img {
+        width: 200px;
+    }
+
+    h2 {
+        font-size: 16px;
+    }
+
+    .form-group input {
+        font-size: 12px;
+        padding: 8px;
+    }
+
+    .btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .subtitle{
+        font-size: 12px;
+    }
+
+    footer {
+        font-size: 12px;
+    }
+}
+
+footer {
+    text-align: center;
+    margin-top: 20px;
+    width: 100%;
+    
+}

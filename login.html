@@ -1,39 +1,53 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
-  
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <style>
-    body {
-      background-color: rgb(248, 249, 250);
-    }
-  </style>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>eMercado - Todo lo que busques está aquí</title>
+
+    
+    <link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,700,900&display=swap" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/login.css" rel="stylesheet">
 </head>
-
 <body>
-  <main class="mt-5">
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div>
-    <button class="btn btn-primary" id="login-button" type="button">Ingresar</button>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
-  <script src="js/login.js"></script>
-</body>
 
+<main class="mt-5">
+    <div class="container d-flex justify-content-center">
+        <div class="login-container">
+            <div class="logo">
+                <img src="img/login.png" alt="Logo de e-mercado" class="img-fluid">
+            </div>
+            <p class="subtitle">Bienvenido nuevamente a e-mercado<br>Tu e-commerce favorito.</p>
+            
+            <h2>Inicia sesión en tu cuenta</h2>
+
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="usuario">Usuario</label>
+                    <input type="text" id="usuario" name="usuario" class="form-control" placeholder="Tu nombre de usuario" required>
+                </div>
+
+                <div class="form-group mt-3">
+                    <label for="password">Contraseña</label>
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Tu contraseña" required>
+                </div>
+
+                <button type="submit" class="btn">Iniciar sesión</button>
+            </form>
+
+            <p class="register mt-3">¿No tienes una cuenta? <a href="#">Regístrate Aquí</a></p>
+        </div>
+    </div>
+</main>
+
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-end"><a href="#">Volver arriba</a></p>
+        <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a></p>
+    </div>
+</footer>
+
+<script src="js/login.js"></script>
+</body>
 </html>
