@@ -2,6 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const catID = localStorage.getItem("catID") || 101;
     const CATALOG_URL = "https://japceibal.github.io/emercado-api/cats_products/" + catID + ".json";
     const container = document.querySelector(".catalog_container");
+    const buscarInput = document.getElementById('buscar-input');
+    if (buscarInput) {
+        buscarInput.addEventListener('input', buscarProductos);
+    }
 
     // Función para crear la tarjeta de producto
     function createProductCard(product) {
@@ -41,6 +45,8 @@ document.addEventListener("DOMContentLoaded", () => {
     fetch(CATALOG_URL)
         .then(response => response.json())
         .then(data => {
+            const titleElement = document.getElementById('title');
+            titleElement.textContent = data.catName || 'Catálogo';
             const products = data.products;
             container.innerHTML = "";
             products.forEach(product => {
@@ -121,9 +127,3 @@ function buscarProductos() {
     });
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const buscarInput = document.getElementById('buscar-input');
-    if (buscarInput) {
-        buscarInput.addEventListener('input', buscarProductos);
-    }
-});
