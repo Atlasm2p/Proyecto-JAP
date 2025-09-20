@@ -1,6 +1,8 @@
+const japceibal = "https://japceibal.github.io/emercado-api/cats_products/";
+
 document.addEventListener("DOMContentLoaded", () => {
     const catID = localStorage.getItem("catID") || 101;
-    const CATALOG_URL = "https://japceibal.github.io/emercado-api/cats_products/" + catID + ".json";
+    const CATALOG_URL = japceibal + catID + ".json";
     const container = document.querySelector(".catalog_container");
     const buscarInput = document.getElementById('buscar-input');
     if (buscarInput) {
