@@ -60,9 +60,6 @@ document.addEventListener("DOMContentLoaded", () => {
     function aplicarFiltros() {
         const min = parseFloat(document.getElementById('precio-min').value) || 0;
         const max = parseFloat(document.getElementById('precio-max').value) || Infinity;
-        const tipo = document.getElementById('tipo').value;
-        const marca = document.getElementById('marca').value;
-        const ano = document.getElementById('ano').value;
         const financiableSwitch = document.getElementById('financiable-switch').checked;
         const buscar = document.getElementById('buscar-input').value.toLowerCase();
 
@@ -71,38 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
             // Precio
             if (!(p.cost >= min && p.cost <= max)) cumple = false;
-
-            // Tipo
-            const tipos = {
-                sedan: [],
-                suv: [productos[1]],
-                cuatrox4: [],
-                hatchback: [productos[0], productos[1], productos[2], productos[3]],
-                deportivo: [productos[4]]
-            };
-            if (tipo && !tipos[tipo].includes(p)) cumple = false;
-
-            // Marca
-            const marcas = {
-                chevrolet: [productos[0]],
-                fiat: [productos[1]],
-                suzuki: [productos[2]],
-                peugeot: [productos[3]],
-                bugatti: [productos[4]]
-            };
-            if (marca && !marcas[marca].includes(p)) cumple = false;
-
-            // Año
-            const anos = {
-                "2014": [productos[0], productos[2]],
-                "2015": [productos[1], productos[2]],
-                "2016": [productos[1], productos[2], productos[4]],
-                "2017": [productos[1], productos[2], productos[4]],
-                "2018": [productos[1], productos[2]],
-                "2019": [productos[0], productos[1], productos[2], productos[3], productos[4]],
-                "2020": [productos[4], productos[2], productos[4]]
-            };
-            if (ano && !anos[ano].includes(p)) cumple = false;
 
             // Financiable
             const financiables = [...productos];
