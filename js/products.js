@@ -5,6 +5,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const CATALOG_URL = japceibal + catID + ".json";
     const container = document.querySelector(".catalog_container");
     const buscarInput = document.getElementById('buscar-input');
+    
     if (buscarInput) {
         buscarInput.addEventListener('input', buscarProductos);
     }
@@ -30,6 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
+    
+        
         
         // Añado un evento de clic a cada tarjeta de producto
         card.addEventListener('click', () => {
@@ -43,18 +46,26 @@ document.addEventListener("DOMContentLoaded", () => {
         return card;
     }
 
+    function visualizarProductos(productos) {
+        const container = document.querySelector(".catalog_container");
+        container.innerHTML = "";
+        productos.forEach(producto => {
+        const card = createProductCard(producto);
+        container.appendChild(card);
+        });
+    }
+
+    let productos = []
+    let productosFiltrados = []
     // Traemos los productos del JSON
     fetch(CATALOG_URL)
         .then(response => response.json())
         .then(data => {
             const titleElement = document.getElementById('title');
             titleElement.textContent = data.catName || 'Catálogo';
-            const products = data.products;
-            container.innerHTML = "";
-            products.forEach(product => {
-                const card = createProductCard(product);
-                container.appendChild(card);
-            });
+            productos = data.products;
+            productosFiltrados = [...productos];
+            visualizarProductos(productosFiltrados);
         })
         .catch(error => console.error("Error al cargar productos:", error));
 
@@ -108,6 +119,27 @@ document.addEventListener("DOMContentLoaded", () => {
     menuLinks.forEach(link => {
         link.addEventListener('click', closeMenu);
     });
+
+    document.getElementById('filtrar-precio').addEventListener('click', () => {
+    const min = parseFloat(document.getElementById('precio-min').value) || 0;
+    const max = parseFloat(document.getElementById('precio-max').value) || Infinity;
+
+    productosFiltrados = productos.filter(p => p.cost >= min && p.cost <= max);
+    visualizarProductos(productosFiltrados);
+    })
+
+    document.getElementById('ordenar').addEventListener('change', (e) => {
+        const value = e.target.value;
+
+        if (value === "precio-asc") {
+            productosFiltrados.sort((a, b) => a.cost - b.cost);
+        } else if (value === "precio-desc") {
+            productosFiltrados.sort((a, b) => b.cost - a.cost);
+        } else if (value === "relevancia") {
+            productosFiltrados.sort((a, b) => b.soldCount - a.soldCount);
+        }
+        visualizarProductos(productosFiltrados)
+    })
 });
 
 function buscarProductos() {
@@ -128,4 +160,3 @@ function buscarProductos() {
         }
     });
 }
-
