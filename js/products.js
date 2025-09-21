@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // Asignar eventos a filtros
-    ['precio-min', 'precio-max', 'tipo', 'marca', 'ano', 'ordenar', 'financiable-switch', 'buscar-input'].forEach(id => {
+    ['precio-min', 'precio-max', 'ordenar', 'financiable-switch', 'buscar-input'].forEach(id => {
         const elem = document.getElementById(id);
         if (elem) {
             elem.addEventListener(id === 'buscar-input' ? 'input' : 'change', aplicarFiltros);
@@ -112,9 +112,6 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById('precio-min').value = "";
             document.getElementById('precio-max').value = "";
             document.getElementById('ordenar').value = "";
-            document.getElementById('tipo').value = "";
-            document.getElementById('marca').value = "";
-            document.getElementById('ano').value = "";
             document.getElementById('buscar-input').value = "";
             document.getElementById('financiable-switch').checked = false;
         });
