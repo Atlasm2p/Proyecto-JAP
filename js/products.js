@@ -4,10 +4,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const catID = localStorage.getItem("catID") || 101;
     const CATALOG_URL = japceibal + catID + ".json";
     const container = document.querySelector(".catalog_container");
-    const buscarInput = document.getElementById('buscar-input');
-    if (buscarInput) {
-        buscarInput.addEventListener('input', buscarProductos);
-    }
 
     // Función para crear la tarjeta de producto
     function createProductCard(product) {
@@ -30,18 +26,23 @@ document.addEventListener("DOMContentLoaded", () => {
             </div>
         `;
 
-        
-        // Añado un evento de clic a cada tarjeta de producto
         card.addEventListener('click', () => {
-            // Guardo el ID del producto en el almacenamiento local
             localStorage.setItem('prodID', product.id);
-            // Redirijo al usuario a la página de detalles del producto
             window.location.href = 'product-info.html';
         });
-        
-        
+
         return card;
     }
+
+    function visualizarProductos(productos) {
+        container.innerHTML = "";
+        productos.forEach(producto => {
+            container.appendChild(createProductCard(producto));
+        });
+    }
+
+    let productos = [];
+    let productosFiltrados = [];
 
     // Traemos los productos del JSON
     fetch(CATALOG_URL)
@@ -49,15 +50,112 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(data => {
             const titleElement = document.getElementById('title');
             titleElement.textContent = data.catName || 'Catálogo';
-            const products = data.products;
-            container.innerHTML = "";
-            products.forEach(product => {
-                const card = createProductCard(product);
-                container.appendChild(card);
-            });
+            productos = data.products;
+            productosFiltrados = [...productos];
+            visualizarProductos(productosFiltrados);
         })
         .catch(error => console.error("Error al cargar productos:", error));
 
+    // Función central de filtros
+    function aplicarFiltros() {
+        const min = parseFloat(document.getElementById('precio-min').value) || 0;
+        const max = parseFloat(document.getElementById('precio-max').value) || Infinity;
+        const tipo = document.getElementById('tipo').value;
+        const marca = document.getElementById('marca').value;
+        const ano = document.getElementById('ano').value;
+        const financiableSwitch = document.getElementById('financiable-switch').checked;
+        const buscar = document.getElementById('buscar-input').value.toLowerCase();
+
+        productosFiltrados = productos.filter(p => {
+            let cumple = true;
+
+            // Precio
+            if (!(p.cost >= min && p.cost <= max)) cumple = false;
+
+            // Tipo
+            const tipos = {
+                sedan: [],
+                suv: [productos[1]],
+                cuatrox4: [],
+                hatchback: [productos[0], productos[1], productos[2], productos[3]],
+                deportivo: [productos[4]]
+            };
+            if (tipo && !tipos[tipo].includes(p)) cumple = false;
+
+            // Marca
+            const marcas = {
+                chevrolet: [productos[0]],
+                fiat: [productos[1]],
+                suzuki: [productos[2]],
+                peugeot: [productos[3]],
+                bugatti: [productos[4]]
+            };
+            if (marca && !marcas[marca].includes(p)) cumple = false;
+
+            // Año
+            const anos = {
+                "2014": [productos[0], productos[2]],
+                "2015": [productos[1], productos[2]],
+                "2016": [productos[1], productos[2], productos[4]],
+                "2017": [productos[1], productos[2], productos[4]],
+                "2018": [productos[1], productos[2]],
+                "2019": [productos[0], productos[1], productos[2], productos[3], productos[4]],
+                "2020": [productos[4], productos[2], productos[4]]
+            };
+            if (ano && !anos[ano].includes(p)) cumple = false;
+
+            // Financiable
+            const financiables = [...productos];
+            financiables.splice(-1, 1);
+            if (financiableSwitch && !financiables.includes(p)) cumple = false;
+
+            // Búsqueda
+            const nombreDesc = (p.name + " " + p.description).toLowerCase();
+            if (buscar && !nombreDesc.includes(buscar)) cumple = false;
+
+            return cumple;
+        });
+
+        // Orden
+        const orden = document.getElementById('ordenar').value;
+        if (orden === "precio-asc") {
+            productosFiltrados.sort((a, b) => a.cost - b.cost);
+        } else if (orden === "precio-desc") {
+            productosFiltrados.sort((a, b) => b.cost - a.cost);
+        } else if (orden === "relevancia") {
+            productosFiltrados.sort((a, b) => b.soldCount - a.soldCount);
+        }
+
+        visualizarProductos(productosFiltrados);
+    }
+
+    // Asignar eventos a filtros
+    ['precio-min', 'precio-max', 'tipo', 'marca', 'ano', 'ordenar', 'financiable-switch', 'buscar-input'].forEach(id => {
+        const elem = document.getElementById(id);
+        if (elem) {
+            elem.addEventListener(id === 'buscar-input' ? 'input' : 'change', aplicarFiltros);
+        }
+    });
+
+    // Botón mostrar todos
+    const botonMostrarTodos = document.querySelector('.filtro-boton-todo');
+    if (botonMostrarTodos) {
+        botonMostrarTodos.addEventListener('click', () => {
+            productosFiltrados = [...productos]; 
+            visualizarProductos(productosFiltrados);
+
+            document.getElementById('precio-min').value = "";
+            document.getElementById('precio-max').value = "";
+            document.getElementById('ordenar').value = "";
+            document.getElementById('tipo').value = "";
+            document.getElementById('marca').value = "";
+            document.getElementById('ano').value = "";
+            document.getElementById('buscar-input').value = "";
+            document.getElementById('financiable-switch').checked = false;
+        });
+    }
+
+    // --- MENÚ (igual que tu versión original) ---
     const menuToggle = document.getElementById('menu-toggle');
     const dropdownMenu = document.getElementById('dropdown-menu');
     const menuOverlay = document.getElementById('menu-overlay');
@@ -65,16 +163,13 @@ document.addEventListener("DOMContentLoaded", () => {
     function toggleMenu() {
         dropdownMenu.classList.toggle('active');
         menuOverlay.classList.toggle('active');
-        console.log('Menú toggled');
     }
 
     function closeMenu() {
         dropdownMenu.classList.remove('active');
         menuOverlay.classList.remove('active');
-        console.log('Menú cerrado');
     }
 
-    // Event listeners para el menú
     if (menuToggle) {
         menuToggle.addEventListener('click', function (e) {
             e.preventDefault();
@@ -83,11 +178,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    if (menuOverlay) {
-        menuOverlay.addEventListener('click', closeMenu);
-    }
+    if (menuOverlay) menuOverlay.addEventListener('click', closeMenu);
 
-    // Cerrar menú al hacer clic fuera
     document.addEventListener('click', function (e) {
         if (dropdownMenu && menuToggle &&
             !dropdownMenu.contains(e.target) &&
@@ -96,36 +188,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // Cerrar menú con Escape
     document.addEventListener('keydown', function (e) {
-        if (e.key === 'Escape') {
-            closeMenu();
-        }
+        if (e.key === 'Escape') closeMenu();
     });
 
-    // Cerrar menú al hacer clic en los enlaces
     const menuLinks = dropdownMenu ? dropdownMenu.querySelectorAll('a') : [];
-    menuLinks.forEach(link => {
-        link.addEventListener('click', closeMenu);
-    });
+    menuLinks.forEach(link => link.addEventListener('click', closeMenu));
 });
-
-function buscarProductos() {
-    const input = document.getElementById('buscar-input');
-    const filter = input.value.toLowerCase();
-    const container = document.querySelector('.catalog_container');
-    const cards = container.getElementsByClassName('card_product');
-
-    Array.from(cards).forEach(card => {
-        const nameElem = card.querySelector('.name_item');
-        const descElem = card.querySelector('.desc_item');
-        const name = nameElem.textContent.toLowerCase();
-        const description = descElem.textContent.toLowerCase();
-        if (name.includes(filter) || description.includes(filter)) {
-            card.style.display = '';
-        } else {
-            card.style.display = 'none';
-        }
-    });
-}
-

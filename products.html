@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
   <link rel="stylesheet" href="css/products.css">
-  <script src="js/products.js"></script>
+  <script src="js/products.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Krona+One&display=swap" rel="stylesheet">
@@ -81,6 +81,24 @@
             <div class="buscar-menu">
                 <input type="text" id="buscar-input" placeholder="Buscar...">
             </div>
+            
+            <div class="filtro-menu">
+                <label for="precio-min">Precio</label>
+                <input type="number" id="precio-min" placeholder="Mínimo">
+                <input type="number" id="precio-max" placeholder="Máximo">
+                <button id="filtrar-precio">Filtrar</button>
+            </div>
+
+            <div class="filtro-menu">
+                <label for="ordenar">Ordenar</label>
+                <select id="ordenar">
+                    <option value="">-- Seleccionar --</option>
+                    <option value="precio-asc">Precio ascendente</option>
+                    <option value="precio-desc">Precio descendente</option>
+                    <option value="relevancia">Más vendidos</option>
+                </select>
+            </div>
+            
             <div class="filtro-menu"> <!-- Son todos hatchback, menos el Fiat uno way que es CUV -->
                 <label for="tipo">Tipos</label>
                 <select name="tipo" id="tipo">
@@ -110,7 +128,7 @@
                 <select name="ano" id="ano">
                     <option value="">Todos</option>
                     <option value="2014">2014</option>
-                    <option value="2017">2015</option>
+                    <option value="2015">2015</option>
                     <option value="2016">2016</option>
                     <option value="2017">2017</option>
                     <option value="2018">2018</option>
