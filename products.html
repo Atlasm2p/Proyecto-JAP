@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>eMercado - Todo lo que busques está aquí</title>
   <link rel="stylesheet" href="css/products.css">
-  <script src="js/products.js"></script>
+  <script src="js/products.js" defer></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Krona+One&display=swap" rel="stylesheet">
@@ -59,7 +59,7 @@
 
     <header class="header-catalogo">
         <div class="titulo-catalogo">
-            <h1 id="title">Catálogo</h1>
+            <h1 id="title"></h1>
         </div>
         <p>
             Descubre nuestra amplia selección de autos de alta y media gama, tanto nuevos como usados, con los mejores precios del mercado. Encuentra el vehículo perfecto que se adapte a tu estilo de vida y presupuesto. 
@@ -81,44 +81,23 @@
             <div class="buscar-menu">
                 <input type="text" id="buscar-input" placeholder="Buscar...">
             </div>
-            <div class="filtro-menu"> <!-- Son todos hatchback, menos el Fiat uno way que es CUV -->
-                <label for="tipo">Tipos</label>
-                <select name="tipo" id="tipo">
-                    <option value="">Todos</option>
-                    <option value="sedan">Sedan</option>
-                    <option value="suv">SUV</option>
-                    <option value="coupe">4x4</option>
-                    <option value="hatchback">Hatchback</option>
-                    <option value="deportivo">Deportivo</option>
-                </select>
+            
+            <div class="filtro-menu">
+                <label for="filtrar-precio">Precio</label>
+                <input type="number" id="precio-min" placeholder="Mínimo">
+                <input type="number" id="precio-max" placeholder="Máximo">
+                <button id="filtrar-precio">Filtrar</button>
             </div>
 
             <div class="filtro-menu">
-                <label for="marca">Marca</label>
-                <select name="marca" id="marca">
-                    <option value="">Todas</option>
-                    <option value="chevrolet">Chevrolet</option>
-                    <option value="fiat">Fiat</option>
-                    <option value="suzuki">Suzuki</option>
-                    <option value="peugeot">Peugeot</option>
-                    <option value="bugatti">Bugatti</option>
+                <label for="ordenar">Ordenar</label>
+                <select id="ordenar">
+                    <option value="">-- Seleccionar --</option>
+                    <option value="precio-asc">Precio ascendente</option>
+                    <option value="precio-desc">Precio descendente</option>
+                    <option value="relevancia">Más vendidos</option>
                 </select>
             </div>
-
-            <div class="filtro-menu">
-                <label for="ano">Año</label>
-                <select name="ano" id="ano">
-                    <option value="">Todos</option>
-                    <option value="2014">2014</option>
-                    <option value="2017">2015</option>
-                    <option value="2016">2016</option>
-                    <option value="2017">2017</option>
-                    <option value="2018">2018</option>
-                    <option value="2019">2019</option>
-                    <option value="2020">2020</option>
-                </select>
-
-                </div>
 
             <div class="switch-financiable-container">
                 <label class="switch">
