@@ -205,5 +205,49 @@ document.addEventListener('DOMContentLoaded', () => {
         window.history.back();
     });
 
+    //Productos relacionados
+
+    const catID = localStorage.getItem("catID") || 101;
+
+    getJSONData(PRODUCTS_URL + catID + EXT_TYPE)
+        .then(result => {
+            if (result.status === "ok") {
+                const productData = result.data;
+                displayRelatedProducts(productData);
+            } else {
+                console.error(result.data);
+                alert("Hubo un error al cargar la información del producto.");
+            }
+        })
+        .catch(error => {
+            console.error("Error al procesar la solicitud:", error);
+            alert("Hubo un error al cargar la información del producto.");
+        });
+
+    function displayRelatedProducts(relatedProducts) {
+        const relatedContainer = document.getElementById('related-products');
+        relatedContainer.innerHTML = '';
+
+        relatedProducts.products.forEach(prod => {
+            if (prod.id === productID) return;
+            const prodCard = document.createElement('div');
+            prodCard.classList.add('card_product', 'm-2');
+            prodCard.style.cursor = 'pointer';
+
+            prodCard.innerHTML = `
+                <img src="${prod.image}" alt="${prod.name}" class="product_image">
+                <div class="name_item">${prod.name}</div>
+                <div class="price">${prod.currency} ${prod.cost}</div>
+            `;
+
+            prodCard.addEventListener('click', () => {
+                localStorage.setItem('prodID', prod.id);
+                window.location.href = 'product-info.html';
+            });
+
+            relatedContainer.appendChild(prodCard);
+        });
+    }
+
 
 });

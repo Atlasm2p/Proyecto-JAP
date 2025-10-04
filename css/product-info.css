@@ -533,3 +533,61 @@ h4 {
         gap: 14px;
     }
 }
+
+/* --- Estilos para la sección de Relacionados (Related) --- */
+
+.related-section {
+    font-family: 'Krona One', sans-serif; 
+    font-size: 1.35rem; 
+    color: #22223b; 
+    margin-bottom: 24px;
+    padding-top: 15px; 
+    border-top: 1px solid #e7e7e7;
+}
+
+.related-products {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.card_product {
+    width: 300px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 16px;
+    flex-shrink: 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.card_product:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card_product img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    background: #f3f4f6;
+}
+
+.card_product .name_item {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 8px;
+    height: 24px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card_product .price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2f31f5;
+}
