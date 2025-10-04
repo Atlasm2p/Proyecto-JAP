@@ -533,3 +533,73 @@ h4 {
         gap: 14px;
     }
 }
+/* --- Sección para dejar calificación --- */
+#review-and-related {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+}
+.add-review-section {
+  padding-top: 1px;
+}
+
+.add-review-section h4 {
+  font-family: 'Krona One', sans-serif;
+  font-size: 1.2rem;
+  color: #22223b;
+  margin-bottom: 15px;
+}
+
+.star-rating {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.star-rating .fa-star {
+  font-size: 1.2rem;
+  color: #d1d5db; /* gris por defecto */
+  transition: color 0.2s;
+}
+
+.star-rating .fa-star:hover,
+.star-rating .fa-star.active {
+  color: #2f31f5; /* azul al seleccionar */
+}
+
+.review-text {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  resize: vertical;
+}
+
+.name-text {
+  width: 100%;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8 ;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.submit-review {
+  background-color: #dbf059;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bolder;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submit-review:hover {
+  background-color: #c3d44f;
+}
