@@ -173,9 +173,29 @@
             </div>
             </div>
           </div>
-        <div class="related-section">
-        <h4>Productos relacionados</h4>
-        <div class="related-products" id="related-products">
+      <div id="review-and-related">
+        <form class="add-review-section container" id="review-form" action="" method="post">
+          <h4>Envía tu reseña</h4>
+          <p>Agrega tu calificación<span style="color: blue; font-size: 25px; font-family: 'Courier New', Courier, monospace;">*</span></p>
+          <div class="star-rating">
+            <span class="fa fa-star" data-value="1"></span>
+            <span class="fa fa-star" data-value="2"></span>
+            <span class="fa fa-star" data-value="3"></span>
+            <span class="fa fa-star" data-value="4"></span>
+            <span class="fa fa-star" data-value="5"></span>
+          </div>
+          <input type="hidden" name="rating" id="rating">
+          <p>Nombres<span style="color: blue; font-size: 25px; font-family: 'Courier New', Courier, monospace;">*</span></p>
+          <input type="text" class="name-text" placeholder="Escribe aquí..." name="name" required></textarea>
+          <p>Escribe tu reseña<span style="color: blue; font-size: 25px; font-family: 'Courier New', Courier, monospace;">*</span></p>
+          <textarea class="review-text" placeholder="Escribe aquí..." name="review" required></textarea>
+        <button type="submit" class="submit-review">Enviar</button>
+        </form>
+
+        <div class="related-section container">
+          <h4>Productos relacionados</h4>
+          <div class="related-products" id="related-products">
+          </div>
         </div>
       </div>
     </div>
