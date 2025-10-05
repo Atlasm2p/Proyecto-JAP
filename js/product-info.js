@@ -306,15 +306,14 @@ document.getElementById('add-review-form').addEventListener('submit', function(e
     e.preventDefault();
     const selectedStars = document.querySelectorAll('.newCommentStars.selected');
     const commentText = document.getElementById('review-text').value.trim();
-    const usuario = sessionStorage.getItem('usuario') || 'Anónimo';
+    const usuario = sessionStorage.getItem('usuario');
 
     if (selectedStars.length > 0 && commentText !== '') {
         const newComment = {
             user: usuario,
             score: selectedStars.length,
             description: commentText,
-            dateTime: new Date().toISOString(),
-            title: '', // Optional, add if you want
+            dateTime: new Date().toISOString()
         };
         allComments.push(newComment);
         displayComments(allComments); // Re-render comments
