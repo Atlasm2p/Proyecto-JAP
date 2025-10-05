@@ -1,34 +1,6 @@
-document.addEventListener('DOMContentLoaded', () => {
+let allComments = [];
 
-    const productID = localStorage.getItem('prodID');
-
-    if (!productID) {
-        alert("No se ha seleccionado ningún producto.");
-        window.location.href = "index.html"; 
-        return;
-    }
-
-    
-    getJSONData(PRODUCT_INFO_URL + productID + EXT_TYPE)
-        .then(result => {
-            if (result.status === "ok") {
-                const productData = result.data;
-                displayProductDetails(productData);
-                
-                fetchAndDisplayComments(productID);
-            } else {
-                console.error(result.data);
-                alert("Hubo un error al cargar la información del producto.");
-            }
-        })
-        .catch(error => {
-            console.error("Error al procesar la solicitud:", error);
-            alert("Hubo un error al cargar la información del producto.");
-        });
-
-    
-
-    function fetchAndDisplayComments(prodId) { 
+function fetchAndDisplayComments(prodId) { 
         getJSONData(PRODUCT_INFO_COMMENTS_URL + prodId + EXT_TYPE) 
             .then(response => {
                 if (response.status === "ok") {
@@ -75,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function displayComments(comments) {
         const commentsListContainer = document.getElementById('comments-list');
         const summary = calculateRatingsSummary(comments);
-        
+        allComments = comments;
         
         document.getElementById('overall-score-big').textContent = summary.average;
         document.getElementById('total-ratings-count').textContent = `${summary.totalCount} calificaciones totales`;
@@ -201,6 +173,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const productID = localStorage.getItem('prodID');
+
+    if (!productID) {
+        alert("No se ha seleccionado ningún producto.");
+        window.location.href = "index.html"; 
+        return;
+    }
+
+    
+    getJSONData(PRODUCT_INFO_URL + productID + EXT_TYPE)
+        .then(result => {
+            if (result.status === "ok") {
+                const productData = result.data;
+                displayProductDetails(productData);
+                
+                fetchAndDisplayComments(productID);
+            } else {
+                console.error(result.data);
+                alert("Hubo un error al cargar la información del producto.");
+            }
+        })
+        .catch(error => {
+            console.error("Error al procesar la solicitud:", error);
+            alert("Hubo un error al cargar la información del producto.");
+        });
+
     document.getElementById('btn-back').addEventListener('click', () => {
         window.history.back();
     });
@@ -244,4 +245,85 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    getJSONData(PRODUCTS_URL + catID + EXT_TYPE)
+        .then(result => {
+            if (result.status === "ok") {
+                const productData = result.data;
+                displayRelatedProducts(productData);
+            } else {
+                console.error(result.data);
+                alert("Hubo un error al cargar la información del producto.");
+            }
+        })
+        .catch(error => {
+            console.error("Error al procesar la solicitud:", error);
+            alert("Hubo un error al cargar la información del producto.");
+        });
+
+    function displayRelatedProducts(relatedProducts) {
+        const relatedContainer = document.getElementById('related-products');
+        relatedContainer.innerHTML = '';
+
+        relatedProducts.products.forEach(prod => {
+            if (prod.id === productID) return;
+            const prodCard = document.createElement('div');
+            prodCard.classList.add('card_product', 'm-2');
+            prodCard.style.cursor = 'pointer';
+
+            prodCard.innerHTML = `
+                <img src="${prod.image}" alt="${prod.name}" class="product_image">
+                <div class="name_item">${prod.name}</div>
+                <div class="price">${prod.currency} ${prod.cost}</div>
+            `;
+
+            prodCard.addEventListener('click', () => {
+                localStorage.setItem('prodID', prod.id);
+                window.location.href = 'product-info.html';
+            });
+
+            relatedContainer.appendChild(prodCard);
+        });
+    }
+
+
+});
+document.querySelectorAll('.newCommentStars').forEach(button => {
+    button.addEventListener('click', (e) => {
+        const selectedValue = parseInt(e.target.getAttribute('data-value'));
+        document.querySelectorAll('.newCommentStars').forEach(star => {
+            const starValue = parseInt(star.getAttribute('data-value'));
+            if (starValue <= selectedValue) {
+                star.classList.add('selected');
+                star.classList.remove('empty');
+            } else {
+                star.classList.remove('selected');
+                star.classList.add('empty');
+            }
+        });
+    });
+});
+document.getElementById('add-review-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const selectedStars = document.querySelectorAll('.newCommentStars.selected');
+    const commentText = document.getElementById('review-text').value.trim();
+    const usuario = sessionStorage.getItem('usuario') || 'Anónimo';
+
+    if (selectedStars.length > 0 && commentText !== '') {
+        const newComment = {
+            user: usuario,
+            score: selectedStars.length,
+            description: commentText,
+            dateTime: new Date().toISOString(),
+            title: '', // Optional, add if you want
+        };
+        allComments.push(newComment);
+        displayComments(allComments); // Re-render comments
+        document.getElementById('add-review-form').reset();
+        document.querySelectorAll('.newCommentStars').forEach(star => {
+            star.classList.remove('selected');
+            star.classList.add('empty');
+        });
+    } else {
+        alert('Por favor, selecciona una calificación y escribe un comentario.');
+    }
 });

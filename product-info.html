@@ -1,72 +1,107 @@
 <!DOCTYPE html>
 <html lang="es">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>eMercado - Todo lo que busques está aquí</title>
 
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
+    <link
+      href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i"
+      rel="stylesheet"
+    />
+    <link href="css/font-awesome.min.css" rel="stylesheet" />
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <link href="css/product-info.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Krona+One"
+      rel="stylesheet"
+    />
+  </head>
 
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <link href="css/product-info.css" rel="stylesheet">
-  <link href='https://fonts.googleapis.com/css?family=Krona+One' rel='stylesheet'>
-</head>
-
-<body>
-  <nav class="navbar-container">
-    <a href="index.html" class="logo-link">
-      <div class="logo">
-        <img src="img/logo_e_mercado.png" alt="Logo e-Mercado" class="logo-e-mercado">
-      </div>
-    </a>
-    <div class="nav-icons">
-      <a href="my-profile.html" class="icon-link" title="Mi perfil">
-        <i class="fas fa-user"></i>
+  <body>
+    <nav class="navbar-container">
+      <a href="index.html" class="logo-link">
+        <div class="logo">
+          <img
+            src="img/logo_e_mercado.png"
+            alt="Logo e-Mercado"
+            class="logo-e-mercado"
+          />
+        </div>
       </a>
-      <a href="cart.html" class="icon-link">
-        <i class="fas fa-shopping-bag"></i>
-      </a>
-      <div class="menu-wrapper" style="position: relative; display: inline-block;">
-        <a href="#" class="icon-link" id="menu-toggle">
-          <i class="fas fa-bars"></i>
+      <div class="nav-icons">
+        <a href="my-profile.html" class="icon-link" title="Mi perfil">
+          <i class="fas fa-user"></i>
         </a>
+        <a href="cart.html" class="icon-link">
+          <i class="fas fa-shopping-bag"></i>
+        </a>
+        <div
+          class="menu-wrapper"
+          style="position: relative; display: inline-block"
+        >
+          <a href="#" class="icon-link" id="menu-toggle">
+            <i class="fas fa-bars"></i>
+          </a>
+        </div>
       </div>
-    </div>
-  </nav>
-  <main>
-    <div class="container">
-      <div class="top-bar">
-        <button class="btn-back" id="btn-back">Volver</button>
-        <nav aria-label="breadcrumb" class="breadcrumb-inline">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item"><a href="categories.html">Catálogo</a></li>
-            <li class="breadcrumb-item active" aria-current="page" id="product-category">Autos</li>
-          </ol>
-        </nav>
-      </div>
-      <div class="product-layout">
-        <div class="gallery-thumbs">
-          <div id="product-thumbs">
-            
+    </nav>
+    <main>
+      <div class="container">
+        <div class="top-bar">
+          <button class="btn-back" id="btn-back">Volver</button>
+          <nav aria-label="breadcrumb" class="breadcrumb-inline">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item">
+                <a href="categories.html">Catálogo</a>
+              </li>
+              <li
+                class="breadcrumb-item active"
+                aria-current="page"
+                id="product-category"
+              >
+                Autos
+              </li>
+            </ol>
+          </nav>
+        </div>
+        <div class="product-layout">
+          <div class="gallery-thumbs">
+            <div id="product-thumbs"></div>
+          </div>
+          <div class="gallery-main">
+            <img
+              src="img/placeholder.png"
+              id="product-image-main"
+              alt="Imagen principal del producto"
+            />
+          </div>
+          <div class="info-column">
+            <h1 id="product-name">Nombre del producto</h1>
+            <p id="product-sold">0 vendidos</p>
+            <h3 id="product-price">USD 0</h3>
+            <div class="qty-row">
+              <label for="qty-select">Cantidad</label>
+              <select id="qty-select">
+                <option value="1">1</option>
+              </select>
+            </div>
+            <button class="buy-now" id="buy-now">Comprar ahora</button>
+            <p class="text-muted">
+              Compra protegida, recibe el producto esperado o te devolvemos tu
+              dinero.
+            </p>
           </div>
         </div>
-        <div class="gallery-main">
-          <img src="img/placeholder.png" id="product-image-main" alt="Imagen principal del producto">
-        </div>
-        <div class="info-column">
-          <h1 id="product-name">Nombre del producto</h1>
-          <p id="product-sold">0 vendidos</p>
-          <h3 id="product-price">USD 0</h3>
-          <div class="qty-row">
-            <label for="qty-select">Cantidad</label>
-            <select id="qty-select">
-              <option value="1">1</option>
-            </select>
-          </div>
-          <button class="buy-now" id="buy-now">Comprar ahora</button>
-          <p class="text-muted">Compra protegida, recibe el producto esperado o te devolvemos tu dinero.</p>
+        <div class="description-section">
+          <h4>Descripción</h4>
+          <p id="product-description">
+            Aquí irá la descripción del producto...
+          </p>
         </div>
       </div>
       <div class="description-section">
@@ -87,48 +122,99 @@
         <span class="fa fa-star empty"></span>
     </div>
 
-    <div class="overall-score-text">
-        <span id="overall-score-big">4.7</span>
-        <span class="overall-score-out-of">de 5</span>
-    </div>
-    
-    <p id="total-ratings-count">3 calificaciones totales</p>
-</div>
-        <div class="reviews-content-wrapper">
-          <div class="rating-breakdown" id="rating-breakdown">
-            <div class="rating-row">
-              <span class="stars">5 estrellas</span>
-              <div class="progress-bar-container"><div class="progress-bar" style="width: 67%;"></div></div>
-              <span class="percentage">67%</span>
+            <div class="overall-score-text">
+              <span id="overall-score-big">4.7</span>
+              <span class="overall-score-out-of">de 5</span>
+            </div>
+
+            <p id="total-ratings-count">3 calificaciones totales</p>
+          </div>
+          <div class="reviews-content-wrapper">
+            <div class="rating-breakdown" id="rating-breakdown">
+              <div class="rating-row">
+                <span class="stars">5 estrellas</span>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 67%"></div>
+                </div>
+                <span class="percentage">67%</span>
               </div>
               <div class="rating-row">
                 <span class="stars">4 estrellas</span>
-                <div class="progress-bar-container"><div class="progress-bar" style="width: 8%;"></div></div>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 8%"></div>
+                </div>
                 <span class="percentage">8%</span>
               </div>
               <div class="rating-row">
-               <span class="stars">3 estrellas</span>
-               <div class="progress-bar-container"><div class="progress-bar" style="width: 2%;"></div></div>              
-               <span class="percentage">2%</span>
+                <span class="stars">3 estrellas</span>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 2%"></div>
+                </div>
+                <span class="percentage">2%</span>
               </div>
               <div class="rating-row">
-               <span class="stars">2 estrellas</span>
-               <div class="progress-bar-container"><div class="progress-bar" style="width: 0%;"></div></div>              
-               <span class="percentage">0%</span>
+                <span class="stars">2 estrellas</span>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 0%"></div>
+                </div>
+                <span class="percentage">0%</span>
               </div>
               <div class="rating-row">
-               <span class="stars">1 estrella</span>
-               <div class="progress-bar-container"><div class="progress-bar" style="width: 1%;"></div></div>              
-               <span class="percentage">1%</span>
-              </div>            
-          </div>
-        <div class="comments-list-wrapper">
-          <div class="comments-list" id="comments-list">
+                <span class="stars">1 estrella</span>
+                <div class="progress-bar-container">
+                  <div class="progress-bar" style="width: 1%"></div>
+                </div>
+                <span class="percentage">1%</span>
+              </div>
             </div>
-          
+            <div class="comments-list-wrapper">
+              <div class="comments-list" id="comments-list"></div>
+            </div>
+            </div>
+              <div class="add-review-section">
+              <h5>Deja tu opinión</h5>
+              <form id="add-review-form">
+              <div class="star-rating-input" id="star-rating-input">
+                <button type="button" class="fa fa-star empty newCommentStars" data-value="1"></button>
+                <button type="button" class="fa fa-star empty newCommentStars" data-value="2"></button>
+                <button type="button" class="fa fa-star empty newCommentStars" data-value="3"></button>
+                <button type="button" class="fa fa-star empty newCommentStars" data-value="4"></button>
+                <button type="button" class="fa fa-star empty newCommentStars" data-value="5"></button>
+              </div>
+              <div class="form-group">
+                <label for="review-text">Comentario</label>
+                <textarea id="review-text" class="form-control" rows="3" placeholder="Escribe tu opinión..."></textarea>
+              </div>
+              <button type="submit" id="submit-comment" class="btn btn-primary mt-2">Enviar opinión</button>
+              </form>
+              </div>
+            </div>
+          </div>
+        <div class="related-section">
+        <h4>Productos relacionados</h4>
+        <div class="related-products" id="related-products">
         </div>
       </div>
     </div>
+    </main>
+    <footer class="footer-aligned text-muted">
+      <p>
+        Este sitio forma parte de
+        <a href="https://jovenesaprogramar.edu.uy/" target="_blank"
+          >Jovenes a Programar</a
+        >
+      </p>
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+    </footer>
+    <div id="spinner-wrapper">
+      <div class="lds-ring">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </div>
     <div id="review-and-related">
       <div class="container">
