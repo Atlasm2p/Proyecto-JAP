@@ -206,9 +206,44 @@ document.addEventListener('DOMContentLoaded', () => {
         window.history.back();
     });
 
-    //Productos relacionados
+    const stars = document.querySelectorAll(".star-rating .fa-star");
+    let rating = 0;
 
-    const catID = localStorage.getItem("catID") || 101;
+    stars.forEach(star => {
+
+        star.addEventListener("mouseover", () => {
+            const value = parseInt(star.getAttribute("data-value"));
+            stars.forEach(s => {
+                s.classList.toggle("active", parseInt(s.getAttribute("data-value")) <= value);
+            });
+        });
+
+        star.addEventListener("mouseout", () => {
+            if (rating == 0) {
+                stars.forEach(s => s.classList.remove("active"));
+            } else {
+                stars.forEach(s => {
+                s.classList.toggle("active", parseInt(s.getAttribute("data-value")) <= rating);    
+                })
+            }
+        });
+
+        star.addEventListener("click", () => {
+            rating = parseInt(star.getAttribute("data-value"));
+            stars.forEach(s => {
+            s.classList.toggle("active", parseInt(s.getAttribute("data-value")) <= rating);
+            });
+            document.getElementById("rating").value = rating;
+        });
+    });
+
+    document.getElementById("review-form").addEventListener("submit", function(e) {
+        if (rating === 0) {
+            e.preventDefault();
+            alert("⚠️ Por favor selecciona una calificación antes de enviar.");
+            return;
+        }
+    })
 
     getJSONData(PRODUCTS_URL + catID + EXT_TYPE)
         .then(result => {
