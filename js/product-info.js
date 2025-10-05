@@ -245,6 +245,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
 
+    const catID = localStorage.getItem("catID") || 101;
+
     getJSONData(PRODUCTS_URL + catID + EXT_TYPE)
         .then(result => {
             if (result.status === "ok") {
