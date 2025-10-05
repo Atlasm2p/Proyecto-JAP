@@ -289,21 +289,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
-document.querySelectorAll('.newCommentStars').forEach(button => {
-    button.addEventListener('click', (e) => {
-        const selectedValue = parseInt(e.target.getAttribute('data-value'));
-        document.querySelectorAll('.newCommentStars').forEach(star => {
-            const starValue = parseInt(star.getAttribute('data-value'));
-            if (starValue <= selectedValue) {
-                star.classList.add('selected');
-                star.classList.remove('empty');
-            } else {
-                star.classList.remove('selected');
-                star.classList.add('empty');
-            }
-        });
-    });
-});
 document.getElementById('review-form').addEventListener('submit', function(e) {
     e.preventDefault();
     const selectedStars = document.getElementById('rating');
