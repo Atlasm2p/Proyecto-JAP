@@ -208,42 +208,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 });
-document.querySelectorAll('.newCommentStars').forEach(button => {
-    button.addEventListener('click', (e) => {
-        const selectedValue = parseInt(e.target.getAttribute('data-value'));
-        document.querySelectorAll('.newCommentStars').forEach(star => {
-            const starValue = parseInt(star.getAttribute('data-value'));
-            if (starValue <= selectedValue) {
-                star.classList.add('selected');
-                star.classList.remove('empty');
-            } else {
-                star.classList.remove('selected');
-                star.classList.add('empty');
-            }
-        });
-    });
-});
-document.getElementById('add-review-form').addEventListener('submit', function(e) {
+document.getElementById('review-form').addEventListener('submit', function(e) {
     e.preventDefault();
-    const selectedStars = document.querySelectorAll('.newCommentStars.selected');
-    const commentText = document.getElementById('review-text').value.trim();
-    const usuario = sessionStorage.getItem('usuario') || 'Anónimo';
+    const selectedStars = document.getElementById('rating');
+    const commentText = document.querySelector('.review-text').value.trim();
+    const usuario = sessionStorage.getItem('usuario');
 
-    if (selectedStars.length > 0 && commentText !== '') {
+    if (selectedStars.value>0 && commentText !== '') {
         const newComment = {
             user: usuario,
-            score: selectedStars.length,
+            score: selectedStars.value,
             description: commentText,
-            dateTime: new Date().toISOString(),
-            title: '', // Optional, add if you want
+            dateTime: new Date().toISOString()
         };
         allComments.push(newComment);
         displayComments(allComments); // Re-render comments
-        document.getElementById('add-review-form').reset();
-        document.querySelectorAll('.newCommentStars').forEach(star => {
-            star.classList.remove('selected');
-            star.classList.add('empty');
+        document.getElementById('review-form').reset();
+        document.querySelectorAll('.star-rating .fa-star').forEach(star => {
+            star.classList.remove('active');
         });
+        const commentsList = document.getElementById('comments-list');
+        const y = commentsList.getBoundingClientRect().top + window.scrollY;
+        window.scrollTo({ top: y, behavior: 'smooth' });
     } else {
         alert('Por favor, selecciona una calificación y escribe un comentario.');
     }
