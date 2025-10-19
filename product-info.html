@@ -20,6 +20,7 @@
       href="https://fonts.googleapis.com/css?family=Krona+One"
       rel="stylesheet"
     />
+    <script src="https://kit.fontawesome.com/b08c876a80.js" crossorigin="anonymous"></script>
   </head>
 
   <body>
@@ -40,14 +41,26 @@
         <a href="cart.html" class="icon-link">
           <i class="fas fa-shopping-bag"></i>
         </a>
-        <div
-          class="menu-wrapper"
-          style="position: relative; display: inline-block"
-        >
-          <a href="#" class="icon-link" id="menu-toggle">
-            <i class="fas fa-bars"></i>
-          </a>
-        </div>
+
+        <a href="#" id="theme-toggle" class="icon-link" title="Cambiar tema">
+          <i class="fa-solid fa-moon"></i>
+        </a>
+
+
+        <div class="menu-wrapper" style="position: relative; display: inline-block;">
+                <a href="#" class="icon-link" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </a>
+
+                <div class="custom-dropdown" id="dropdown-menu">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="categories.html">Categorías</a></li>
+                        <li><a href="sell.html">Vender</a></li>
+                        <li><a href="login.html?redirect=products.html" id="login-button">Ingresar</a></li>
+                    </ul>
+                </div>
+            </div>
       </div>
     </nav>
     <main>
@@ -104,10 +117,7 @@
           </p>
         </div>
       </div>
-      <div class="description-section">
-        <h4>Descripción</h4>
-        <p id="product-description">Aquí irá la descripción del producto...</p>
-      </div>
+      
     </div>
     <div class="container">
       <div class="reviews-section">

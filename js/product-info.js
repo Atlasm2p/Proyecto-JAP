@@ -175,7 +175,52 @@ function fetchAndDisplayComments(prodId) {
 
 
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Lógica del menú ---
+    const menuToggle = document.getElementById('menu-toggle');
+    const dropdownMenu = document.getElementById('dropdown-menu');
+    const menuOverlay = document.getElementById('menu-overlay');
 
+    function toggleMenu() {
+        dropdownMenu.classList.toggle('active');
+        menuOverlay.classList.toggle('active');
+    }
+
+    function closeMenu() {
+        dropdownMenu.classList.remove('active');
+        menuOverlay.classList.remove('active');
+    }
+
+    if (menuToggle) {
+        menuToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMenu();
+        });
+    }
+
+    if (menuOverlay) {
+        menuOverlay.addEventListener('click', closeMenu);
+    }
+
+    document.addEventListener('click', function (e) {
+        if (dropdownMenu && menuToggle && 
+            !dropdownMenu.contains(e.target) && 
+            !menuToggle.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') {
+            closeMenu();
+        }
+    });
+
+    const menuLinks = dropdownMenu ? dropdownMenu.querySelectorAll('a') : [];
+    menuLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
+    
     const productID = localStorage.getItem('prodID');
 
     if (!productID) {
@@ -314,4 +359,31 @@ document.getElementById('review-form').addEventListener('submit', function(e) {
     } else {
         alert('Por favor, selecciona una calificación y escribe un comentario.');
     }
+});
+
+// ======== MODO OSCURO ========
+
+// Referencia al botón
+const themeToggle = document.getElementById("theme-toggle");
+const icon = themeToggle.querySelector("i");
+
+// Verificar si el usuario ya tiene guardado el modo oscuro
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+  document.body.classList.add("dark-mode");
+  icon.classList.replace("fa-moon", "fa-sun");
+}
+
+// Cambiar el tema al hacer clic
+themeToggle.addEventListener("click", (e) => {
+  e.preventDefault();
+  document.body.classList.toggle("dark-mode");
+
+  // Actualizar icono
+  const isDark = document.body.classList.contains("dark-mode");
+  icon.classList.toggle("fa-sun", isDark);
+  icon.classList.toggle("fa-moon", !isDark);
+
+  // Guardar preferencia en localStorage
+  localStorage.setItem("theme", isDark ? "dark" : "light");
 });

@@ -475,3 +475,60 @@ body{
     padding: 0 30px 0 30px;
   }
 }
+
+/* ======== MODO OSCURO ======== */
+
+body.dark-mode {
+  --background: #121212;
+  --gris-oscuro: #cfcfcf;
+  --negro: #f1f1f1;
+  --azul: #4f8ef7;
+  --verde-amarillo: #c6e44b;
+  --shadow: 0 10px 30px rgba(255,255,255,0.05);
+}
+
+body.dark-mode {
+  background-color: var(--background);
+  color: var(--negro);
+}
+
+body.dark-mode .navbar-container {
+  background-color: var(--background);
+}
+
+body.dark-mode .custom-dropdown {
+  background-color: #222;
+}
+
+body.dark-mode .custom-dropdown a {
+  color: var(--gris-oscuro);
+}
+
+body.dark-mode .product-card {
+  background-color: #1e1e1e;
+  color: var(--gris-oscuro);
+}
+
+body.dark-mode .footer-container {
+  background-color: #000;
+}
+
+body.dark-mode .footer-container p, body.dark-mode .footer-container a {
+  color: white;
+}
+body.dark-mode .back-to-top-btn {
+  background-color: #333;
+}
+
+body.dark-mode .category-card {
+  background-color: #000;
+}
+
+body.dark-mode .card-back {
+  background-color: #797979;
+  color: white;
+}
+
+body.dark-mode .categories-nav button {
+    background-color: #797979;
+}
