@@ -1,0 +1,253 @@
+/* 2.1 Contenedor Principal de la Página */
+.profile-container {
+    max-width: 1200px; 
+    margin: 20px auto; 
+    padding: 20px;
+    display: flex; 
+    gap: 30px; 
+    background-color: #f7f7f7; 
+}
+
+/* 2.2 Estilos de la Columna Izquierda (Información del Perfil) */
+.profile-info-column {
+    flex-basis: 350px; 
+    flex-shrink: 0; 
+    padding: 30px;
+    background-color: #fff; 
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Imagen de Perfil y Botón */
+.profile-picture-block {
+    position: relative;
+    width: 150px;
+    height: 150px;
+    margin: 0 auto 30px; 
+}
+
+.profile-picture-placeholder {
+    width: 100%;
+    height: 100%;
+    
+    overflow: hidden; 
+    background-color: #ccc; 
+    border-radius: 50%; 
+}
+
+.profile-picture-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+}
+
+.edit-photo-btn {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #2f31f5; 
+    border: 2px solid #fff;
+    color: #fff; 
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Título de la sección "Mi perfil" */
+.profile-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 10px;
+    font-family: "Krona One", sans-serif;
+}
+
+/* Lista de datos (Nombre, Teléfono, Correo) */
+.data-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.data-item:last-child {
+    border-bottom: none; 
+}
+
+.data-label {
+    font-weight: 400;
+    color: #777;
+    flex-basis: 30%; 
+}
+
+.data-value {
+    font-weight: 500;
+    color: #333;
+    flex-grow: 1; 
+    text-align: right;
+    padding-right: 10px; 
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+}
+
+/* 2.3 Estilos de la Columna Derecha (Grid de Funcionalidades) */
+.profile-features-grid {
+    flex-grow: 1; 
+    display: grid;
+    
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+}
+
+.feature-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 150px; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Estilos específicos para las tarjetas completas (Pedidos, Pagos) */
+.primary-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.card-icon-box {
+    font-size: 2.5rem;
+    color: #333; 
+}
+
+.card-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.card-description {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+/* Estilos para los cuadros vacíos */
+.placeholder-card {
+    background-color: #eee; 
+    border: 1px dashed #ccc;
+}
+
+
+/* 2.4 Estilos del Header/Navbar */
+
+
+.site-header {
+    
+    color: white;
+    padding: 10px 0;
+}
+
+.header-content {
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.logo {
+    color: #2f31f5;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Contenedor de los iconos de navegación */
+.header-nav {
+    display: flex;
+    gap: 5px; 
+    position: relative; 
+}
+
+.nav-icon-btn {
+    background: none;
+    border: none;
+    color: #2f31f5; 
+    font-size: 1.2rem;
+    padding: 8px 10px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.nav-icon-btn:hover {
+    opacity: 1;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Menú desplegable */
+.custom-dropdown {
+    position: absolute;
+    top: 100%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    right: 0;
+    margin-top: 5px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.custom-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.custom-dropdown li {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.custom-dropdown li:last-child {
+    border-bottom: none;
+}
+
+.custom-dropdown a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--negro);
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.custom-dropdown a:hover {
+    background-color: var(--verde-amarillo);
+    color: var(--negro);
+}
