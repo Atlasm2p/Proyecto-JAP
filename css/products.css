@@ -22,6 +22,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 30px 30px 20px 30px;
 }
 
 .logo-e-mercado {
@@ -755,7 +756,7 @@ body.dark-mode {
 }
 
 body.dark-mode .navbar-container {
-  background-color: var(--background);
+  background-color: var(--negro);
 }
 
 body.dark-mode .dropdown-menu {

@@ -34,7 +34,9 @@ body{
     gap: 20px;
     align-items: center;
 }
-
+.nav-icons span {
+    color: var(--azul);
+}
 .icon-link {
     font-size: 24px;
     color: var(--azul);
@@ -493,7 +495,7 @@ body.dark-mode {
 }
 
 body.dark-mode .navbar-container {
-  background-color: var(--background);
+  background-color: var(--negro);
 }
 
 body.dark-mode .custom-dropdown {

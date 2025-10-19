@@ -26,16 +26,17 @@ main {
 }
 
 
-.navbar-container {
-    max-width: 1700px;
-    margin: 32px auto 0 auto;
+.navbar-container{
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: transparent;
-    padding: 0 40px;
+    padding: 30px 30px 20px 30px;
 }
 
+.navbar-container p{
+    color: #2f31f5;
+}
 
 .top-bar {
     display: flex;
@@ -684,8 +685,9 @@ body.dark-mode {
 }
 
 body.dark-mode .navbar-container {
-  background-color: var(--background);
+  background-color: var(--negro);
 }
+
 
 body.dark-mode .custom-dropdown {
   background-color: #222;
