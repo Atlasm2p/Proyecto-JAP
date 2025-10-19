@@ -1,46 +1,43 @@
 document.addEventListener('DOMContentLoaded', () => {
     
     const PROFILE_DATA_KEY = 'userProfileData';
-    
     const USER_EMAIL_KEY = 'userEmail'; 
     const DEFAULT_EMAIL = 'ejemplo@correo.com'; 
     
-    const profileEmailElement = document.getElementById('profile-email');
-    const profileEmailFooterElement = document.getElementById('profile-email-footer');
-    
-    
     const editableFields = [
+        { key: 'email', valueElementId: 'profile-email', inputElementId: 'input-email' },
         { key: 'name', valueElementId: 'profile-name', inputElementId: 'input-name' },
         { key: 'phone', valueElementId: 'profile-phone', inputElementId: 'input-phone' },
-        { key: 'email', valueElementId: 'profile-email', inputElementId: 'input-email' },
         { key: 'email-footer', valueElementId: 'profile-email-footer', inputElementId: 'input-email-footer' }
     ];
 
-    /**
-     * 1. Precarga y carga inicial de datos.
-     */
+    /** * 1. Precarga y carga inicial de datos. * - Inicializa los campos vacíos, excepto el email de sesión.*/
     function loadProfileData() {
-        // Cargar los datos guardados o inicializar un objeto vacío
-        const savedData = JSON.parse(localStorage.getItem(PROFILE_DATA_KEY)) || {};
+        let savedData = JSON.parse(localStorage.getItem(PROFILE_DATA_KEY)) || {};
         let emailFromLocalStorage = localStorage.getItem(USER_EMAIL_KEY) || DEFAULT_EMAIL;
 
-        // Si es la primera vez (no hay datos guardados), precargar el email
-        if (!localStorage.getItem(PROFILE_DATA_KEY)) {
-            savedData.email = emailFromLocalStorage;
-            savedData['email-footer'] = emailFromLocalStorage;
-            // Opcional: guardar los datos iniciales
+        // **LÓGICA PARA INICIALIZAR LA PRIMERA VEZ (Registro en Mi Perfil)**
+        if (Object.keys(savedData).length === 0) {
+            // La primera vez, solo el "Usuario" y el "Correo" se inicializan con el email de sesión.
+            // Los demás quedan explícitamente vacíos.
+            savedData.email = emailFromLocalStorage; 
+            savedData.name = '';
+            savedData.phone = '';
+            savedData['email-footer'] = emailFromLocalStorage; 
+            
             saveProfileData(savedData);
         }
 
         // Rellenar todos los campos con los datos cargados
         editableFields.forEach(field => {
             const valueElement = document.getElementById(field.valueElementId);
-            const dataValue = savedData[field.key];
+            const dataValue = savedData[field.key] || ''; // Usar cadena vacía si el valor es null/undefined
+            const inputElement = document.getElementById(field.inputElementId);
 
-            if (dataValue && valueElement) {
-                valueElement.textContent = dataValue;
-                // Si existe el input, precargar su valor también
-                const inputElement = document.getElementById(field.inputElementId);
+            if (valueElement) {
+                // Si el valor está vacío, muestra un placeholder como en la imagen
+                valueElement.textContent = dataValue || "No ingresado"; 
+                // Si existe el input, precargar su valor
                 if (inputElement) {
                     inputElement.value = dataValue;
                 }
@@ -50,7 +47,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * 2. Guarda el objeto de datos completo en localStorage.
-     * @param {object} data - El objeto con los datos del perfil.
      */
     function saveProfileData(data) {
         localStorage.setItem(PROFILE_DATA_KEY, JSON.stringify(data));
@@ -63,7 +59,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const itemContainer = event.target.closest('.data-item');
         if (!itemContainer) return;
 
-        const fieldKey = itemContainer.dataset.field;
         const valueElement = itemContainer.querySelector('.data-value');
         const inputElement = itemContainer.querySelector('.data-input');
         const editButton = itemContainer.querySelector('.edit-btn');
@@ -71,18 +66,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (!valueElement || !inputElement || !editButton || !saveButton) return;
 
-        // Alternar la visibilidad de los elementos
         const isEditing = valueElement.classList.contains('hidden');
 
         if (!isEditing) {
-            // Entrar en modo edición: Ocultar valor, mostrar input y botón de guardar
+            // Entrar en modo edición
             valueElement.classList.add('hidden');
             inputElement.classList.remove('hidden');
             editButton.classList.add('hidden');
             saveButton.classList.remove('hidden');
             inputElement.focus();
         } else {
-            // Salir de modo edición (después de guardar o cancelar):
+            // Salir de modo edición
             valueElement.classList.remove('hidden');
             inputElement.classList.add('hidden');
             editButton.classList.remove('hidden');
@@ -102,10 +96,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const newValue = inputElement.value.trim();
 
-        // 4.1 Actualizar el valor mostrado en el DOM
+        // 4.1 Actualizar el valor mostrado en el DOM (incluyendo placeholder si está vacío)
         const valueElement = itemContainer.querySelector('.data-value');
         if (valueElement) {
-            valueElement.textContent = newValue;
+            valueElement.textContent = newValue || "No ingresado";
         }
 
         // 4.2 Guardar el nuevo valor en localStorage
@@ -116,7 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // 4.3 Salir del modo edición
         toggleEdit(event);
     }
-
+    // ... (Lógica de Foto de Perfil y Listeners de menú se mantienen similares) ...
+    
     // ----------------------------------------------------
     /**
      * Lógica para la Foto de Perfil (Visualización temporal)
@@ -141,8 +136,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 reader.onload = function(e) {
                     const imageUrl = e.target.result;
-
-                    // Mostrar la nueva imagen en el DOM
                     const img = document.createElement('img');
                     img.src = imageUrl;
                     // Limpia el contenido anterior y muestra la imagen
@@ -173,12 +166,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 6. Listener para el menú desplegable (Ahora apunta a 'dropdown-menu')
     const menuToggle = document.getElementById('menu-toggle');
-    const userDropdown = document.getElementById('dropdown-menu'); // <--- CAMBIO CLAVE AQUÍ
+    const userDropdown = document.getElementById('dropdown-menu'); 
     
     if (menuToggle && userDropdown) {
         menuToggle.addEventListener('click', (event) => {
             event.preventDefault(); // Evita que el enlace # recargue la página
-            // El menú en el index NO USA style.display, pero usaremos este para simplicidad
             userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
         });
         document.addEventListener('click', (event) => {
@@ -190,4 +182,3 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
-

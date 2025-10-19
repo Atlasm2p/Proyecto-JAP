@@ -1,253 +1,184 @@
 /* 2.1 Contenedor Principal de la Página */
 .profile-container {
     max-width: 1200px; 
-    margin: 20px auto; 
-    padding: 20px;
+    margin: 40px auto;
+    padding: 0;
+    background-color: transparent;
     display: flex; 
-    gap: 30px; 
-    background-color: #f7f7f7; 
+    gap: 40px;
+    margin-top: 20px;
 }
 
 /* 2.2 Estilos de la Columna Izquierda (Información del Perfil) */
 .profile-info-column {
-    flex-basis: 350px; 
+    flex-basis: 300px;
     flex-shrink: 0; 
-    padding: 30px;
-    background-color: #fff; 
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    padding: 40px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
 }
 
 /* Imagen de Perfil y Botón */
 .profile-picture-block {
-    position: relative;
+    position: relative; 
     width: 150px;
     height: 150px;
-    margin: 0 auto 30px; 
+    margin: 0 auto 50px;
 }
 
 .profile-picture-placeholder {
+    background-color: var(--background); 
+    border-radius: 50%;
+    overflow: hidden;
     width: 100%;
     height: 100%;
-    
-    overflow: hidden; 
-    background-color: #ccc; 
-    border-radius: 50%; 
-}
-
-.profile-picture-placeholder img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover; 
 }
 
 .edit-photo-btn {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    width: 35px;
-    height: 35px;
+    position: absolute; 
+    bottom: 0px;
+    right: 0px;
+    width: 40px;
+    height: 40px;
+    background-color: var(--azul); 
+    border: 3px solid white;
+    font-size: 1rem;
     border-radius: 50%;
-    background-color: #2f31f5; 
-    border: 2px solid #fff;
-    color: #fff; 
+    color: white;
+}
+
+.edit-photo-btn:hover{
+    transform: scale(1.1);
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 /* Título de la sección "Mi perfil" */
 .profile-section-title {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     font-weight: 600;
-    margin-bottom: 25px;
-    border-bottom: 1px solid #eee;
-    padding-bottom: 10px;
-    font-family: "Krona One", sans-serif;
+    margin-bottom: 15px;
+    padding-bottom: 0;
+    font-family: var(--fuente-titulos);
 }
 
 /* Lista de datos (Nombre, Teléfono, Correo) */
 .data-item {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.data-item:last-child {
-    border-bottom: none; 
+    flex-direction: column; 
+    align-items: flex-start;
+    padding: 12px 0;
 }
 
 .data-label {
-    font-weight: 400;
-    color: #777;
-    flex-basis: 30%; 
+    font-weight: 500;
+    color: blue;
+    font-size: 0.85rem;
+    margin-bottom: 3px;
+    flex-basis: auto;
 }
 
 .data-value {
     font-weight: 500;
-    color: #333;
+    color: var(--color-text-dark);
     flex-grow: 1; 
-    text-align: right;
-    padding-right: 10px; 
+    text-align: left;
+    padding-right: 15px;
+    padding-left: 10px;
 }
 
-.edit-btn {
+.value-edit-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+/* Input y botones de edición/guardar */
+.data-input {
+    flex-grow: 1;
+    border-radius: 5px;
+    padding: 5px 5px;
+    margin-right: 10px;
+}
+
+.edit-btn, .save-btn {
     background: none;
     border: none;
-    color: #555;
+    color: var(--azul);
     cursor: pointer;
-    font-size: 1rem;
-    padding: 0;
+    font-size: 1.1rem;
+    padding: 5px;
+    flex-shrink: 0;
+}
+
+.save-btn {
+    color: var(--verde-amarillo);
 }
 
 /* 2.3 Estilos de la Columna Derecha (Grid de Funcionalidades) */
 .profile-features-grid {
     flex-grow: 1; 
     display: grid;
-    
+    padding: 40px;
     grid-template-columns: repeat(2, 1fr); 
-    gap: 20px; 
+    gap: 25px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: var(--shadow);
 }
 
 .feature-card {
-    background-color: #fff;
-    border-radius: 8px;
+    position: relative;
+    background-color: var(--background);
+    border-radius: 15px;
     padding: 20px;
     min-height: 150px; 
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* Estilos específicos para las tarjetas completas (Pedidos, Pagos) */
+.feature-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow);
+    cursor: pointer;
+}
+
 .primary-card {
     display: flex;
-    align-items: center;
-    gap: 15px;
+    align-items: flex-start;
+    gap: 20px;
 }
 
 .card-icon-box {
-    font-size: 2.5rem;
-    color: #333; 
+    font-size: 3rem;
+    color: var(--negro);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+
+.card-icon-box i {
+    color: var(--azul);
 }
 
 .card-title {
-    font-size: 1.2rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 700;
     margin-bottom: 5px;
+    color: var(--negro);
+    font-family: var(--fuente-titulos);
 }
 
 .card-description {
-    font-size: 0.9rem;
-    color: #555;
-}
-
-/* Estilos para los cuadros vacíos */
-.placeholder-card {
-    background-color: #eee; 
-    border: 1px dashed #ccc;
-}
-
-
-/* 2.4 Estilos del Header/Navbar */
-
-
-.site-header {
-    
-    color: white;
-    padding: 10px 0;
-}
-
-.header-content {
-    max-width: 1200px; 
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
-}
-
-.logo {
-    color: #2f31f5;
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-/* Contenedor de los iconos de navegación */
-.header-nav {
-    display: flex;
-    gap: 5px; 
-    position: relative; 
-}
-
-.nav-icon-btn {
-    background: none;
-    border: none;
-    color: #2f31f5; 
-    font-size: 1.2rem;
-    padding: 8px 10px;
-    cursor: pointer;
-    opacity: 0.8;
-    transition: opacity 0.2s;
-}
-
-.nav-icon-btn:hover {
-    opacity: 1;
+    font-size: 0.95rem;
+    color: var(--negro);
+    line-height: 1.4;
 }
 
 .hidden {
     display: none !important;
-}
-
-/* Menú desplegable */
-.custom-dropdown {
-    position: absolute;
-    top: 100%;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    min-width: 200px;
-    right: 0;
-    margin-top: 5px;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
-}
-
-.custom-dropdown.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
-
-.custom-dropdown ul {
-    list-style: none;
-    margin: 0;
-    padding: 10px 0;
-}
-
-.custom-dropdown li {
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.custom-dropdown li:last-child {
-    border-bottom: none;
-}
-
-.custom-dropdown a {
-    display: block;
-    padding: 12px 20px;
-    color: var(--negro);
-    text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.2s ease;
-}
-
-.custom-dropdown a:hover {
-    background-color: var(--verde-amarillo);
-    color: var(--negro);
 }

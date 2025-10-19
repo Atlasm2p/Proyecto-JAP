@@ -16,46 +16,48 @@
 
 <body>
 
-    <header class="site-header">
-        <div class="header-content">
-            <a href="index.html" class="logo-link">
-                <div class="logo">
-                    <img src="img/logo_e_mercado.png" alt="Logo e-Mercado" class="logo-e-mercado" />
-                </div>
+     <nav class="navbar-container">
+        <a href="index.html" class="logo-link">
+            <div class="logo">
+                <img src="img/logo_e_mercado.png" alt="Logo e-Mercado" class="logo-e-mercado">
+            </div>
+        </a>
+
+        <div class="nav-icons">
+            <a href="my-profile.html" class="icon-link" title="Mi perfil">
+                <i class="fa-solid fa-user"></i>
+            </a>
+            <a href="cart.html" class="icon-link">
+                <i class="fas fa-shopping-bag"></i>
             </a>
 
-            <div class="nav-icons">
-                <a href="my-profile.html" class="icon-link" title="Mi perfil">
-                    <i class="fas fa-user"></i>
-                </a>
-                <a href="cart.html" class="icon-link">
-                    <i class="fas fa-shopping-bag"></i>
+            <!-- Contenedor del botón y menú -->
+            <div class="menu-wrapper" style="position: relative; display: inline-block;">
+                <a href="#" class="icon-link" id="menu-toggle">
+                    <i class="fas fa-bars"></i>
                 </a>
 
-                <div class="menu-wrapper" style="position: relative; display: inline-block">
-                    <a href="#" class="icon-link" id="menu-toggle">
-                        <i class="fas fa-bars"></i>
-                    </a>
-
-                    <div class="custom-dropdown" id="dropdown-menu">
-                        <ul>
-                            <li><a href="index.html">Inicio</a></li>
-                            <li><a href="categories.html">Categorías</a></li>
-                            <li><a href="sell.html">Vender</a></li>
-                        </ul>
-                    </div>
+                <div class="custom-dropdown" id="dropdown-menu">
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="categories.html">Categorías</a></li>
+                        <li><a href="sell.html">Vender</a></li>
+                        <li><a href="login.html?redirect=products.html" id="login-button">Ingresar</a></li>
+                    </ul>
                 </div>
             </div>
         </div>
-    </header>
+    </nav>
 
-    <main class="profile-container">
+    <div class="menu-overlay" id="menu-overlay"> </div>
+
+<main class="profile-container">
 
         <section class="profile-info-column">
 
             <div class="profile-picture-block">
                 <div class="profile-picture-placeholder" id="profile-picture">
-                </div>
+                    </div>
 
                 <input type="file" id="profile-image-input" accept="image/*" class="hidden">
 
@@ -68,37 +70,53 @@
 
             <div class="profile-data-list">
                 <div class="data-item" data-field="email">
-                    <span class="data-label">Usuario</span>
+                <span class="data-label">Usuario</span> 
+                <div class="value-edit-container">
                     <span class="data-value" id="profile-email"></span>
                     <input type="email" class="data-input hidden" id="input-email" value="">
-                    <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
-                    <button class="save-btn hidden" data-field="email"><i class="fa-solid fa-check"></i></button>
-                </div>
-
-                <div class="data-item" data-field="name">
-                    <span class="data-label">Nombre y Apellido</span>
-                    <span class="data-value" id="profile-name"></span>
-                    <input type="text" class="data-input hidden" id="input-name" value="">
-                    <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
-                    <button class="save-btn hidden" data-field="name"><i class="fa-solid fa-check"></i></button>
-                </div>
-
-                <div class="data-item" data-field="phone">
-                    <span class="data-label">Número de teléfono</span>
-                    <span class="data-value" id="profile-phone"></span>
-                    <input type="tel" class="data-input hidden" id="input-phone" value="">
-                    <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
-                    <button class="save-btn hidden" data-field="phone"><i class="fa-solid fa-check"></i></button>
-                </div>
-
-                <div class="data-item" data-field="email-footer">
-                    <span class="data-label">Correo</span>
-                    <span class="data-value" id="profile-email-footer"></span>
-                    <input type="email" class="data-input hidden" id="input-email-footer" value="">
-                    <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
-                    <button class="save-btn hidden" data-field="email-footer"><i class="fa-solid fa-check"></i></button>
+                    <div class="edit-buttons">
+                        <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
+                        <button class="save-btn hidden" data-field="email"><i class="fa-solid fa-check"></i></button>
+                    </div>
                 </div>
             </div>
+
+                <div class="data-item" data-field="name">
+                <span class="data-label">Nombre y Apellido</span>
+                <div class="value-edit-container">
+                    <span class="data-value" id="profile-name"></span>
+                    <input type="text" class="data-input hidden" id="input-name" value="">
+                    <div class="edit-buttons">
+                        <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
+                        <button class="save-btn hidden" data-field="name"><i class="fa-solid fa-check"></i></button>
+                    </div>
+                </div>
+            </div>
+
+                <div class="data-item" data-field="phone">
+                <span class="data-label">Número de teléfono</span>
+                <div class="value-edit-container">
+                    <span class="data-value" id="profile-phone"></span>
+                    <input type="tel" class="data-input hidden" id="input-phone" value="">
+                    <div class="edit-buttons">
+                        <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
+                        <button class="save-btn hidden" data-field="phone"><i class="fa-solid fa-check"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="data-item" data-field="email-footer">
+                <span class="data-label">Correo</span>
+                <div class="value-edit-container">
+                    <span class="data-value" id="profile-email-footer"></span>
+                    <input type="email" class="data-input hidden" id="input-email-footer" value="">
+                    <div class="edit-buttons">
+                        <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
+                        <button class="save-btn hidden" data-field="email-footer"><i class="fa-solid fa-check"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         </section>
 
@@ -108,8 +126,7 @@
                 <div class="card-icon-box"><i class="fa-solid fa-box-open"></i></div>
                 <div class="card-content">
                     <h3 class="card-title">Tus pedidos</h3>
-                    <p class="card-description">Rastrear, devolver, cancelar un pedido, descargar una factura o comprar
-                        de nuevo</p>
+                    <p class="card-description">Rastrear, devolver, cancelar un pedido, descargar una factura o comprar de nuevo</p>
                 </div>
             </article>
 
@@ -117,8 +134,7 @@
                 <div class="card-icon-box"><i class="fa-solid fa-money-check-dollar"></i></div>
                 <div class="card-content">
                     <h3 class="card-title">Tus pagos</h3>
-                    <p class="card-description">Ver todas las transacciones, administrar métodos de pago y
-                        configuraciones</p>
+                    <p class="card-description">Ver todas las transacciones, administrar métodos de pago y configuraciones</p>
                 </div>
             </article>
 
@@ -126,8 +142,7 @@
                 <div class="card-icon-box"><i class="fa-solid fa-shield"></i></div>
                 <div class="card-content">
                     <h3 class="card-title">Seguridad</h3>
-                    <p class="card-description">Administra tu contraseña, la verificación en dos pasos y protege tu
-                        cuenta.</p>
+                    <p class="card-description">Administra tu contraseña, la verificación en dos pasos y protege tu cuenta.</p>
                 </div>
             </article>
 
@@ -144,23 +159,27 @@
                 <div class="card-icon-box"><i class="fa-solid fa-file-lines"></i></div>
                 <div class="card-content">
                     <h3 class="card-title">Facturación</h3>
-                    <p class="card-description">Modifica tus datos fiscales, dirección de envío y preferencias de
-                        facturas.</p>
+                    <p class="card-description">Modifica tus datos fiscales, dirección de envío y preferencias de facturas.</p>
                 </div>
             </article>
 
             <article class="feature-card primary-card">
                 <div class="card-icon-box"><i class="fa-solid fa-tag"></i></div>
-                <div class="card-content">
-                    <h3 class="card-title">Tus ventas</h3>
-                    <p class="card-description">Administra tus publicaciones, revisa ingresos, estadísticas y gestiona
-                        pedidos vendidos.</p>
+                    <div class="card-content">
+                        <h3 class="card-title">Tus ventas</h3>
+                        <p class="card-description">Administra tus publicaciones, revisa ingresos, estadísticas y gestiona pedidos vendidos.</p>
                 </div>
             </article>
-
         </section>
 
     </main>
+
+    <footer class="footer-container">
+    <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jóvenes a Programar</a></p>
+        <a href="#top" class="back-to-top-btn" aria-label="Volver arriba">
+            <i class="fa-solid fa-arrow-up"></i>
+    </a>
+</footer>
 
     <script src="js/my-profile.js"></script>
     <script src="js/index.js"></script>
