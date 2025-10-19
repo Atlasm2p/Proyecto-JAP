@@ -2,80 +2,168 @@
 <html lang="es">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil | eMercado</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/my-profile.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+      href="https://fonts.googleapis.com/css?family=Krona+One"
+      rel="stylesheet"
+    />
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="my-profile.html">Mi perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="cart.html">Carrito <span class="badge bg-secondary" id="cart-count">0</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" id="login-button" href="login.html?redirect=my-profile.html">Ingresar</a>  
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/my-profile.js"></script>
-  <script src="js/loginlogic.js"></script>
+
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <img src="img/logo_e_mercado.png" alt="Logo e-Mercado" class="logo-e-mercado" />
+                </div>
+            </a>
+
+            <div class="nav-icons">
+                <a href="my-profile.html" class="icon-link" title="Mi perfil">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="cart.html" class="icon-link">
+                    <i class="fas fa-shopping-bag"></i>
+                </a>
+
+                <div class="menu-wrapper" style="position: relative; display: inline-block">
+                    <a href="#" class="icon-link" id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </a>
+
+                    <div class="custom-dropdown" id="dropdown-menu">
+                        <ul>
+                            <li><a href="index.html">Inicio</a></li>
+                            <li><a href="categories.html">Categorías</a></li>
+                            <li><a href="sell.html">Vender</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="profile-container">
+
+        <section class="profile-info-column">
+
+            <div class="profile-picture-block">
+                <div class="profile-picture-placeholder" id="profile-picture">
+                </div>
+
+                <input type="file" id="profile-image-input" accept="image/*" class="hidden">
+
+                <button class="edit-photo-btn" id="edit-photo-btn" title="Actualizar foto de perfil">
+                    <i class="fa-solid fa-camera"></i>
+                </button>
+            </div>
+
+            <h2 class="profile-section-title">Mi perfil</h2>
+
+            <div class="profile-data-list">
+                <div class="data-item" data-field="email">
+                    <span class="data-label">Usuario</span>
+                    <span class="data-value" id="profile-email"></span>
+                    <input type="email" class="data-input hidden" id="input-email" value="">
+                    <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
+                    <button class="save-btn hidden" data-field="email"><i class="fa-solid fa-check"></i></button>
+                </div>
+
+                <div class="data-item" data-field="name">
+                    <span class="data-label">Nombre y Apellido</span>
+                    <span class="data-value" id="profile-name"></span>
+                    <input type="text" class="data-input hidden" id="input-name" value="">
+                    <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
+                    <button class="save-btn hidden" data-field="name"><i class="fa-solid fa-check"></i></button>
+                </div>
+
+                <div class="data-item" data-field="phone">
+                    <span class="data-label">Número de teléfono</span>
+                    <span class="data-value" id="profile-phone"></span>
+                    <input type="tel" class="data-input hidden" id="input-phone" value="">
+                    <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
+                    <button class="save-btn hidden" data-field="phone"><i class="fa-solid fa-check"></i></button>
+                </div>
+
+                <div class="data-item" data-field="email-footer">
+                    <span class="data-label">Correo</span>
+                    <span class="data-value" id="profile-email-footer"></span>
+                    <input type="email" class="data-input hidden" id="input-email-footer" value="">
+                    <button class="edit-btn"><i class="fa-solid fa-pen"></i></button>
+                    <button class="save-btn hidden" data-field="email-footer"><i class="fa-solid fa-check"></i></button>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="profile-features-grid">
+
+            <article class="feature-card primary-card">
+                <div class="card-icon-box"><i class="fa-solid fa-box-open"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Tus pedidos</h3>
+                    <p class="card-description">Rastrear, devolver, cancelar un pedido, descargar una factura o comprar
+                        de nuevo</p>
+                </div>
+            </article>
+
+            <article class="feature-card primary-card">
+                <div class="card-icon-box"><i class="fa-solid fa-money-check-dollar"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Tus pagos</h3>
+                    <p class="card-description">Ver todas las transacciones, administrar métodos de pago y
+                        configuraciones</p>
+                </div>
+            </article>
+
+            <article class="feature-card primary-card">
+                <div class="card-icon-box"><i class="fa-solid fa-shield"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Seguridad</h3>
+                    <p class="card-description">Administra tu contraseña, la verificación en dos pasos y protege tu
+                        cuenta.</p>
+                </div>
+            </article>
+
+            <article class="feature-card primary-card">
+                <div class="card-icon-box"><i class="fa-solid fa-lock"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Privacidad</h3>
+                    <p class="card-description">Controla tus preferencias y decide sobre el uso de tus datos personales.
+                    </p>
+                </div>
+            </article>
+
+            <article class="feature-card primary-card">
+                <div class="card-icon-box"><i class="fa-solid fa-file-lines"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Facturación</h3>
+                    <p class="card-description">Modifica tus datos fiscales, dirección de envío y preferencias de
+                        facturas.</p>
+                </div>
+            </article>
+
+            <article class="feature-card primary-card">
+                <div class="card-icon-box"><i class="fa-solid fa-tag"></i></div>
+                <div class="card-content">
+                    <h3 class="card-title">Tus ventas</h3>
+                    <p class="card-description">Administra tus publicaciones, revisa ingresos, estadísticas y gestiona
+                        pedidos vendidos.</p>
+                </div>
+            </article>
+
+        </section>
+
+    </main>
+
+    <script src="js/my-profile.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
