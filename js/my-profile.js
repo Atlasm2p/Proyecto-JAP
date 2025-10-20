@@ -133,30 +133,24 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Manejar el cambio de imagen y mostrarla
-    if (imageInput && profilePicPlaceholder) {
-        imageInput.addEventListener('change', (event) => {
-            const file = event.target.files[0];
-            if (file) {
-                const reader = new FileReader();
+    const input = document.getElementById('profile-image-input');
+    const img = document.querySelector('.profile-picture-block img');
 
-                reader.onload = function(e) {
-                    const imageUrl = e.target.result;
-
-                    // Mostrar la nueva imagen en el DOM
-                    const img = document.createElement('img');
-                    img.src = imageUrl;
-                    // Limpia el contenido anterior y muestra la imagen
-                    profilePicPlaceholder.innerHTML = ''; 
-                    profilePicPlaceholder.appendChild(img);
-
-                    // No se guarda en localStorage
-                };
-
-                // Lee el archivo como una URL de datos (Base64)
-                reader.readAsDataURL(file);
-            }
-        });
+    const saved = localStorage.getItem('profile-picture');
+    if (saved && img) {
+        img.src = saved;
     }
+    input.addEventListener('change', function (event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                if (img) img.src = e.target.result;
+                localStorage.setItem('profile-picture', e.target.result);
+            };
+            reader.readAsDataURL(file);
+        }
+    });
     // ----------------------------------------------------
     
     // Inicializar la carga de datos al cargar la página
