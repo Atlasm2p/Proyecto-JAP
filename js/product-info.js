@@ -173,6 +173,42 @@ function fetchAndDisplayComments(prodId) {
         });
     }
 
+    // Funciones para el boton comprar
+
+    const btnComprar = document.getElementById('buy-now');
+
+    btnComprar.addEventListener("click", function() {
+        let infoProducto = [];
+
+        getJSONData(PRODUCTS_URL + localStorage.getItem("catID") + EXT_TYPE)
+        .then(result => {
+            if (result.status === "ok") {
+                const productData = result.data;
+                productData.products.forEach(product => {
+                    if (product.id === parseInt(localStorage.getItem('prodID'))) {
+                        infoProducto.push({
+                            nombre: product.name,
+                            costo: product.cost,
+                            moneda: product.currency,
+                            cantidad: document.getElementById("qty-select").value,
+                            imagen: product.image,
+                            subtotal: product.cost * document.getElementById("qty-select").value
+                        });
+                        localStorage.setItem("productInfo", JSON.stringify(infoProducto));
+                        window.location.href = "cart.html"
+                    };
+                });
+            } else {
+                console.error(result.data);
+                alert("Hubo un error al cargar la información del producto.");
+            }
+        })
+        .catch(error => {
+            console.error("Error al procesar la solicitud:", error);
+            alert("Hubo un error al cargar la información del producto.");
+        });
+    });
+
 
 document.addEventListener('DOMContentLoaded', () => {
     // --- Lógica del menú ---
