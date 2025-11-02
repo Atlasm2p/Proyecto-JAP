@@ -2,73 +2,119 @@
 <html lang="es">
 
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <title>eMercado - Todo lo que busques está aquí</title>
-  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
-  <link href="css/bootstrap.min.css" rel="stylesheet">
-  <link href="css/font-awesome.min.css" rel="stylesheet">
-  <link href="css/styles.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Perfil | eMercado</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link
+      href="https://fonts.googleapis.com/css?family=Krona+One"
+      rel="stylesheet"
+    />
 </head>
 
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
-    <div class="container">
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav w-100 justify-content-between">
-          <li class="nav-item">
-            <a class="nav-link" href="index.html">Inicio</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="categories.html">Categorías</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="sell.html">Vender</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="my-profile.html">Mi perfil</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="cart.html">Carrito <span class="badge bg-secondary" id="cart-count">0</span></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link"  id="login-button" href="login.html?redirect=cart.html">Ingresar</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
-  <main>
-    <div class="container">
-      <div class="alert alert-danger text-center" role="alert">
-        <h4 class="alert-heading">Funcionalidad en desarrollo</h4>
-      </div>
-    </div>
-  </main>
-  <footer class="text-muted">
-    <div class="container">
-      <p class="float-end">
-        <a href="#">Volver arriba</a>
-      </p>
-      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a></p>
-    </div>
-  </footer>
-  <div id="spinner-wrapper">
-    <div class="lds-ring">
-      <div></div>
-      <div></div>
-      <div></div>
-      <div></div>
-    </div>
-  </div>
-  <script src="js/bootstrap.bundle.min.js"></script>
-  <script src="js/init.js"></script>
-  <script src="js/cart.js"></script>
-  <script src="js/loginlogic.js"></script>
+
+    <header class="site-header">
+        <div class="header-content">
+            <a href="index.html" class="logo-link">
+                <div class="logo">
+                    <img src="img/logo_e_mercado.png" alt="Logo e-Mercado" class="logo-e-mercado" />
+                </div>
+            </a>
+
+            <div class="nav-icons">
+                <a href="my-profile.html" class="icon-link" title="Mi perfil">
+                    <i class="fas fa-user"></i>
+                </a>
+                <a href="cart.html" class="icon-link">
+                    <i class="fas fa-shopping-bag"></i>
+                </a>
+
+                <a href="#" id="theme-toggle" class="icon-link" title="Cambiar tema">
+                    <i class="fa-solid fa-moon"></i>
+                </a>
+
+                <div class="menu-wrapper" style="position: relative; display: inline-block">
+                    <a href="#" class="icon-link" id="menu-toggle">
+                        <i class="fas fa-bars"></i>
+                    </a>
+
+                    <div class="custom-dropdown" id="dropdown-menu">
+                        <ul>
+                            <li><a href="index.html">Inicio</a></li>
+                            <li><a href="categories.html">Categorías</a></li>
+                            <li><a href="sell.html">Vender</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="cart-container">
+
+        <section class="cart-list-container">
+
+            <h2 class="cart-section-title">Carrito</h2>
+            <span class="cart-subtitle">Anular la selección de todos los elementos</span>
+            <div class="cart-list">
+                <div class="cart-item">
+                    <div class="item-image">
+                      <button class="save-btn"><i class="fa-solid fa-check"></i></button>
+                      <img src="img/car1.jpg" alt="">
+                      <h1 class="cart-item-title">Fitito</h1>
+                    </div>
+                    <div class="item-data">
+                      <span>UYU 53.6997</span>
+                      <span style="color: gray; font-size: 12px;">USD 13500</span>
+                      <span style="color: blue; font-size: 12px;">Disponible</span>
+                      <div class="trash-container">
+                        <button class="save-btn"><i class="fa-solid fa-trash"></i></button>
+                        <div  class="counter-container">
+                          <button class="counter-btn" id="decrease">-</button>
+                          <span class="counter-value" id="counter">1</span>
+                          <button class="counter-btn" id="increase">+</button>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="cart-summary">
+          <h2 class="cart-section-title">Resumen del carrito</h2>
+          <div class="summary-data">
+            <div class="summary-item">
+              <span style="color: gray;">Total de artículos</span>
+              <span style="color: orange">0</span>
+            </div>
+            <div class="summary-item">
+              <span style="color: gray;">Envío</span>
+              <span style="color: orange;">Gratis</span>
+            </div>
+            <div class="summary-data">
+              <div class="summary-item">
+                <span style="color: gray; ">Descuento</span>
+                <span >UYU 0</span>
+              </div>
+            </div>
+          </div>
+          <span style="color: blue">Ingresar código de cupón</span>
+          <div class="summary-item">
+            <span style="font-weight: bold;">Total</span>
+            <span style="font-weight: UYU 0">UYU 0</span>
+          </div>
+          <div></div>
+          <button id="summary-btn">Continuar compra</button>
+        </section>
+
+    </main>
+
+    <script src="js/cart.js"></script>
+    <script src="js/index.js"></script>
 </body>
 
 </html>
