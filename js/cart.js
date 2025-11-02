@@ -1,15 +1,22 @@
- function updateSummary(totalItems, totalUYU) {
-    const itemCount = document.querySelector(".cart-summary .item-count");
-    const totalPrice = document.querySelector(".cart-summary .total-price");
+document.addEventListener("DOMContentLoaded", () => {
+  const cartList = document.querySelector(".cart-list");
+  const totalItemsEl = document.querySelector(".cart-summary .summary-item span[style*='orange']");
+  const totalEl = document.querySelector(".cart-summary .summary-item span[style*='UYU']");
+  const summaryBtn = document.getElementById("summary-btn");
 
-    if (itemCount && totalPrice) {
-        itemCount.textContent = totalItems;
-        totalPrice.textContent = `UYU ${totalUYU.toLocaleString()}`;
-    }
-}
+  // Obtener productos desde localStorage (si existen)
+  let cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
 
- function renderCart(products) {
-    let cartList = document.querySelector(".cart-list");
+  // Si el carrito está vacío
+  if (cartProducts.length === 0) {
+    showEmptyCart();
+    return;
+  }
+
+  renderCart(cartProducts);
+
+
+  function renderCart(products) {
     cartList.innerHTML = "";
     let totalUYU = 0;
     let totalItems = 0;
@@ -18,87 +25,153 @@
       const item = document.createElement("div");
       item.classList.add("cart-item");
 
-      const priceUYU = product.moneda === "USD" ? product.costo * 53.7 : product.costo;
+      const priceUYU = product.currency === "USD" ? product.cost * 53.7 : product.cost;
 
       item.innerHTML = `
-      <div class="item-image">
-        <button class="save-btn select-btn"><i class="fa-solid fa-check"></i></button>
-        <img src="${product.imagen}" alt="${product.nombre}">
-        <h1 class="cart-item-title">${product.nombre}</h1>
-      </div>
-      <div class="item-data">
-        <span>${product.moneda} ${product.costo.toLocaleString()}</span>
-        <span style="color: gray; font-size: 12px;">UYU ${priceUYU.toLocaleString()}</span>
-        <span style="color: blue; font-size: 12px;">Disponible</span>
-        <div class="trash-container">
-        <button class="save-btn delete-btn"><i class="fa-solid fa-trash"></i></button>
-        <div class="counter-container">
-          <button class="counter-btn decrease">-</button>
-          <span class="counter-value">${product.cantidad || 1}</span>
-          <button class="counter-btn increase">+</button>
+        <div class="item-image">
+          <button class="save-btn select-btn ${product.selected ? "selected" : ""}">
+            <i class="fa-solid fa-check"></i>
+          </button>
+          <img src="${product.image}" alt="${product.name}">
+          <h1 class="cart-item-title">${product.name}</h1>
         </div>
+        <div class="item-data">
+          <span>${product.currency} ${product.cost.toLocaleString()}</span>
+          <span style="color: gray; font-size: 12px;">UYU ${priceUYU.toLocaleString()}</span>
+          <span style="color: blue; font-size: 12px;">Disponible</span>
+          <div class="trash-container">
+            <button class="save-btn delete-btn"><i class="fa-solid fa-trash"></i></button>
+            <div class="counter-container">
+              <button class="counter-btn decrease">-</button>
+              <span class="counter-value">${product.quantity || 1}</span>
+              <button class="counter-btn increase">+</button>
+            </div>
+          </div>
         </div>
-      </div>
       `;
 
       cartList.appendChild(item);
 
-      totalUYU += priceUYU * (product.cantidad || 1);
-      totalItems += product.cantidad || 1;
+      // Totales solo para productos seleccionados
+      if (product.selected !== false) {
+        totalUYU += priceUYU * (product.quantity || 1);
+        totalItems += product.quantity || 1;
+      }
 
+      // Botones
       const decreaseBtn = item.querySelector(".decrease");
       const increaseBtn = item.querySelector(".increase");
       const deleteBtn = item.querySelector(".delete-btn");
+      const selectBtn = item.querySelector(".select-btn");
+
+      // Aumentar cantidad
       increaseBtn.addEventListener("click", () => {
-      product.cantidad = (product.cantidad || 1) + 1;
-      saveAndRender();
-      });
-
-      decreaseBtn.addEventListener("click", () => {
-      if ((product.cantidad || 1) > 1) {
-        product.cantidad--;
+        product.quantity = (product.quantity || 1) + 1;
         saveAndRender();
-      }
       });
 
+      // Disminuir cantidad
+      decreaseBtn.addEventListener("click", () => {
+        if ((product.quantity || 1) > 1) {
+          product.quantity--;
+          saveAndRender();
+        }
+      });
+
+      // Eliminar producto
       deleteBtn.addEventListener("click", () => {
-      products.splice(index, 1);
-      saveAndRender();
+        products.splice(index, 1);
+        if (products.length === 0) {
+          showEmptyCart();
+        }
+        saveAndRender();
+      });
+
+      // Seleccionar producto
+      selectBtn.addEventListener("click", () => {
+        product.selected = !product.selected;
+        saveAndRender();
       });
     });
 
+    updateSummary(totalItems, totalUYU);
   }
 
+  // Guardar cambios y volver a renderizar
   function saveAndRender() {
     localStorage.setItem("cartProducts", JSON.stringify(cartProducts));
     renderCart(cartProducts);
   }
-document.addEventListener("DOMContentLoaded", () => {
-  const cartList = document.querySelector(".cart-list");
-  const summaryBtn = document.getElementById("summary-btn");
 
-  // Obtener productos desde localStorage (si existen)
-  let cartProducts = JSON.parse(localStorage.getItem("cartItems")) === null ? [] : JSON.parse(localStorage.getItem("cartItems"));
-
-  // Si el carrito está vacío
-  if (cartProducts.length === 0) {
+  // Mostrar carrito vacío
+  function showEmptyCart() {
     cartList.innerHTML = `
       <div class="empty-cart" style="text-align:center; padding:20px;">
         <p>No hay productos en el carrito</p>
       </div>
     `;
-    return;
+    updateSummary(0, 0);
   }
 
-  renderCart(cartProducts);
-
-
+  // Actualizar totales
+  function updateSummary(totalItems = 0, totalUYU = 0) {
+    totalItemsEl.textContent = totalItems;
+    totalEl.textContent = `UYU ${totalUYU.toLocaleString()}`;
+  }
 
   // Botón “Continuar compra”
   if (summaryBtn) {
     summaryBtn.addEventListener("click", () => {
-      alert("Redirigiendo al proceso de compra ");
+      const selectedProducts = cartProducts.filter(p => p.selected !== false);
+      if (selectedProducts.length === 0) {
+        alert("Selecciona al menos un producto para continuar.");
+        return;
+      }
+      alert(`Redirigiendo al proceso de compra con ${selectedProducts.length} producto(s)...`);
     });
   }
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const themeToggle = document.getElementById("theme-toggle");
+  const icon = themeToggle.querySelector("i");
+
+  const savedTheme = localStorage.getItem("theme");
+  if (savedTheme === "dark") {
+    document.body.classList.add("dark-mode");
+    icon.classList.replace("fa-moon", "fa-sun");
+  }
+
+  themeToggle.addEventListener("click", (e) => {
+    e.preventDefault();
+    document.body.classList.toggle("dark-mode");
+
+    const isDark = document.body.classList.contains("dark-mode");
+
+    icon.classList.toggle("fa-sun", isDark);
+    icon.classList.toggle("fa-moon", !isDark);
+
+    localStorage.setItem("theme", isDark ? "dark" : "light");
+  });
+
+  const menuToggle = document.getElementById("menu-toggle");
+  const dropdownMenu = document.getElementById("dropdown-menu");
+
+  if (menuToggle && dropdownMenu) {
+    menuToggle.addEventListener("click", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      dropdownMenu.classList.toggle("active");
+    });
+
+    document.addEventListener("click", (e) => {
+      if (!dropdownMenu.contains(e.target) && !menuToggle.contains(e.target)) {
+        dropdownMenu.classList.remove("active");
+      }
+    });
+
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") dropdownMenu.classList.remove("active");
+    });
+  }
+});
