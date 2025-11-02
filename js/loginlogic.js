@@ -5,8 +5,9 @@ document.addEventListener("DOMContentLoaded", function() {
     
     
     if (sessionStorage.getItem("loggedIn") === "true") {
+        if (document.getElementById("login-button")) {
         document.getElementById("login-button").style.display = "none";
-        
+        }
         
         const userEmail = sessionStorage.getItem("usuario"); 
 
