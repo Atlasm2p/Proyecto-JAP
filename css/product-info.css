@@ -26,16 +26,17 @@ main {
 }
 
 
-.navbar-container {
-    max-width: 1700px;
-    margin: 32px auto 0 auto;
+.navbar-container{
+    position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: transparent;
-    padding: 0 40px;
+    padding: 30px 30px 20px 30px;
 }
 
+.navbar-container p{
+    color: #2f31f5;
+}
 
 .top-bar {
     display: flex;
@@ -504,6 +505,139 @@ h4 {
     font-size: 0.85rem;
 }
 
+#review-and-related {
+    display: flex;
+    flex-direction: row;
+    margin-top: 40px;
+    gap: 30px;
+}
+
+/* --- Sección para dejar calificación --- */
+.add-review-section {
+  padding-top: 1px;
+}
+
+.add-review-section h4 {
+  font-family: 'Krona One', sans-serif;
+  font-size: 1.2rem;
+  color: #22223b;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.star-rating {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.star-rating .fa-star {
+  font-size: 1.2rem;
+  color: #d1d5db; /* gris por defecto */
+  transition: color 0.2s;
+}
+
+.star-rating .fa-star:hover,
+.star-rating .fa-star.active {
+  color: #2f31f5; /* azul al seleccionar */
+}
+
+.review-text {
+  width: 100%;
+  min-height: 100px;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+  resize: vertical;
+}
+
+.name-text {
+  width: 100%;
+  border: 1px solid #ccc;
+  background-color: #f8f8f8 ;
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 1rem;
+  margin-bottom: 15px;
+}
+
+.submit-review {
+  background-color: #dbf059;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: bolder;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.submit-review:hover {
+  background-color: #c3d44f;
+}
+
+/* --- Estilos para la sección de Relacionados (Related) --- */
+
+.related-section {
+    font-family: 'Krona One', sans-serif; 
+    font-size: 1.35rem; 
+    color: #22223b; 
+    margin-bottom: 24px;
+    padding-top: 15px; 
+    border-top: 1px solid #e7e7e7;
+}
+
+.related-products {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 20px;
+    padding-bottom: 10px;
+}
+
+.card_product {
+    width: 200px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    padding: 16px;
+    flex-shrink: 0;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+}
+
+.card_product:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.card_product img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 12px;
+    background: #f3f4f6;
+}
+
+.card_product .name_item {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 8px;
+    height: 24px; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.card_product .price {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #2f31f5;
+}
+
 @media (max-width: 1200px) {
     .container, .navbar-container, .footer-aligned {
         max-width: 100vw;
@@ -532,4 +666,56 @@ h4 {
         flex-direction: row;
         gap: 14px;
     }
+}
+
+/* ======== MODO OSCURO ======== */
+
+body.dark-mode {
+  --background: #121212;
+  --gris-oscuro: #cfcfcf;
+  --negro: #f1f1f1;
+  --azul: #4f8ef7;
+  --verde-amarillo: #c6e44b;
+  --shadow: 0 10px 30px rgba(255,255,255,0.05);
+}
+
+body.dark-mode {
+  background-color: var(--background);
+  color: var(--negro);
+}
+
+body.dark-mode .navbar-container {
+  background-color: var(--negro);
+}
+
+
+body.dark-mode .custom-dropdown {
+  background-color: #222;
+}
+
+body.dark-mode .custom-dropdown a {
+  color: var(--gris-oscuro);
+}
+
+body.dark-mode .container {
+    background-color: #1e1e1e;
+}
+
+body.dark-mode p, a, h1, h3, h4, span{
+    color: white;
+}
+
+body.dark-mode .info-column p, a, h1, h3, h4, span{
+    color: white;
+}
+
+body.dark-mode .info-column #product-name,
+body.dark-mode .info-column #product-price,
+body.dark-mode .info-column #product-sold,
+body.dark-mode #product-description {
+    color: white !important;
+}
+
+body.dark-mode .add-review-section h4 {
+  color: white !important;
 }

@@ -22,6 +22,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 30px 30px 20px 30px;
 }
 
 .logo-e-mercado {
@@ -736,4 +737,38 @@ input:checked + .slider:before {
         text-align: center;
         padding: 8px;
     }
+}
+
+/* ======== MODO OSCURO ======== */
+
+body.dark-mode {
+  --background: #121212;
+  --gris-oscuro: #cfcfcf;
+  --negro: #f1f1f1;
+  --azul: #4f8ef7;
+  --verde-amarillo: #c6e44b;
+  --shadow: 0 10px 30px rgba(255,255,255,0.05);
+}
+
+body.dark-mode {
+  background-color: var(--background);
+  color: var(--negro);
+}
+
+body.dark-mode .navbar-container {
+  background-color: var(--negro);
+}
+
+body.dark-mode .dropdown-menu {
+  background-color: #222;
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.1);
+}
+
+body.dark-mode .dropdown-menu a {
+  color: var(--gris-oscuro);
+}
+
+body.dark-mode .dropdown-menu a:hover {
+  background-color: var(--azul);
+  color: white;
 }

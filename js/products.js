@@ -157,3 +157,30 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuLinks = dropdownMenu ? dropdownMenu.querySelectorAll('a') : [];
     menuLinks.forEach(link => link.addEventListener('click', closeMenu));
 });
+
+// ======== MODO OSCURO ========
+
+// Referencia al botón
+const themeToggle = document.getElementById("theme-toggle");
+const icon = themeToggle.querySelector("i");
+
+// Verificar si el usuario ya tiene guardado el modo oscuro
+const savedTheme = localStorage.getItem("theme");
+if (savedTheme === "dark") {
+  document.body.classList.add("dark-mode");
+  icon.classList.replace("fa-moon", "fa-sun");
+}
+
+// Cambiar el tema al hacer clic
+themeToggle.addEventListener("click", (e) => {
+  e.preventDefault();
+  document.body.classList.toggle("dark-mode");
+
+  // Actualizar icono
+  const isDark = document.body.classList.contains("dark-mode");
+  icon.classList.toggle("fa-sun", isDark);
+  icon.classList.toggle("fa-moon", !isDark);
+
+  // Guardar preferencia en localStorage
+  localStorage.setItem("theme", isDark ? "dark" : "light");
+});
