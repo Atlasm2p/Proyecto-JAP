@@ -1,0 +1,318 @@
+/* 2.1 Contenedor Principal de la Página */
+.cart-container {
+    max-width: 1200px; 
+    margin: 20px auto; 
+    padding: 20px;
+    display: flex; 
+    gap: 30px; 
+    
+}
+
+/* 2.2 Estilos de la Columna Izquierda (Carrito) */
+.cart-summary,
+.cart-list-container {
+    flex-basis: 550px; 
+    flex-shrink: 0; 
+    padding: 30px;
+    background-color: #fff; 
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.cart-section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    font-family: "Krona One", sans-serif;
+}
+
+/* Lista de datos (Nombre, Teléfono, Correo) */
+.cart-item {
+    background-color: #cfcfcf;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 8px;
+    border-radius: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.cart-item:last-child {
+    border-bottom: none; 
+}
+
+.cart-subtitle {
+    cursor: pointer;
+    font-weight: 400;
+    color: #777;
+    flex-basis: 30%; 
+    padding-bottom: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.item-image {
+    display: flex;
+    align-items: center;
+    gap: 10px;    
+}
+
+.cart-item img {
+    max-width: 100px;
+    height: auto;
+    object-fit: contain;
+    border-radius: 10px;
+}
+
+.cart-item-title {
+    font-size: 1rem;
+    font-family: "Krona One", sans-serif;
+}
+
+.item-data {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.data-label {
+    font-weight: 400;
+    color: #777;
+    flex-basis: 30%; 
+}
+
+.trash-container {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    gap: 10px;
+}
+
+.counter-container {
+      display: inline-flex;
+      align-items: center;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+      padding: 5px 10px;
+      gap: 10px;
+    }
+
+.counter-btn {
+    border: none;
+    color: #2f31f5;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.counter-btn:hover {
+    background-color: #bbb;
+}
+
+.counter-value {
+    min-width: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.data-value {
+    font-weight: 500;
+    color: #333;
+    flex-grow: 1; 
+    text-align: right;
+    padding-right: 10px; 
+}
+
+.edit-btn {
+    background: none;
+    border: none;
+    color: #555;
+    cursor: pointer;
+    font-size: 1rem;
+    padding: 0;
+}
+
+/* 2.3 Estilos de la Columna Derecha (Resumen del carrito) */
+.cart-summary {
+    background-color: #fff;
+    flex-grow: 1; 
+    
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 20px; 
+}
+
+.summary-data {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#summary-btn {
+    width: 100%;
+    height: 40px;
+    background-color: #dbf059; 
+    border: none;
+    color: #333;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 8px 0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 15px;
+    max-width: 360px;
+}
+
+/* Estilos para los cuadros vacíos */
+.placeholder-card {
+    background-color: #eee; 
+    border: 1px dashed #ccc;
+}
+
+
+/* 2.4 Estilos del Header/Navbar */
+
+
+.site-header {
+
+    color: white;
+    padding: 30px 30px 20px 30px;
+}
+
+.header-content {
+    max-width: 1200px; 
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+}
+
+.logo {
+    color: #2f31f5;
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Contenedor de los iconos de navegación */
+.header-nav {
+    display: flex;
+    gap: 5px; 
+    position: relative; 
+}
+
+.nav-icon-btn {
+    background: none;
+    border: none;
+    color: #2f31f5; 
+    font-size: 1.2rem;
+    padding: 8px 10px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+}
+
+.nav-icon-btn:hover {
+    opacity: 1;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Menú desplegable */
+.custom-dropdown {
+    position: absolute;
+    top: 100%;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    min-width: 200px;
+    right: 0;
+    margin-top: 5px;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.custom-dropdown.active {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.custom-dropdown ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px 0;
+}
+
+.custom-dropdown li {
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.custom-dropdown li:last-child {
+    border-bottom: none;
+}
+
+.custom-dropdown a {
+    display: block;
+    padding: 12px 20px;
+    color: var(--negro);
+    text-decoration: none;
+    font-size: 16px;
+    transition: background-color 0.2s ease;
+}
+
+.custom-dropdown a:hover {
+    background-color: var(--verde-amarillo);
+    color: var(--negro);
+}
+
+/* ======== MODO OSCURO ======== */
+
+body.dark-mode {
+  --background: #121212;
+  --gris-oscuro: #cfcfcf;
+  --negro: #f1f1f1;
+  --azul: #4f8ef7;
+  --verde-amarillo: #c6e44b;
+  --shadow: 0 10px 30px rgba(255,255,255,0.05);
+}
+
+body.dark-mode {
+  background-color: var(--background);
+  color: var(--negro);
+}
+
+body.dark-mode .site-header {
+  background-color: var(--negro);
+}
+
+body.dark-mode .custom-dropdown {
+  background-color: #222;
+}
+
+body.dark-mode .custom-dropdown a {
+  color: var(--gris-oscuro);
+}
+
+body.dark-mode .profile-container {
+    background-color: #cfcfcf;
+}
+
+body.dark-mode p,
+body.dark-mode .data-label, .data-value{
+    color: #121212;
+}
+
+body.dark-mode .profile-container .profile-info-column,
+body.dark-mode .profile-container article{
+    background-color: #777;
+}
