@@ -164,13 +164,40 @@ function fetchAndDisplayComments(prodId) {
             mainImageElement.alt = "Imagen no disponible";
             thumbsContainer.innerHTML = '<p>No hay imágenes disponibles.</p>';
         }
+const quantitySelector = document.getElementById('qty-select');
+    const buyNowButton = document.getElementById('buy-now');
+    const addToCartButton = document.getElementById('add-to-cart');
 
-        const quantitySelector = document.getElementById('qty-select');
-        const buyNowButton = document.getElementById('buy-now');
-        buyNowButton.addEventListener('click', () => {
-            const selectedQuantity = parseInt(quantitySelector.value);
-            alert(`Agregando ${selectedQuantity} unidad(es) de ${product.name} al carrito.`);
-        });
+    addToCartButton.addEventListener('click', () => {
+        let cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+        const selectedQuantity = parseInt(quantitySelector.value);
+        
+        const cartItem = {
+            nombre: product.name,
+            costo: product.cost,
+            moneda: product.currency,
+            cantidad: selectedQuantity,
+            imagen: product.images[0],
+            subtotal: product.cost * selectedQuantity
+        };
+
+        const existingItemIndex = cartItems.findIndex(item => item.nombre === cartItem.nombre);
+        
+        if (existingItemIndex !== -1) {
+            cartItems[existingItemIndex].cantidad += selectedQuantity;
+            cartItems[existingItemIndex].subtotal = cartItems[existingItemIndex].cantidad * cartItems[existingItemIndex].costo;
+        } else {
+            cartItems.push(cartItem);
+        }
+
+        localStorage.setItem("cartItems", JSON.stringify(cartItems));
+        alert(`${selectedQuantity} unidad(es) de ${product.name} agregadas al carrito`);
+    });
+
+    buyNowButton.addEventListener('click', () => {
+        addToCartButton.click();
+        window.location.href = "cart.html";
+    });
     }
 
     // Funciones para el boton comprar

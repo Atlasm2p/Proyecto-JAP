@@ -719,3 +719,17 @@ body.dark-mode #product-description {
 body.dark-mode .add-review-section h4 {
   color: white !important;
 }
+.add-to-cart{
+    width: 360px;
+    height: 40px;
+    background-color: #c7c7c7; 
+    border: none;
+    color: #333;
+    font-weight: bold;
+    border-radius: 12px;
+    padding: 8px 0;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    max-width: 360px;
+}
