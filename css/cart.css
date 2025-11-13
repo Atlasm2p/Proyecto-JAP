@@ -1,318 +1,341 @@
-/* 2.1 Contenedor Principal de la Página */
+
 .cart-container {
-    max-width: 1200px; 
-    margin: 20px auto; 
-    padding: 20px;
-    display: flex; 
-    gap: 30px; 
-    
+  max-width: 1200px; 
+  margin: 20px auto; 
+  padding: 20px;
+  display: flex; 
+  gap: 30px; 
 }
 
-/* 2.2 Estilos de la Columna Izquierda (Carrito) */
 .cart-summary,
 .cart-list-container {
-    flex-basis: 550px; 
-    flex-shrink: 0; 
-    padding: 30px;
-    background-color: #fff; 
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  flex-basis: 550px; 
+  flex-shrink: 0; 
+  padding: 30px;
+  background-color: #fff; 
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
 .cart-section-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    font-family: "Krona One", sans-serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: "Krona One", sans-serif;
 }
 
-/* Lista de datos (Nombre, Teléfono, Correo) */
 .cart-item {
-    background-color: #cfcfcf;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 8px;
-    border-radius: 10px;
-    border-bottom: 1px solid #eee;
+  background-color: #cfcfcf;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 8px;
+  border-radius: 10px;
+  border-bottom: 1px solid #eee;
 }
 
 .cart-item:last-child {
-    border-bottom: none; 
-}
-
-.cart-subtitle {
-    cursor: pointer;
-    font-weight: 400;
-    color: #777;
-    flex-basis: 30%; 
-    padding-bottom: 10px 0;
-    border-bottom: 1px solid #eee;
-}
-
-.item-image {
-    display: flex;
-    align-items: center;
-    gap: 10px;    
+  border-bottom: none; 
 }
 
 .cart-item img {
-    max-width: 100px;
-    height: auto;
-    object-fit: contain;
-    border-radius: 10px;
+  max-width: 100px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 10px;
+}
+
+.item-image {
+  display: flex;
+  align-items: center;
+  gap: 10px;    
 }
 
 .cart-item-title {
-    font-size: 1rem;
-    font-family: "Krona One", sans-serif;
+  font-size: 1rem;
+  font-family: "Krona One", sans-serif;
 }
 
 .item-data {
-    display: flex;
-    flex-direction: column;
-    align-items: end;
+  display: flex;
+  flex-direction: column;
+  align-items: end;
 }
 
-.data-label {
-    font-weight: 400;
-    color: #777;
-    flex-basis: 30%; 
-}
-
-.trash-container {
-    display: inline-flex;
-    align-items: center;
-    padding: 5px 10px;
-    gap: 10px;
+.trash-container { 
+  display: inline-flex; 
+  align-items: center; 
+  padding: 5px 10px; 
+  gap: 10px; 
 }
 
 .counter-container {
-      display: inline-flex;
-      align-items: center;
-      background-color: #f0f0f0;
-      border-radius: 5px;
-      padding: 5px 10px;
-      gap: 10px;
-    }
+  display: inline-flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  padding: 5px 10px;
+  gap: 10px;
+}
 
 .counter-btn {
-    border: none;
-    color: #2f31f5;
-    cursor: pointer;
-    font-size: 16px;
+  border: none;
+  color: #2f31f5;
+  cursor: pointer;
+  font-size: 16px;
 }
 
 .counter-btn:hover {
-    background-color: #bbb;
+  background-color: #bbb;
 }
 
 .counter-value {
-    min-width: 20px;
-    text-align: center;
-    font-size: 16px;
-}
-
-.data-value {
-    font-weight: 500;
-    color: #333;
-    flex-grow: 1; 
-    text-align: right;
-    padding-right: 10px; 
-}
-
-.edit-btn {
-    background: none;
-    border: none;
-    color: #555;
-    cursor: pointer;
-    font-size: 1rem;
-    padding: 0;
-}
-
-/* 2.3 Estilos de la Columna Derecha (Resumen del carrito) */
-.cart-summary {
-    background-color: #fff;
-    flex-grow: 1; 
-    
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 20px; 
-}
-
-.summary-data {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.summary-item {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+  min-width: 20px;
+  text-align: center;
+  font-size: 16px;
 }
 
 #summary-btn {
-    width: 100%;
-    height: 40px;
-    background-color: #dbf059; 
-    border: none;
-    color: #333;
-    font-weight: bold;
-    border-radius: 12px;
-    padding: 8px 0;
-    font-size: 1.1rem;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    margin-top: 15px;
-    max-width: 360px;
+  width: 100%;
+  height: 40px;
+  background-color: #dbf059; 
+  border: none;
+  color: #333;
+  font-weight: bold;
+  border-radius: 12px;
+  padding: 8px 0;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 15px;
+  max-width: 360px;
 }
-
-/* Estilos para los cuadros vacíos */
-.placeholder-card {
-    background-color: #eee; 
-    border: 1px dashed #ccc;
-}
-
-
-/* 2.4 Estilos del Header/Navbar */
-
 
 .site-header {
-
-    color: white;
-    padding: 30px 30px 20px 30px;
+  color: white;
+  padding: 30px 30px 20px 30px;
 }
 
 .header-content {
-    max-width: 1200px; 
-    margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    justify-content: space-between; 
-    align-items: center;
+  max-width: 1200px; 
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between; 
+  align-items: center;
 }
 
 .logo {
-    color: #2f31f5;
-    text-decoration: none;
-    font-size: 1.5rem;
-    font-weight: 700;
+  color: #2f31f5;
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
-/* Contenedor de los iconos de navegación */
-.header-nav {
-    display: flex;
-    gap: 5px; 
-    position: relative; 
+.nav-icons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
-.nav-icon-btn {
-    background: none;
-    border: none;
-    color: #2f31f5; 
-    font-size: 1.2rem;
-    padding: 8px 10px;
-    cursor: pointer;
-    opacity: 0.8;
-    transition: opacity 0.2s;
+.icon-link {
+  background: none;
+  border: none;
+  color: #2f31f5; 
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
 }
 
-.nav-icon-btn:hover {
-    opacity: 1;
+.icon-link:hover {
+  opacity: 1;
 }
 
-.hidden {
-    display: none !important;
-}
-
-/* Menú desplegable */
 .custom-dropdown {
-    position: absolute;
-    top: 100%;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-    min-width: 200px;
-    right: 0;
-    margin-top: 5px;
-    z-index: 1000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(-10px);
-    transition: all 0.3s ease;
+  position: absolute;
+  top: 100%;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  min-width: 200px;
+  right: 0;
+  margin-top: 5px;
+  z-index: 1000;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
 }
 
 .custom-dropdown.active {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
 }
 
-.custom-dropdown ul {
-    list-style: none;
-    margin: 0;
-    padding: 10px 0;
+/* ===============================
+   RESPONSIVE DESIGN
+   =============================== */
+
+@media (max-width: 1024px) {
+  .cart-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+  }
+
+  .cart-summary,
+  .cart-list-container {
+    width: 100%;
+    flex-basis: auto;
+  }
+
+  .cart-item img {
+    max-width: 80px;
+  }
+
+  .cart-item-title {
+    font-size: 0.95rem;
+  }
+
+  #summary-btn {
+    max-width: 100%;
+  }
+
+  .header-content {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .nav-icons {
+    gap: 8px;
+  }
 }
 
-.custom-dropdown li {
-    border-bottom: 1px solid #f0f0f0;
+@media (max-width: 768px) {
+  .cart-container {
+    flex-direction: column;
+    padding: 10px;
+    gap: 20px;
+  }
+
+  .cart-summary,
+  .cart-list-container {
+    padding: 20px;
+  }
+
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .item-data {
+    align-items: flex-start;
+  }
+
+  .cart-item img {
+    max-width: 70px;
+  }
+
+  .header-content {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .nav-icons {
+    justify-content: center;
+  }
+
+  #summary-btn {
+    font-size: 1rem;
+  }
 }
 
-.custom-dropdown li:last-child {
-    border-bottom: none;
+@media (max-width: 480px) {
+  .cart-container {
+    padding: 8px;
+  }
+
+  .cart-summary,
+  .cart-list-container {
+    padding: 15px;
+  }
+
+  .cart-section-title {
+    font-size: 1.2rem;
+    text-align: center;
+  }
+
+  .cart-item {
+    padding: 8px;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .cart-item img {
+    max-width: 60px;
+  }
+
+  .counter-container {
+    padding: 4px 8px;
+    gap: 6px;
+  }
+
+  .counter-btn {
+    font-size: 14px;
+  }
+
+  .header-content {
+    padding: 0;
+  }
+
+  .icon-link {
+    font-size: 18px;
+  }
+
+  #summary-btn {
+    font-size: 0.9rem;
+    height: 38px;
+  }
 }
 
-.custom-dropdown a {
-    display: block;
-    padding: 12px 20px;
-    color: var(--negro);
-    text-decoration: none;
-    font-size: 16px;
-    transition: background-color 0.2s ease;
+/* ===============================
+   TRANSICIONES GENERALES
+   =============================== */
+* {
+  transition: all 0.2s ease-in-out;
 }
 
-.custom-dropdown a:hover {
-    background-color: var(--verde-amarillo);
-    color: var(--negro);
-}
-
-/* ======== MODO OSCURO ======== */
+/* ===============================
+   MODO OSCURO
+   =============================== */
 
 body.dark-mode {
-  --background: #121212;
-  --gris-oscuro: #cfcfcf;
-  --negro: #f1f1f1;
-  --azul: #4f8ef7;
-  --verde-amarillo: #c6e44b;
-  --shadow: 0 10px 30px rgba(255,255,255,0.05);
+  background-color: #121212;
+  color: #f1f1f1;
 }
 
-body.dark-mode {
-  background-color: var(--background);
-  color: var(--negro);
+body.dark-mode .cart-summary,
+body.dark-mode .cart-list-container {
+  background-color: #1e1e1e;
+  box-shadow: 0 2px 10px rgba(255, 255, 255, 0.05);
 }
 
-body.dark-mode .site-header {
-  background-color: var(--negro);
+body.dark-mode .cart-item {
+  background-color: #2b2b2b;
+  border-bottom: 1px solid #333;
 }
 
-body.dark-mode .custom-dropdown {
-  background-color: #222;
+body.dark-mode .counter-container {
+  background-color: #333;
 }
 
-body.dark-mode .custom-dropdown a {
-  color: var(--gris-oscuro);
+body.dark-mode .counter-btn {
+  color: #c6e44b;
 }
 
-body.dark-mode .profile-container {
-    background-color: #cfcfcf;
-}
-
-body.dark-mode p,
-body.dark-mode .data-label, .data-value{
-    color: #121212;
-}
-
-body.dark-mode .profile-container .profile-info-column,
-body.dark-mode .profile-container article{
-    background-color: #777;
+body.dark-mode #summary-btn {
+  background-color: #c6e44b;
+  color: #000;
 }
