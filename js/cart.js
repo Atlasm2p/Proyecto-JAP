@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let envioUYU = 0;
   let totalUYU = 0;
   let totalItems = 0;
-  
+
   // Obtener productos desde localStorage (si existen)
   let cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
 
@@ -27,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
     cartList.innerHTML = "";
     subtotalUYU = 0;
     calcularEnvio();
-    totalItems = 0;    
+    totalItems = 0;
 
     products.forEach((product, index) => {
       const item = document.createElement("div");
@@ -134,15 +134,20 @@ document.addEventListener("DOMContentLoaded", () => {
     totalEl.textContent = `UYU ${(totalUYU).toLocaleString()}`;
   }
 
-  // Botón “Continuar compra”
+  // Botón “Finalizar compra” (Implementación de Pauta 4)
   if (summaryBtn) {
-    summaryBtn.addEventListener("click", () => {
-      const selectedProducts = cartProducts.filter(p => p.selected !== false);
-      if (selectedProducts.length === 0) {
-        alert("Selecciona al menos un producto para continuar.");
-        return;
+    summaryBtn.textContent = "Finalizar Compra"; // Actualiza el texto del botón
+    summaryBtn.addEventListener("click", (e) => {
+      e.preventDefault(); // Previene cualquier envío de formulario no deseado
+
+      // Ejecuta la validación principal
+      if (validarCompra()) {
+        // Si es exitoso, muestra el feedback
+        mostrarFeedbackExitoso();
+      } else {
+        // Si falla, el feedback se mostrará a través de las clases 'is-invalid' de Bootstrap
+        // Opcional: Podrías usar un alert o un toast aquí.
       }
-      alert(`Redirigiendo al proceso de compra con ${selectedProducts.length} producto(s)...`);
     });
   }
   const themeToggle = document.getElementById("theme-toggle");
@@ -190,22 +195,24 @@ document.addEventListener("DOMContentLoaded", () => {
   // Actualizar Tipo de envio
   const envioSelect = document.getElementById("tipo-envio");
   const labelEnvio = document.getElementById("label-tipo-envio");
-  
+
   envioSelect.addEventListener("change", () => {
-  if (envioSelect.value === "premium") {
-    tipoEnvio = envioSelect.value;
-    labelEnvio.textContent = "2 a 5 días (15%)";
-    calcularEnvio();
-  } else if (envioSelect.value === "express") {
-    tipoEnvio = envioSelect.value;
-    labelEnvio.textContent = "5 a 8 días (7%)";
-    calcularEnvio();
-  } else if (envioSelect.value === "standard") {
-    tipoEnvio = envioSelect.value;
-    labelEnvio.textContent = "12 a 15 días (5%)";
-    calcularEnvio();
-  }
-});
+    if (envioSelect.value === "premium") {
+      tipoEnvio = envioSelect.value;
+      labelEnvio.textContent = "2 a 5 días (15%)";
+      calcularEnvio();
+    } else if (envioSelect.value === "express") {
+      tipoEnvio = envioSelect.value;
+      labelEnvio.textContent = "5 a 8 días (7%)";
+      calcularEnvio();
+    } else if (envioSelect.value === "standard") {
+      tipoEnvio = envioSelect.value;
+      labelEnvio.textContent = "12 a 15 días (5%)";
+      calcularEnvio();
+    }
+
+
+  });
 
   function calcularEnvio() {
     if (tipoEnvio === "premium") {
@@ -262,4 +269,250 @@ document.addEventListener("DOMContentLoaded", () => {
       console.error("Error cargando JSON:", err);
       departamentoSelect.innerHTML = "<option>Error al cargar...</option>";
     });
+
+  // --- LÓGICA PARA GUARDAR DATOS DE MODALES ---
+
+  // 1. Guardar Dirección y Mostrarla en el Resumen
+  const guardarDirBtn = document.getElementById("guardarDir-btn");
+  const editarDireccionBtn = document.getElementById("editarDireccionBtn");
+
+  if (guardarDirBtn) {
+    guardarDirBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      
+      const direccionModalElement = document.getElementById('formDireccion');
+      const direccionModal = bootstrap.Modal.getInstance(direccionModalElement);
+      if (direccionModal) {
+        direccionModal.hide();
+      }
+
+      
+      actualizarTextoDireccion();
+    });
+  }
+
+  function actualizarTextoDireccion() {
+    const nombre = document.getElementById('nombre').value.trim();
+    const departamento = document.getElementById('departamento').value;
+    const localidad = document.getElementById('localidad').value;
+    const calle = document.getElementById('calle').value.trim();
+    const numero = document.getElementById('numero').value.trim();
+    const esquina = document.getElementById('esquina').value.trim();
+
+    const direccionTextoElement = editarDireccionBtn.previousElementSibling.querySelector('span');
+
+    if (departamento && localidad && calle && numero) {
+      let texto = `${nombre}, ${departamento}, ${localidad}, ${calle}, N° ${numero}`;
+      if (esquina) {
+        texto += `, Esq. ${esquina}`;
+      }
+      direccionTextoElement.textContent = texto;
+      direccionTextoElement.style.color = 'black';
+    } else {
+      direccionTextoElement.textContent = 'Nombre, Departamento, Localidad, Calle, Número, Esquina';
+      direccionTextoElement.style.color = 'gray';
+    }
+  }
+
+  // 2. Guardar Pago con Tarjeta
+  const guardarTarjetaBtn = document.getElementById("guardarTarjeta-btn");
+  if (guardarTarjetaBtn) {
+    guardarTarjetaBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      
+      const numTarjeta = document.getElementById('numeroTarjeta').value.trim();
+      const cvvTarjeta = document.getElementById('cvvTarjeta').value.trim();
+
+      if (numTarjeta !== "" && cvvTarjeta !== "") {
+        const modalTarjetaElement = document.getElementById('modalTarjeta');
+        const modalTarjeta = bootstrap.Modal.getInstance(modalTarjetaElement);
+        if (modalTarjeta) {
+          modalTarjeta.hide();
+        }
+      }
+      
+    });
+  }
+
+  // 3. Guardar Pago con Transferencia
+  const guardarTransferenciaBtn = document.getElementById("guardarTransferencia-btn");
+  if (guardarTransferenciaBtn) {
+    guardarTransferenciaBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+
+      
+      const numCuenta = document.getElementById('numeroCuenta').value.trim();
+
+      if (numCuenta !== "") {
+        const modalTransferenciaElement = document.getElementById('modalTransferencia');
+        const modalTransferencia = bootstrap.Modal.getInstance(modalTransferenciaElement);
+        if (modalTransferencia) {
+          modalTransferencia.hide();
+        }
+      }
+    });
+  }
+
+  // --- FUNCIONES DE VALIDACIÓN (PAUTA 4) ---
+
+  // Función principal que verifica todos los requisitos
+  function validarCompra() {
+    let esValido = true;
+
+    
+    document.querySelectorAll('.is-invalid').forEach(el => el.classList.remove('is-invalid'));
+
+    // 1. Validar campos de Dirección 
+    if (!validarDireccion()) {
+      esValido = false;
+    }
+
+    
+    
+
+    // 3. Validar que la cantidad para cada producto sea > 0
+    if (!validarCantidadProductos()) {
+      alert("La cantidad para cada producto en el carrito debe ser mayor a 0.");
+      esValido = false;
+    }
+
+    // 4. Validar Forma de Pago y sus campos asociados
+    if (!validarFormaPago()) {
+      alert("Debe seleccionar una forma de pago y completar sus campos requeridos.");
+      esValido = false;
+    }
+
+    return esValido;
+  }
+
+  // A. Validar campos de Dirección
+  function validarDireccion() {
+    let valido = true;
+    
+    const camposObligatorios = [
+      'departamento', 'localidad', 'calle', 'numero', 'nombre' 
+    ];
+
+    camposObligatorios.forEach(id => {
+      const campo = document.getElementById(id);
+
+      
+      if (campo && campo.value.trim() === "") {
+        campo.classList.add('is-invalid');
+        valido = false;
+      } else if (campo) {
+        campo.classList.remove('is-invalid');
+      }
+    });
+
+    // Si la dirección no es válida, abre el modal para que el usuario complete.
+    if (!valido) {
+      const direccionModal = new bootstrap.Modal(document.getElementById('formDireccion'));
+      direccionModal.show();
+    }
+
+    return valido;
+  }
+
+  // B. Validar que la cantidad de productos sea > 0 y que haya al menos uno seleccionado
+  function validarCantidadProductos() {
+    
+    if (cartProducts.length === 0) {
+      return false;
+    }
+
+    
+    const productosSeleccionados = cartProducts.filter(p => p.selected !== false);
+    if (productosSeleccionados.length === 0) {
+      return false;
+    }
+
+    
+    const cantidadesValidas = productosSeleccionados.every(product => (product.quantity || 1) > 0);
+
+    return cantidadesValidas;
+  }
+
+  // C. Validar forma de pago y sus campos asociados
+  function validarFormaPago() {
+    const radioCredito = document.getElementById('credito');
+    const radioTransferencia = document.getElementById('transferencia');
+
+    let pagoSeleccionado = false;
+    let camposPagoValidos = true;
+
+    // 1. Validar Tarjeta de Crédito 
+    if (radioCredito && radioCredito.checked) {
+      pagoSeleccionado = true;
+      const numTarjeta = document.getElementById('numeroTarjeta');
+      const cvvTarjeta = document.getElementById('cvvTarjeta');
+
+      if (!numTarjeta || numTarjeta.value.trim() === "") {
+        camposPagoValidos = false;
+        numTarjeta.classList.add('is-invalid');
+      } else {
+        numTarjeta.classList.remove('is-invalid');
+      }
+
+      if (!cvvTarjeta || cvvTarjeta.value.trim() === "") {
+        camposPagoValidos = false;
+        cvvTarjeta.classList.add('is-invalid');
+      } else {
+        cvvTarjeta.classList.remove('is-invalid');
+      }
+
+      
+      if (!camposPagoValidos) {
+        const modalTarjeta = new bootstrap.Modal(document.getElementById('modalTarjeta'));
+        modalTarjeta.show();
+      }
+
+    } else {
+      
+      const numTarjeta = document.getElementById('numeroTarjeta');
+      const cvvTarjeta = document.getElementById('cvvTarjeta');
+      if (numTarjeta) numTarjeta.classList.remove('is-invalid');
+      if (cvvTarjeta) cvvTarjeta.classList.remove('is-invalid');
+    }
+
+    // 2. Validar Transferencia Bancaria 
+    if (radioTransferencia && radioTransferencia.checked) {
+      pagoSeleccionado = true;
+      const numCuenta = document.getElementById('numeroCuenta');
+
+      if (!numCuenta || numCuenta.value.trim() === "") {
+        camposPagoValidos = false;
+        numCuenta.classList.add('is-invalid');
+        
+        const modalTransferencia = new bootstrap.Modal(document.getElementById('modalTransferencia'));
+        modalTransferencia.show();
+      } else {
+        numCuenta.classList.remove('is-invalid');
+      }
+
+    } else {
+      
+      const numCuenta = document.getElementById('numeroCuenta');
+      if (numCuenta) numCuenta.classList.remove('is-invalid');
+    }
+
+    
+    return pagoSeleccionado && camposPagoValidos;
+  }
+
+  // D. Feedback de compra exitosa
+function mostrarFeedbackExitoso() {
+    
+    alert("¡Compra exitosa! Su pedido ha sido procesado correctamente.");
+
+    
+    if (summaryBtn) {
+        summaryBtn.disabled = true;
+        summaryBtn.textContent = 'Compra Finalizada';
+    }
+
+    
+}
 });
