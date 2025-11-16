@@ -167,7 +167,10 @@ function displayProductDetails(product) {
     alert(`${selectedQuantity} unidad(es) de ${product.name} agregadas al carrito`);
   }
 
-  addToCartButton.addEventListener("click", addToCart);
+  addToCartButton.addEventListener("click", () => {
+    addToCart();
+    updateCartBadge();
+  });
 
   buyNowButton.addEventListener("click", () => {
     addToCart();
