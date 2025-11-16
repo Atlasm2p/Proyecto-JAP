@@ -77,6 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
       increaseBtn.addEventListener("click", () => {
         product.quantity = (product.quantity || 1) + 1;
         saveAndRender();
+        updateCartBadge();
       });
 
       // Disminuir cantidad
@@ -84,6 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if ((product.quantity || 1) > 1) {
           product.quantity--;
           saveAndRender();
+          updateCartBadge();
         }
       });
 
@@ -94,6 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
           showEmptyCart();
         }
         saveAndRender();
+        updateCartBadge();
       });
 
       // Seleccionar producto
