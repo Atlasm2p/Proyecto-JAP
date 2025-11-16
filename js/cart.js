@@ -174,4 +174,62 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Escape") dropdownMenu.classList.remove("active");
     });
   }
+
+  // Actualizar Tipo de envio
+  const envioSelect = document.getElementById("tipo-envio");
+  const labelEnvio = document.getElementById("label-tipo-envio");
+  
+  envioSelect.addEventListener("change", () => {
+    if (envioSelect.value === "premium") {
+      labelEnvio.textContent = "2 a 5 días (15%)";
+    } else if (envioSelect.value === "express") {
+      labelEnvio.textContent = "5 a 8 días (7%)";
+    } else if (envioSelect.value === "standard") {
+      labelEnvio.textContent = "12 a 15 días (5%)";
+    }
+  });
+
+  // Api para departamentos y localidades
+
+  // Elementos del formulario
+  const departamentoSelect = document.getElementById("departamento");
+  const localidadSelect = document.getElementById("localidad");
+
+  // Cargar JSON local
+  fetch("js/departamentos.json")
+    .then(res => res.json())
+    .then(data => {
+
+      // Cargar departamentos en el <select>
+      data.forEach(dep => {
+        const option = document.createElement("option");
+        option.value = dep.name;
+        option.textContent = dep.name;
+        departamentoSelect.appendChild(option);
+      });
+
+      // Cuando cambia un departamento → cargar sus localidades
+      departamentoSelect.addEventListener("change", () => {
+        const seleccionado = departamentoSelect.value;
+
+        const depObj = data.find(d => d.name === seleccionado);
+
+        localidadSelect.innerHTML = "<option value=''>Seleccione localidad...</option>";
+
+        // Si existe, cargar sus localidades
+        if (depObj) {
+          depObj.towns.forEach(loc => {
+            const opt = document.createElement("option");
+            opt.value = loc.name;
+            opt.textContent = loc.name;
+            localidadSelect.appendChild(opt);
+          });
+        }
+      });
+
+    })
+    .catch(err => {
+      console.error("Error cargando JSON:", err);
+      departamentoSelect.innerHTML = "<option>Error al cargar...</option>";
+    });
 });
