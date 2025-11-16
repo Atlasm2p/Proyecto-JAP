@@ -1,9 +1,16 @@
 document.addEventListener("DOMContentLoaded", () => {
   const cartList = document.querySelector(".cart-list");
   const totalItemsEl = document.querySelector(".cart-summary .summary-item span[style*='orange']");
-  const totalEl = document.querySelector(".cart-summary .summary-item span[style*='UYU']");
+  const subtotalEl = document.querySelector(".cart-summary .summary-item span[style*='UYU']");
+  const envioPrecio = document.querySelectorAll(".cart-summary .summary-item span[style*='UYU']")[1];
+  const totalEl = document.querySelector(".cart-summary .summary-item span[style*='font-weight: bold; font-size: large; margin-left: auto; margin-right: 5%;']");
   const summaryBtn = document.getElementById("summary-btn");
-
+  let tipoEnvio = "standard";
+  let subtotalUYU = 0;
+  let envioUYU = 0;
+  let totalUYU = 0;
+  let totalItems = 0;
+  
   // Obtener productos desde localStorage (si existen)
   let cartProducts = JSON.parse(localStorage.getItem("cartProducts")) || [];
 
@@ -18,8 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
   function renderCart(products) {
     cartList.innerHTML = "";
-    let totalUYU = 0;
-    let totalItems = 0;
+    subtotalUYU = 0;
+    calcularEnvio();
+    totalItems = 0;    
 
     products.forEach((product, index) => {
       const item = document.createElement("div");
@@ -54,7 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
       // Totales solo para productos seleccionados
       if (product.selected !== false) {
-        totalUYU += priceUYU * (product.quantity || 1);
+        subtotalUYU += priceUYU * (product.quantity || 1);
+        calcularEnvio();
         totalItems += product.quantity || 1;
       }
 
@@ -94,7 +103,7 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     });
 
-    updateSummary(totalItems, totalUYU);
+    updateSummary(totalItems, subtotalUYU, envioUYU);
   }
 
   // Guardar cambios y volver a renderizar
@@ -110,13 +119,16 @@ document.addEventListener("DOMContentLoaded", () => {
         <p>No hay productos en el carrito</p>
       </div>
     `;
-    updateSummary(0, 0);
+    updateSummary(0, 0, 0);
   }
 
   // Actualizar totales
-  function updateSummary(totalItems = 0, totalUYU = 0) {
+  function updateSummary(totalItems = 0, subtotalUYU = 0, envioUYU = 0) {
     totalItemsEl.textContent = totalItems;
-    totalEl.textContent = `UYU ${totalUYU.toLocaleString()}`;
+    subtotalEl.textContent = `UYU ${subtotalUYU.toLocaleString()}`;
+    envioPrecio.textContent = `UYU ${(parseInt(envioUYU)).toLocaleString()}`;
+    totalUYU = subtotalUYU + (parseInt(envioUYU));
+    totalEl.textContent = `UYU ${(totalUYU).toLocaleString()}`;
   }
 
   // Botón “Continuar compra”
@@ -130,9 +142,6 @@ document.addEventListener("DOMContentLoaded", () => {
       alert(`Redirigiendo al proceso de compra con ${selectedProducts.length} producto(s)...`);
     });
   }
-});
-
-document.addEventListener("DOMContentLoaded", () => {
   const themeToggle = document.getElementById("theme-toggle");
   const icon = themeToggle.querySelector("i");
 
@@ -174,4 +183,80 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.key === "Escape") dropdownMenu.classList.remove("active");
     });
   }
+
+  // Actualizar Tipo de envio
+  const envioSelect = document.getElementById("tipo-envio");
+  const labelEnvio = document.getElementById("label-tipo-envio");
+  
+  envioSelect.addEventListener("change", () => {
+  if (envioSelect.value === "premium") {
+    tipoEnvio = envioSelect.value;
+    labelEnvio.textContent = "2 a 5 días (15%)";
+    calcularEnvio();
+  } else if (envioSelect.value === "express") {
+    tipoEnvio = envioSelect.value;
+    labelEnvio.textContent = "5 a 8 días (7%)";
+    calcularEnvio();
+  } else if (envioSelect.value === "standard") {
+    tipoEnvio = envioSelect.value;
+    labelEnvio.textContent = "12 a 15 días (5%)";
+    calcularEnvio();
+  }
+});
+
+  function calcularEnvio() {
+    if (tipoEnvio === "premium") {
+      envioUYU = subtotalUYU * 0.15;
+    } else if (tipoEnvio === "express") {
+      envioUYU = subtotalUYU * 0.07;
+    } else {
+      envioUYU = subtotalUYU * 0.05;
+    }
+
+    updateSummary(totalItems, subtotalUYU, envioUYU);
+  }
+
+  // Api para departamentos y localidades
+
+  // Elementos del formulario
+  const departamentoSelect = document.getElementById("departamento");
+  const localidadSelect = document.getElementById("localidad");
+
+  // Cargar JSON local
+  fetch("js/departamentos.json")
+    .then(res => res.json())
+    .then(data => {
+
+      // Cargar departamentos en el <select>
+      data.forEach(dep => {
+        const option = document.createElement("option");
+        option.value = dep.name;
+        option.textContent = dep.name;
+        departamentoSelect.appendChild(option);
+      });
+
+      // Cuando cambia un departamento → cargar sus localidades
+      departamentoSelect.addEventListener("change", () => {
+        const seleccionado = departamentoSelect.value;
+
+        const depObj = data.find(d => d.name === seleccionado);
+
+        localidadSelect.innerHTML = "<option value=''>Seleccione localidad...</option>";
+
+        // Si existe, cargar sus localidades
+        if (depObj) {
+          depObj.towns.forEach(loc => {
+            const opt = document.createElement("option");
+            opt.value = loc.name;
+            opt.textContent = loc.name;
+            localidadSelect.appendChild(opt);
+          });
+        }
+      });
+
+    })
+    .catch(err => {
+      console.error("Error cargando JSON:", err);
+      departamentoSelect.innerHTML = "<option>Error al cargar...</option>";
+    });
 });
