@@ -9,24 +9,15 @@ document.addEventListener("DOMContentLoaded", function() {
         document.getElementById("login-button").style.display = "none";
         }
         
-        const userEmail = sessionStorage.getItem("usuario"); 
-
-        
+        const storedNombre = sessionStorage.getItem('usuario');
+        const userEmail = storedNombre || sessionStorage.getItem('usuarioEmail') || '';
         localStorage.setItem(USER_EMAIL_KEY, userEmail);
-
-        
         const profileData = JSON.parse(localStorage.getItem(PROFILE_DATA_KEY));
-
-        let nameForWelcome = userEmail.split('@')[0]; 
-
+        let nameForWelcome = storedNombre || (userEmail.includes('@') ? userEmail.split('@')[0] : userEmail);
         if (profileData && profileData.name) {
-            
             nameForWelcome = profileData.name;
-        } 
-        
-
-        
-        document.querySelector(".nav-icons").insertAdjacentHTML("afterBegin", 
+        }
+        document.querySelector('.nav-icons').insertAdjacentHTML('afterBegin',
             `<span id="welcome-user-name">Bienvenido, ${nameForWelcome}</span>`
         );
 

@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000/";
+const BASE_URL = "https://japceibal.github.io/emercado-api/";
 
 const CATEGORIES_URL = BASE_URL + "cats/cat.json";
 const PUBLISH_PRODUCT_URL = BASE_URL + "sell/publish.json";
