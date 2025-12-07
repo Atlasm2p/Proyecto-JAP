@@ -155,7 +155,6 @@ function displayProductDetails(product) {
       existing.quantity += selectedQuantity;
     } else {
       cartProducts.push({
-        id: product.id || parseInt(localStorage.getItem("prodID"), 10) || null,
         name: product.name,
         cost: product.cost,
         currency: product.currency,
@@ -212,7 +211,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return;
   }
 
-  // Comportamiento original: cargar desde JSON remoto
   getJSONData(PRODUCT_INFO_URL + productID + EXT_TYPE)
     .then(result => {
       if (result.status === "ok") {
@@ -268,7 +266,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // --- Productos relacionados ---
   const catID = localStorage.getItem("catID") || 101;
-  // Comportamiento original: relacionados desde JSON remoto
   getJSONData(PRODUCTS_URL + catID + EXT_TYPE)
     .then(result => {
       if (result.status === "ok") {

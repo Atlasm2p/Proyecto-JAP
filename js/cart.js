@@ -143,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // Ejecuta la validación principal
       if (validarCompra()) {
         // Si es exitoso, muestra el feedback
-        terminarCompra();
+        mostrarFeedbackExitoso();
       } else {
         // Si falla, el feedback se mostrará a través de las clases 'is-invalid' de Bootstrap
         // Opcional: Podrías usar un alert o un toast aquí.
@@ -503,89 +503,16 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // D. Feedback de compra exitosa
-async function terminarCompra() {
-    const usuario_id = parseInt(sessionStorage.getItem('userId'), 10);
-    if (!Number.isInteger(usuario_id) || usuario_id <= 0) {
-      alert('Usuario no autenticado o ID inválido. Inicie sesión nuevamente.');
-      return;
+function mostrarFeedbackExitoso() {
+    
+    alert("¡Compra exitosa! Su pedido ha sido procesado correctamente.");
+
+    
+    if (summaryBtn) {
+        summaryBtn.disabled = true;
+        summaryBtn.textContent = 'Compra Finalizada';
     }
 
-    // Dirección (texto mostrado en el resumen)
-    let direccion_envio = "";
-    try {
-      const direccionSpan = editarDireccionBtn?.previousElementSibling?.querySelector('span');
-      direccion_envio = direccionSpan?.textContent?.trim() || "";
-    } catch (_) {}
-
-    // Método de pago
-    const radioCredito = document.getElementById('credito');
-    const radioTransferencia = document.getElementById('transferencia');
-    let metodo_pago = null;
-    if (radioCredito && radioCredito.checked) metodo_pago = 'credito';
-    else if (radioTransferencia && radioTransferencia.checked) metodo_pago = 'transferencia';
-
-    // Envío
-    const costo_envio = Number(envioUYU || 0);
-    const tipo_envio = tipoEnvio;
-
-    // Items seleccionados
-    const seleccionados = cartProducts.filter(p => p.selected !== false);
-    if (seleccionados.length === 0) {
-      alert("Debe seleccionar al menos un producto para finalizar la compra.");
-      return;
-    }
-
-    const items = seleccionados.map(p => ({
-      producto_id: p.id || p.producto_id || null,
-      cantidad: p.quantity || 1,
-      precio_unitario: p.cost
-    })).filter(it => it.producto_id);
-
-    if (items.length === 0) {
-      // Mostrar detalle de cuáles faltan
-      const faltantes = seleccionados.filter(p => !(p.id || p.producto_id)).map(p => p.name).join(', ');
-      alert("No se pudo preparar la lista de productos (faltan IDs). Re-agregue al carrito estos productos desde su página para registrar el ID: " + faltantes);
-      return;
-    }
-
-    const payload = {
-      usuario_id,
-      tipo_envio,
-      direccion_envio: direccion_envio || null,
-      metodo_pago: metodo_pago || null,
-      costo_envio,
-      items
-    };
-
-    // Log and validate before sending to backend (helps debug errno 1452 FK issues)
-    console.log("[Checkout] Payload preparado:", payload);
-    const invalidItemIds = payload.items.filter(it => !Number.isInteger(it.producto_id) || it.producto_id <= 0);
-    if (!Number.isInteger(payload.usuario_id) || payload.usuario_id <= 0) {
-      alert("usuario_id inválido. Debe ser un entero positivo asociado a la tabla usuarios.");
-      return;
-    }
-    if (invalidItemIds.length > 0) {
-      alert("Algunos productos tienen IDs inválidos. Revise la consola y vuelva a agregarlos al carrito.");
-      console.warn("Items con IDs inválidos:", invalidItemIds);
-      return;
-    }
-
-    try {
-      const response = await fetch("http://localhost:3000/cart", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-      const result = await response.json();
-      if (!response.ok) {
-        alert(result.error || "Error al finalizar la compra");
-        return;
-      }
-      alert(`Compra registrada. ID carrito: ${result.id}\nTotal: UYU ${result.total_final}`);
-      localStorage.removeItem('cartProducts');
-    } catch (err) {
-      console.error("Error en la solicitud /cart:", err);
-      alert("Error de red al finalizar la compra.");
-    }
-  }
+    
+}
 });
